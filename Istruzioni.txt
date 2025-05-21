@@ -1,0 +1,13 @@
+**ISTRUZIONI ESAME LABORATORIO DI INFORMATICA**
+
+Generali:
+1. La prima traccia è disponibile per i primi due appelli per poter lavorare più tranquillamente (ricordarsi che bisogna consegnarla entro 10 giorni prima di ogni appello)
+2. La traccia si basa su un task principale e si suddivide in sotto-task per tutte le funzionalità
+3. I dettagli superflui costituiranno un elemento negativo ai fini della valutazione (non inserire informazioni fuori traccia, e se inserite motivarle bene per non influenzare la valutazione)
+
+Tipo di consegna:
+1. Il caso di studio deve essere consegnato cinque giorni prima della data dell’appello inviando una mail ai docenti del corso (pierpaolo.basile@uniba.it, marco.degemmis@uniba.it). L’oggetto della mail dovrà essere: “[LabInf] Consegna appello del <data>”. Allegare alla mail lo ZIP (vedi punto 5) e inserire nel testo della mail i nomi dei componenti del gruppo. Se lo ZIP supera la dimensione massima consentita dall’account di posta, inserire nel testo della mail un link per il download.
+2. Consegnare i sorgenti e i relativi file utili al funzionamento del programma
+3. Consegnare la documentazione contenente tutti i dettagli sull'analisi e sulla progettazione
+4. Documentare il codice e generare la documentazione con DoxyGen
+5. Inserire tutto il materiale in un unico ZIP e nominarlo usando il nominativo degli studenti del gruppo, per esempio "Mario Rossi - Giuseppe Verdi.zip"
