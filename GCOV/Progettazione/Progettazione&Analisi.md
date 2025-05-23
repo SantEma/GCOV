@@ -43,3 +43,4 @@ In base a questo schema si è deciso di inserire nel file **header** che funge d
 In ogni file sarà presente, tramite gli appositi controlli, sia la funzione eseguibile dall'**admin** che dall'**utente**. Questa scelta progettuale è stata adottata per rendere più **snello** il main e favorire l'**information hiding**, tra le varie funzioni e compiti da svolgere. Favorendo una struttura ad albero e un approccio **modulare** alla risoluzione della richiesta.
 
 ...
+L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password. Per ipotesi e per non aggiungere informazioni superflue, l'admin avrà solo una possibilità per inserire il codice in maniera corretta, altrimenti dovrà rilanciare il programma.
