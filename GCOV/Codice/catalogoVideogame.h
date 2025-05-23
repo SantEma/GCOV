@@ -24,7 +24,7 @@ typdef struct {
     int anno_uscita;
     char genere[20]; // anche più di una
     int recensione; // 0-5
-} videogame_t;
+} Videogame_T;
 
 //funzioni per la gestione del catalogo
 
