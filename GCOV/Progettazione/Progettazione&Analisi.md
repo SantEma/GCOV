@@ -34,7 +34,7 @@ Ogni videogioco è caratterizzato da:
 ## Variabili utilizzate
 
 ## Schema lavorativo
-()
+![[Pasted image 20250523174021.png]]
 In base a questo schema si è deciso di inserire nel file **header** che funge da libreria tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro e quelle chiamabili ed il record dei videogiochi. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
 - Il file per il menu
 - Il file per la ricerca e la scrittura di recensione
