@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef CATALOGOVIDEOGAME_H
+#ifndef CATALOGOVIDEOGAME_H
 #define CATALOGOVIDEOGAME_H
 
 //struttura per i videogiochi
-typdef struct {
+typedef struct {
     char nome[70]; // gioco col nome più lungo al mondo
     char editore[40]; // editore col nome più lungo al mondo
     char sviluppatore[40];
@@ -24,8 +24,10 @@ typdef struct {
     int anno_uscita;
     char genere[20]; // anche più di una
     int recensione; // 0-5
-} Videogame_T;
+} videogame_t;
 
 //funzioni per la gestione del catalogo
+void ScriviCatalogo(char *nomeFile, videogame_t);
+void RicercaCatalogo(char *nomeFile, videogame_t );
 
 #endif

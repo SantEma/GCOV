@@ -7,10 +7,10 @@
 
 int main(){
     // Impostazione del flag per decretare il ruolo del visitatore al catalogo
-    short Check_Admin=0;
+    short check_admin=0;
     
     // navigazione nel menù
-    short SceltaUtente=0;
+    short scelta=0;
     printf("\nInserire l'operazione che si vuole eseguire sul catalogo\n1-Cercare videogame\n2-...");
     /* La ricerca del videogame si divide in due tipi:
      * l'admin potrà ricercare un videogame solo per effettuare 3 operazioni madri:
