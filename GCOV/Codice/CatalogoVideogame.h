@@ -11,6 +11,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifndef CATALOGOVIDEOGAME_H
+#define CATALOGOVIDEOGAME_H
+
+//costanti
+#define GIOCHI_START 20 //numero giochi presenti nel file inizialmente
+#define PASSWORD "Admin123" //codcie per accedere come admin, altrimenti si è ospiti
+
 //struttura per i videogiochi
 typedef struct {
     char nome[70]; // gioco col nome più lungo al mondo
@@ -20,11 +28,11 @@ typedef struct {
     int anno_uscita;
     char genere[20]; // anche più di una
     int recensione; // 0-5, obbligatoria
-} Videogame_T;
+} videogame_t;
 
-#ifndef CATALOGOVIDEOGAME_H
-#define CATALOGOVIDEOGAME_H
+//funzione per la gestione del menu
+int Menu();
 
-//TO-DOfunzioni per la gestione del catalogo
-
+//funzioni per la gestione del catalogo
+void ScriviCatalogo(char *nomeFile);
 #endif
