@@ -32,3 +32,14 @@ Ogni videogioco è caratterizzato da:
 - uno o più generi
 - una o più recensioni (*obbligatoria, che va da 0 a 5*)
 ## Variabili utilizzate
+
+## Schema lavorativo
+()
+In base a questo schema si è deciso di inserire nel file **header** che funge da libreria tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro e quelle chiamabili ed il record dei videogiochi. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
+- Il file per il menu
+- Il file per la ricerca e la scrittura di recensione
+- Il file per l'ordinamento
+- il file per le statistiche
+In ogni file sarà presente, tramite gli appositi controlli, sia la funzione eseguibile dall'**admin** che dall'**utente**. Questa scelta progettuale è stata adottata per rendere più **snello** il main e favorire l'**information hiding**, tra le varie funzioni e compiti da svolgere. Favorendo una struttura ad albero e un approccio **modulare** alla risoluzione della richiesta.
+
+...
