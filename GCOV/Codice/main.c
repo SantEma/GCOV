@@ -7,6 +7,6 @@
 
 int main(){
     // Impostazione del flag per decretare il ruolo del visitatore al catalogo
-    //short check_admin=0;
+    ScriviCatalogo("catalogo.dat");
 
 }

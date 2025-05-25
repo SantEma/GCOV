@@ -41,7 +41,7 @@ void ScriviCatalogo(char *nomeFile){
         short flag=1; //Controllare se il file è stato creato correttamente
         file=fopen(nomeFile, "wb");
         if(file!=NULL){
-            if(fwrite(&catalogo, sizeof(videogame_t), GIOCHI_START,file)!=1) flag=0;
+            if(fwrite(catalogo, sizeof(videogame_t), GIOCHI_START,file)!=GIOCHI_START) flag=0; // Controlliamo che scriva tutti gli elementi definiti dal numero della costante
             if(!flag) printf("\nErrore nella scrittura");
             else printf("\nSCRITTO");
             fclose(file);
@@ -50,6 +50,7 @@ void ScriviCatalogo(char *nomeFile){
         }
     else{
         // il file esiste già, non dobbiamo riscriverlo
+        //printf("\nFile gia' esistente");
         fclose(file);
     }
 }
