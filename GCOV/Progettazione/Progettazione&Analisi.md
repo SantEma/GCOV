@@ -44,7 +44,7 @@ In ogni file sarà presente, tramite gli appositi controlli, sia la funzione ese
 
 ...
 
-L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password. Per ipotesi e per non aggiungere informazioni superflue, l'admin avrà solo una possibilità per inserire il codice in maniera corretta, altrimenti dovrà rilanciare il programma.
+L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *admin157*, ponendo attenzione alla scrittura poiché non si tollera un upper-case. Per ipotesi e per non aggiungere informazioni superflue, l'admin avrà solo una possibilità per inserire il codice in maniera corretta, altrimenti dovrà rilanciare il programma.
 
 ...
 
