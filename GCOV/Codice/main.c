@@ -6,7 +6,23 @@
 //Inserire il commentary doxygen
 
 int main(){
-    // Impostazione del flag per decretare il ruolo del visitatore al catalogo
     ScriviCatalogo("catalogo.dat");
+    int scelta=Menu();
+    switch (scelta){
+        case 1:
+            RicercaAdmin("catalogo.dat");
+            break;
+    
+        case 2:
+            RicercaVisitatore("catalogo.dat");
+            break;
+        /*case 3
+    
+        */
 
+        default:
+            break;
+    }
+
+    return 0;
 }

@@ -20,8 +20,18 @@ int Menu(){
         printf("\nPassword corretta, benvenuto amministratore");
     }
     else if(strcmp(input_password,"visitatore")==0) printf("\nPassword corretta, benvenuto visitatore");
-    else printf("\nPassword errata, riavviare per inserire correttamente, benvenuto visitatore");
+    else printf("\nPassword errata, benvenuto visitatore");
+
     //Fase di -> Scelta
+    short scelta=0;
+    if(check_admin==1){
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1-Ricerca prodotto\n2-Visualizzare una recensione");
+
+    }
+    else{
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1-Ricerca prodotto per visualizzare o aggiungere una recensione");
+    }
+
         //Fase di -> Ricerca
         /* La ricerca del videogame si divide in due tipi:
         * l'admin potrà ricercare un videogame solo per effettuare 3 operazioni madri:

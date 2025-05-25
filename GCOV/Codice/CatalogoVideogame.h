@@ -17,7 +17,7 @@
 
 //costanti
 #define GIOCHI_START 20 //numero giochi presenti nel file inizialmente
-#define PASSWORD "Admin123" //codcie per accedere come admin, altrimenti si è ospiti
+#define PASSWORD "Admin157" //codcie per accedere come admin, altrimenti si è ospiti
 
 //struttura per i videogiochi
 typedef struct {
@@ -35,4 +35,6 @@ int Menu();
 
 //funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
+void RicercaAdmin(char *nomeFile);
+void RicercaVisitatore(char *nomeFile);
 #endif
