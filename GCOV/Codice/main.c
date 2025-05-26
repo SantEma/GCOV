@@ -6,7 +6,7 @@
 //Inserire il commentary doxygen
 
 int main(){
-    ScriviCatalogo("catalogo.dat");
+    ScriviCatalogo("catalogo.dat"); // Creazione del file catalogo.dat con i videogiochi iniziali
     int scelta=Menu();
     switch (scelta){
         case 1:

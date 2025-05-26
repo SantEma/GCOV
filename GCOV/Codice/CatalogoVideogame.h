@@ -17,7 +17,7 @@
 
 //costanti
 #define GIOCHI_START 20 //numero giochi presenti nel file inizialmente
-#define PASSWORD "Admin157" //codcie per accedere come admin, altrimenti si è ospiti
+#define PASSWORD "Admin157" //codice per accedere come admin, altrimenti si è ospiti (di solito non andrebbero mai messe hardcode le password)
 
 //struttura per i videogiochi
 typedef struct {
