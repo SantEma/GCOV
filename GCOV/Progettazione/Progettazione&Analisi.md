@@ -48,4 +48,5 @@ L'autentificazione dell'utente in admin o visualizzatore viene gestita nella fun
 
 ...
 
+**SOTTOSTRINGHE**-> Cerchi fif (su 50 fif diversi che stanno, come fifa fifoloide ecc.. fifoloide 3) e poi l'utente deve inserire il nome completo del gioco che vuole selezionare tra quelli mostrati. 
 ## Problemi riscontrati
