@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "catalogoVideogame.h"
+#include "CatalogoVideogame.h"
 
 //Inserire il commentary doxygen
 
