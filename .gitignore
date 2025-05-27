@@ -1,4 +1,6 @@
 .vscode
 .obsidian
-
+meson.build
 .fake
+program.exe
+catalogo.dat
