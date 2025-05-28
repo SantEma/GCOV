@@ -35,6 +35,6 @@ int Menu();
 
 //funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
-void RicercaAdmin(char *nomeFile);
-void RicercaVisitatore(char *nomeFile);
+void RicercaAdmin(char *nomeFile, videogame_t);
+void RicercaVisitatore(char *nomeFile,videogame_t);
 #endif

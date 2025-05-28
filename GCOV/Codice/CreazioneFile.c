@@ -35,7 +35,7 @@ void ScriviCatalogo(char *nomeFile){
 
     //verifica se il file esiste già
     FILE* file=fopen(nomeFile, "rb"); // se il file è apribile in rb allora già esiste, bisogna non entrarci
-    if(file ==NULL){
+    if(file == NULL){
         //file non esistente, possiamo inserire i giochi
 
         short flag=1; //Controllare se il file è stato creato correttamente

@@ -6,15 +6,16 @@
 //Inserire il commentary doxygen
 
 int main(){
+    videogame_t videogame;
     ScriviCatalogo("catalogo.dat"); // Creazione del file catalogo.dat con i videogiochi iniziali
     int scelta=Menu();
     switch (scelta){
         case 1:
-            RicercaAdmin("catalogo.dat");
+            RicercaAdmin("catalogo.dat",videogame);
             break;
     
         case 2:
-            RicercaVisitatore("catalogo.dat");
+            RicercaVisitatore("catalogo.dat",videogame);
             break;
         /*case 3
     
