@@ -9,6 +9,9 @@ int main(){
     videogame_t videogame;
     ScriviCatalogo("catalogo.dat"); // Creazione del file catalogo.dat con i videogiochi iniziali
     int scelta=Menu();
+
+    //Da inserire il ciclo ancora per la scelta del menu
+
     switch (scelta){
         case 1:
             RicercaAdmin("catalogo.dat",videogame);

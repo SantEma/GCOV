@@ -25,23 +25,36 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
         fgets(nome_ricerca, sizeof(nome_ricerca), stdin);
         nome_ricerca[strcspn(nome_ricerca, "\n")] = 0; // Rimuove il newline finale
         videogioco.nome[strcspn(videogioco.nome, "\n")] = 0;
-        //strcpy(nome_ricerca, "The Legend of Zelda: Breath of the Wild"); //per testare la ricerca di un gioco specifico
-        
+
+        //Da finire con la ricerca in sottostringhe e di upperCase e lowercase
 
         //ciclo per la ricerca del gioco
         while(fread(&videogioco,sizeof(videogame_t), 1, file) == 1){
             if(strcmp(videogioco.nome, nome_ricerca) == 0){
                 check_name=1; //se il gioco è stato trovato
                 printf("\nGioco trovato:\n");
-                printf("Nome: %s\n", videogioco.nome);
-                printf("Editore: %s\n", videogioco.editore);
-                printf("Sviluppatore: %s\n", videogioco.sviluppatore);
-                printf("Descrizione: %s\n", videogioco.descrizione_breve_gioco);
-                printf("Anno di uscita: %d\n", videogioco.anno_uscita);
-                printf("Genere: %s\n", videogioco.genere);
-                printf("Recensione: %d\n", videogioco.recensione);
+                
+                //Scelta dell'operazione da eseguire con richiamo alla sua funzione
+                printf("\nScegli l'operazione da eseguire:\n");
+                printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n");
+                short scelta_operazioneFile;
+                scanf("%hd", &scelta_operazioneFile);
+                switch (scelta_operazioneFile){
+                case 1:
+                    ModificaGioco(nomeFile, videogioco, nome_ricerca);
+                    break;
+                
+                case 2:
+                    CancellaGioco(nomeFile, videogioco, nome_ricerca);
+                    break;
 
-                printf("\nFinito test per vedere se il catalogo viene letto");
+                case 3:
+                    AggiungiGioco(nomeFile, videogioco, nome_ricerca);
+                    break;
+
+                default:
+                    break;
+                }
             }
         }
         fclose(file);

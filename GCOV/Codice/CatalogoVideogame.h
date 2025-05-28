@@ -28,6 +28,7 @@ typedef struct {
     int anno_uscita;
     char genere[20]; // anche più di una
     int recensione; // 0-5, obbligatoria
+    int copie_vendute; // utile per le statistiche
 } videogame_t;
 
 //funzione per la gestione del menu
@@ -37,4 +38,9 @@ int Menu();
 void ScriviCatalogo(char *nomeFile);
 void RicercaAdmin(char *nomeFile, videogame_t);
 void RicercaVisitatore(char *nomeFile,videogame_t);
+
+//funzioni per la gestione dei videogiochi da parte dell'admin
+void ModificaGioco(char *nomeFile, videogame_t, char);
+void CancellaGioco(char *nomeFile, videogame_t, char);
+void AggiungiGioco(char *nomeFile, videogame_t, char);
 #endif

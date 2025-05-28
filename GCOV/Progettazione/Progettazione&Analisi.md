@@ -52,7 +52,7 @@ L'autentificazione dell'utente in admin o visualizzatore viene gestita nella fun
 
 ...
 
-La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sottocomandi. 
+La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c Dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca.
 
 **SOTTOSTRINGHE**-> Cerchi fif (su 50 fif diversi che stanno, come fifa fifoloide ecc.. fifoloide 3) e poi l'utente deve inserire il nome completo del gioco che vuole selezionare tra quelli mostrati. 
 ## Problemi riscontrati
