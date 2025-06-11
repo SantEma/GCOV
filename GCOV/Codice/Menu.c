@@ -10,7 +10,7 @@
 int Menu(){
     //Impostazione del flag per decretare il ruolo del visitatore al catalogo
     short check_admin=0;
-    char input_password[10]; //lunghezza media della password prescelta per gli admin e per i visualizzatori
+    char input_password[MAX_CARATTERI]; //lunghezza media della password prescelta per gli admin e per i visualizzatori
 
     //Fase di -> Autentificazione
     printf("\nSi prega di indentificarsi inserendo la password riconosciuta per gli admin, altrimenti digitare 'visitatore' come riportato.\nRicordiamo che si ha solo una possibilita' per inserire la passowrd\nAltrimenti bisognera' riavviare il programma se la si vuole rinserire correttamente senza essere accettati come 'visitatore' -->");
