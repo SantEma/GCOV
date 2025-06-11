@@ -10,7 +10,7 @@ int main(){
     ScriviCatalogo("catalogo.dat"); // Creazione del file catalogo.dat con i videogiochi iniziali
     int scelta=Menu();
 
-    //Da inserire il ciclo ancora per la scelta del menu
+    do{
 
     switch (scelta){
         case 1:
@@ -23,10 +23,13 @@ int main(){
         /*case 3
     
         */
-
+        
+        case -1:
+            printf("\nUscita dal programma...\n");
+            break;
         default:
             break;
     }
-
+    }while(scelta!=-1);
     return 0;
 }

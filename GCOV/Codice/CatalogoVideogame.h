@@ -18,7 +18,7 @@
 //costanti
 #define GIOCHI_START 20 //numero giochi presenti nel file inizialmente
 #define PASSWORD "Admin157" //codice per accedere come admin, altrimenti si è ospiti (di solito non andrebbero mai messe hardcode le password)
-#define MAX_CARATTERI "10" //
+#define MAX_CARATTERI 10 //
 //struttura per i videogiochi
 typedef struct {
     char nome[70]; // gioco col nome più lungo al mondo

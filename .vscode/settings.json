@@ -3,5 +3,6 @@
         "catalogovideogame.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/home/emanuele/Scrivania/Progetti/GCOV/GCOV"
 }

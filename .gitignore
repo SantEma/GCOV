@@ -5,3 +5,4 @@ meson.build
 program.exe
 catalogo.dat
 .idea
+CMakeLists.txt
