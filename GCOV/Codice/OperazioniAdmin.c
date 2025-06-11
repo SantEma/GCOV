@@ -9,17 +9,20 @@
 
 //Funzione per la modifica di un gioco
 void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
-    FILE *file= fopen(nomeFile, "r+b");
+    FILE *file= fopen(nomeFile, "rb+");
     short campo_modifica=0; //variabile per la scelta del campo da modificare
     short x=0; //variabile per il ciclo di mdofica del gioco
     int pos=-1; //variabile per la posizione del gioco da modificare
+    long offset=0; //variabile per salvare la posizione trovata
+
     if(file != NULL){
         //verfifca della posizione del gioco da modificare
-        while(pos<0){
-            scanf("%d",&pos);
-            while (getchar() != '\n');
-            if(pos<0) printf("\nPosizione non valida, rinserire: ");
+        int found_pos=0;
+        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            if(strcmp(videogioco.nome,nome_ricerca)==0) pos==found_pos;
+            found_pos++;
         }
+        
         //modifica campi del gioco
         printf("\nChe campo vuoi modificare del gioco '%s'?\n", nome_ricerca);
         do{
@@ -33,6 +36,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             
             switch (campo_modifica) {
             case 1:
+                /* nome */
                 printf("\nInserisci il nuovo nome del gioco: ");
                 while (getchar() != '\n');
                 fgets(videogioco.nome, sizeof(videogioco.nome), stdin);
@@ -40,23 +44,40 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
                 break;
             
             case 2:
-                /* code */
+                /* editore */
+                printf("\nInserisci il nuovo nome dell'editore: ");
+                while(getchar()!='\n');
+                fgets(videogioco.editore,sizeof(videogioco.editore),stdin);
+                videogioco.editore[strcspn(videogioco.editore, "\n")]=0;
                 break;
 
             case 3:
-                /* code */
+                /* sviluppatore */
+                printf("\nInserisci il nuovo nome dello sviluppatore: ");
+                while(getchar()!='\n');
+                fgets(videogioco.sviluppatore,sizeof(videogioco.sviluppatore),stdin);
+                videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
                 break;
             
             case 4:
-                /* code */
+                /* desc */
+                printf("\nInserisci la nuova descrizione breve del videogioco: ");
+                while(getchar()!='\n');
+                fgets(videogioco.descrizione_breve_gioco,sizeof(videogioco.descrizione_breve_gioco),stdin);
+                videogioco.descrizione_breve_gioco[strcspn(videogioco.descrizione_breve_gioco, "\n")]=0;
                 break;
             
             case 5:
-                /* code */
+                /* anno di uscita */
+                printf("\nInserire il nuovo anno di uscita del videogioco: ");
+                scanf("%d",&videogioco.anno_uscita);
                 break;
             
             case 6:
-                /* code */
+                /* genere */
+                printf("\nInserisci il nuovo genere del videogioco: ");
+                fgets(videogioco.genere, sizeof(videogioco.genere), stdin);
+                videogioco.genere[strcspn(videogioco.genere, "\n")] = '\0';
                 break;    
             
             default:
@@ -72,6 +93,8 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         }while(x==1);
 
         // Stampa le modifiche apportate
+        fseek(file,0,SEEK_SET);
+
         printf("\nQueste sono state le modifiche apportate");
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
             printf("\nNome: %s", videogioco.nome);
