@@ -20,9 +20,10 @@ int main(){
         case 2:
             RicercaVisitatore("catalogo.dat",videogame);
             break;
-        /*case 3
+        case 3:
+            printf("\nVisualizzazione delle recensioni non implementata\n");
+            break;
     
-        */
         
         case -1:
             printf("\nUscita dal programma...\n");

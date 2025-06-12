@@ -49,7 +49,7 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
                     break;
 
                 case 3:
-                    AggiungiGioco(nomeFile, videogioco, nome_ricerca);
+                    AggiungiGioco(nomeFile, videogioco);
                     break;
 
                 default:
@@ -65,6 +65,8 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
     else printf("\nErrore nell'apertura del file");
 }
 
+
+
 void RicercaVisitatore(char *nomeFile, videogame_t videogioco){
-    
+    printf("Da implementare\n");
 }

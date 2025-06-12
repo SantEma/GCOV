@@ -33,7 +33,7 @@ int Menu(){
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
     }
     else{
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n2-Ricerca prodotto per visualizzare o aggiungere una recensione\n");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1-Ricerca prodotto per visualizzare o aggiungere una recensione\n");
     }
 
         //Fase di -> Statistiche

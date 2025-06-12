@@ -33,7 +33,7 @@ void ScriviCatalogo(char *nomeFile){
         {"Tetris", "Nintendo", "Alexey Pajitnov", "", 1984, "Puzzle", 5,0}
     };
 
-    //verifica se il file esiste già
+    //Verifica se il file esiste già
     FILE* file=fopen(nomeFile, "rb"); // se il file è apribile in rb allora già esiste, bisogna non entrarci
     if(file == NULL){
         //file non esistente, possiamo inserire i giochi

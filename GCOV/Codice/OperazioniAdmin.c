@@ -19,7 +19,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         //verfifca della posizione del gioco da modificare
         int found_pos=0;
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            if(strcmp(videogioco.nome,nome_ricerca)==0) pos==found_pos;
+            if(strcmp(videogioco.nome,nome_ricerca)==0) pos = found_pos;
             found_pos++;
         }
         
@@ -110,4 +110,14 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per la modifica del gioco");
+}
+
+void AggiungiGioco(char *nomeFile, videogame_t videogioco){
+    printf("Da implementare\n");
+    
+}
+
+void CancellaGioco(char *nomeFile, videogame_t, char *nome_ricerca){
+    printf("Da implementare");
+    
 }
