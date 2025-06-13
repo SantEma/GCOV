@@ -66,7 +66,6 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
 }
 
 
-
 void RicercaVisitatore(char *nomeFile, videogame_t videogioco){
     printf("Da implementare\n");
 }

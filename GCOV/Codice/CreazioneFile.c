@@ -34,9 +34,9 @@ void ScriviCatalogo(char *nomeFile){
     };
 
     //Verifica se il file esiste già
-    FILE* file=fopen(nomeFile, "rb"); // se il file è apribile in rb allora già esiste, bisogna non entrarci
+    FILE* file=fopen(nomeFile, "rb"); //Se il file è apribile in rb allora già esiste, bisogna non entrarci
     if(file == NULL){
-        //file non esistente, possiamo inserire i giochi
+        //File non esistente, possiamo inserire i giochi
 
         short flag=1; //Controllare se il file è stato creato correttamente
         file=fopen(nomeFile, "wb");
@@ -49,7 +49,7 @@ void ScriviCatalogo(char *nomeFile){
         else printf("\nError");
         }
     else{
-        // il file esiste già, non dobbiamo riscriverlo
+        //Il file esiste già, non dobbiamo riscriverlo
         //printf("\nFile gia' esistente");
         fclose(file);
     }

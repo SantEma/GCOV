@@ -11,7 +11,7 @@
 void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
     FILE *file= fopen(nomeFile, "rb+");
     short campo_modifica=0; //variabile per la scelta del campo da modificare
-    short x=0; //variabile per il ciclo di mdofica del gioco
+    short x=0; //variabile per il ciclo di modifica del gioco
     int pos=-1; //variabile per la posizione del gioco da modificare
     long offset=0; //variabile per salvare la posizione trovata
 
@@ -23,7 +23,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             found_pos++;
         }
         
-        //modifica campi del gioco
+        //Modifica campi del gioco
         printf("\nChe campo vuoi modificare del gioco '%s'?\n", nome_ricerca);
         do{
             printf("1 - Nome\n2 - Editore\n3 - Sviluppatore\n4 - Descrizione breve del gioco\n5 - Anno di uscita\n6 - Genere\n");
@@ -117,36 +117,36 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
     
 }
 
-void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca) {
-    FILE *file_originale = fopen(nomeFile, "rb");
-    FILE *file_temporaneo = fopen("temp.dat", "wb"); // File temporaneo per scrivere i giochi che non devono essere cancellati
-    int trovato = 0; //Flag booleana per capire se il gioco è stato trovato e cancellato
+void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
+    FILE *file_originale=fopen(nomeFile,"rb"); //Apre il file dati in lettura binaria.
+    FILE *file_temporaneo=fopen("temp.dat","wb"); //Crea un file temporaneo in scrittura binaria.
+    int trovato=0; //Flag per verificare se il gioco è stato trovato.
 
-    //Funzione per controllare se i due file sono stati caricati correttamente
-    if (file_originale == NULL || file_temporaneo == NULL) {
+    //Controlla se i file sono stati aperti correttamente.
+    if(file_originale==NULL||file_temporaneo==NULL){
         printf("\nErrore nell'apertura dei file per la cancellazione.");
-        return;
+        return; //Termina la funzione in caso di errore.
     }
 
-    // 
-    while (fread(&videogioco, sizeof(videogame_t), 1, file_originale) == 1) {
-        if (strcmp(videogioco.nome, nome_ricerca) != 0) {
-            fwrite(&videogioco, sizeof(videogame_t), 1, file_temporaneo);
-        } else {
-            trovato = 1; 
+    //Scorre ogni record (videogioco) nel file originale.
+    while(fread(&videogioco,sizeof(videogame_t),1,file_originale)==1){
+        //Se il nome del gioco corrente è diverso da quello da cancellare lo scrive nel file temporaneo.
+        if(strcmp(videogioco.nome,nome_ricerca)!=0){
+            fwrite(&videogioco,sizeof(videogame_t),1,file_temporaneo);
+        }else{
+            trovato=1; //Se il nome del gioco corrente corrisponde a quello da cancellare, imposta il flag trovato a 1.
         }
     }
 
     fclose(file_originale);
     fclose(file_temporaneo);
 
-    if (trovato) {
-        // Se il gioco è stato trovato, rimuoviamo il file originale e rinominiamo il file temporaneo
-        remove(nomeFile);
-        rename("temp.dat", nomeFile);
-        printf("\nGioco '%s' cancellato con successo.\n", nome_ricerca);
-    } else {
-        remove("temp.dat"); 
-        printf("\nGioco '%s' non trovato nel catalogo.\n", nome_ricerca);
+    if(trovato){
+        remove(nomeFile); 
+        rename("temp.dat",nomeFile); //Rinomina il file temporaneo con il nome dell'originale, altrimenti, se non trovato, elimina il file temporaneo.
+        printf("\nGioco '%s' cancellato con successo.\n",nome_ricerca);
+    }else{
+        remove("temp.dat");
+        printf("\nGioco '%s' non trovato nel catalogo.\n",nome_ricerca);
     }
 }
