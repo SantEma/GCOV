@@ -13,7 +13,7 @@ Creato da Andrea Milo e Emanuele Santoruvo
 			- [ ] Aggiunta record
 			- [ ] Visualizzazione recensione
 	- Visitatore
-		- [] Ricerca visitatore
+		- [ ] Ricerca visitatore
 			- [ ] Visualizzazione recensioni
 			- [ ] Inserire recensione
 			- [ ] Acquisto videogioco
