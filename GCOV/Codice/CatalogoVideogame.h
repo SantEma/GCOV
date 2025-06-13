@@ -43,9 +43,15 @@ typedef struct{
 
 //Funzione per la gestione del menu
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 void MenuPrincipale(videogame_t videogame);
 void MenuAdmin(videogame_t videogame, char *nomeFile);
 void MenuVisitatore(videogame_t videogame, char *nomeFile);
+=======
+void MenuPrincipale();
+void MenuAdmin();
+void MenuVisitatore();
+>>>>>>> Stashed changes
 =======
 void MenuPrincipale();
 void MenuAdmin();
