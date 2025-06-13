@@ -76,6 +76,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             case 6:
                 /* genere */
                 printf("\nInserisci il nuovo genere del videogioco: ");
+                while(getchar()!='\n');
                 fgets(videogioco.genere[0], sizeof(videogioco.genere[0]), stdin);
                 videogioco.genere[0][strcspn(videogioco.genere[0], "\n")] = '\0';
                 break;    
@@ -155,7 +156,6 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
             //Editore
             printf("\nInserire l'editore: ");
-            getchar();
             fgets(videogioco.editore,sizeof(videogioco.editore),stdin);
             videogioco.editore[strcspn(videogioco.editore, "\n")]=0;
 
@@ -176,11 +176,11 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
             //Anno uscita
             printf("\nInserire l'anno di uscita: ");
-            scanf("%d",videogioco.anno_uscita); 
+            scanf("%d",&videogioco.anno_uscita); 
             
             //Genere
             int num_generi=0;
-            printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d", MAX_RECENSIONI);
+            printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d: ", MAX_RECENSIONI);
             scanf("%d",&num_generi);
             getchar();
             if(num_generi>MAX_RECENSIONI) num_generi = MAX_RECENSIONI; //eliminare i valori in più per potrarlo al valore della costante
@@ -224,8 +224,8 @@ void Visualizzaizer(char *nomeFile, videogame_t videogioco){
             printf("\nSviluppatore: %s", videogioco.sviluppatore);
             printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
             printf("\nAnno di uscita: %d", videogioco.anno_uscita);
-            printf("\nGenere: %s", videogioco.genere);
-            printf("\nRecensione: %d", videogioco.recensione);
+            printf("\nGenere: %s", videogioco.genere[0]);
+            printf("\nRecensione: %d", videogioco.recensione.recensione_num);
             printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
         }
         fclose(file);
