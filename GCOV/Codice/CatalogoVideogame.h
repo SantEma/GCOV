@@ -21,13 +21,6 @@
 #define MAX_CARATTERI_PASSWORD 10 //caratteri massimi per la password
 #define MAX_CARATTERI_DESCRIZIONI 200 //caratteri massimi per la recensione e descrizione
 #define MAX_RECENSIONI 5 //Numero massimo di recensioni inseribili
-#define MAX_GENERE_LENGTH 30 //Lunghezza massima per ogni genere
-
-//Struttura per le recensioni (DEVE essere definita PRIMA di videogame_t)
-typedef struct{
-    int recensione_num; // 0-5, obbligatoria
-    char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
-}recensione_t;
 
 //Struttura per i videogiochi
 typedef struct {
@@ -36,10 +29,17 @@ typedef struct {
     char sviluppatore[50]; // aumentato per gestire nomi lunghi
     char descrizione_breve_gioco[MAX_CARATTERI_DESCRIZIONI]; // facoltativa
     int anno_uscita;
-    char genere[MAX_RECENSIONI][MAX_GENERE_LENGTH]; // dimensioni corrette per evitare overflow
+    char genere[MAX_RECENSIONI][MAX_CARATTERI_DESCRIZIONI]; // dimensioni corrette per evitare overflow
     recensione_t recensione; 
     int copie_vendute; // contatore degli acquisti -> utile per le statistiche
 } videogame_t;
+
+//Struttura per le recensioni
+typedef struct{
+    int recensione_num; // 0-5, obbligatoria
+    char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
+}recensione_t;
+
 
 //Funzione per la gestione del menu
 void MenuPrincipale(videogame_t videogame);
