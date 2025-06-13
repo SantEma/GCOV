@@ -9,7 +9,7 @@
 
 //Funzione per la creazione del catalogo
 void ScriviCatalogo(char *nomeFile){
-    //array dei 20 giochi iniziali
+    //array dei 20 giochi iniziali - INIZIALIZZAZIONE CORRETTA
     videogame_t catalogo[GIOCHI_START]={
         {"The Legend of Zelda: Breath of the Wild", "Nintendo", "Nintendo EPD", "Avventura open-world in Hyrule", 2017, {"Avventura", "", "", "", ""}, {0, ""}, 0},
         {"The Witcher 3: Wild Hunt", "CD Projekt", "CD Projekt RED", "Caccia mostri in un mondo fantasy", 2015, {"GDR", "", "", "", ""}, {0, ""}, 0},

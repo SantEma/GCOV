@@ -21,32 +21,30 @@
 #define MAX_CARATTERI_PASSWORD 10 //caratteri massimi per la password
 #define MAX_CARATTERI_DESCRIZIONI 200 //caratteri massimi per la recensione e descrizione
 #define MAX_RECENSIONI 5 //Numero massimo di recensioni inseribili
+#define MAX_GENERE_LENGTH 30 //Lunghezza massima per ogni genere
 
-//Struttura per i videogiochi
-typedef struct {
-    char nome[70]; // gioco col nome più lungo al mondo
-    char editore[40]; // editore col nome più lungo al mondo
-    char sviluppatore[40];
-    char descrizione_breve_gioco[MAX_CARATTERI_DESCRIZIONI]; // facoltativa
-    int anno_uscita;
-    char genere[MAX_CARATTERI_DESCRIZIONI][MAX_RECENSIONI]; // anche più di una
-    recensione_t recensione; 
-    int copie_vendute; // contatore degli acquisti -> utile per le statistiche
-} videogame_t;
-
-//Struttura per le recensioni
+//Struttura per le recensioni (DEVE essere definita PRIMA di videogame_t)
 typedef struct{
     int recensione_num; // 0-5, obbligatoria
     char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
 }recensione_t;
 
+//Struttura per i videogiochi
+typedef struct {
+    char nome[80]; // aumentato per gestire nomi lunghi
+    char editore[50]; // aumentato per gestire nomi lunghi
+    char sviluppatore[50]; // aumentato per gestire nomi lunghi
+    char descrizione_breve_gioco[MAX_CARATTERI_DESCRIZIONI]; // facoltativa
+    int anno_uscita;
+    char genere[MAX_RECENSIONI][MAX_GENERE_LENGTH]; // dimensioni corrette per evitare overflow
+    recensione_t recensione; 
+    int copie_vendute; // contatore degli acquisti -> utile per le statistiche
+} videogame_t;
 
 //Funzione per la gestione del menu
-
 void MenuPrincipale(videogame_t videogame);
 void MenuAdmin(videogame_t videogame, char *nomeFile);
 void MenuVisitatore(videogame_t videogame, char *nomeFile);
-
 
 //Funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
@@ -57,4 +55,6 @@ void RicercaVisitatore(char *nomeFile, videogame_t);
 void ModificaGioco(char *nomeFile, videogame_t, char*);
 void CancellaGioco(char *nomeFile, videogame_t, char*);
 void AggiungiGioco(char *nomeFile, videogame_t);
+void Visualizzaizer(char *nomeFile, videogame_t);
+
 #endif

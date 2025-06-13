@@ -76,6 +76,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             case 6:
                 /* genere */
                 printf("\nInserisci il nuovo genere del videogioco: ");
+                while(getchar()!='\n'); // Aggiungi questa linea per pulire il buffer
                 fgets(videogioco.genere[0], sizeof(videogioco.genere[0]), stdin);
                 videogioco.genere[0][strcspn(videogioco.genere[0], "\n")] = '\0';
                 break;    
@@ -142,7 +143,7 @@ void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 void AggiungiGioco(char *nomeFile, videogame_t videogioco){
     FILE *file=fopen(nomeFile,"rb+");
     short x=0; //variabile per il ciclo di modifica del gioco
-    short scelta_descrizione=0; //Variabile per la scelta dell'inseirmento della descrizione
+    short scelta_descrizione=0; //Variabile per la scelta dell'inserimento della descrizione
     
     if(file!=NULL){
         //Inserimento nuovo gioco
@@ -163,33 +164,41 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
 
             //Descrizione
-            printf("\nVuoi inserire la descrizione?: 1-Si 0-No");
+            printf("\nVuoi inserire la descrizione?: 1-Si 0-No: ");
             scanf("%hd", &scelta_descrizione);
+            while(getchar() != '\n'); // Pulisci il buffer dopo scanf
             if(scelta_descrizione==1){
                 printf("\nInserire la descrizione del gioco: ");
                 fgets(videogioco.descrizione_breve_gioco,sizeof(videogioco.descrizione_breve_gioco),stdin);
                 videogioco.descrizione_breve_gioco[strcspn(videogioco.descrizione_breve_gioco, "\n")]=0;
+            } else {
+                strcpy(videogioco.descrizione_breve_gioco, ""); // Inizializza stringa vuota
             }
 
             //Anno uscita
             printf("\nInserire l'anno di uscita: ");
-            scanf("%d",videogioco.anno_uscita); 
+            scanf("%d",&videogioco.anno_uscita); 
             
             //Genere
             int num_generi=0;
-            printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d", MAX_RECENSIONI);
+            printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d: ", MAX_RECENSIONI);
             scanf("%d",&num_generi);
-            if(num_generi>MAX_RECENSIONI) num_generi = MAX_RECENSIONI; //eliminare i valori in più per potrarlo al valore della costante
+            while(getchar() != '\n'); // Pulisci il buffer dopo scanf
+            if(num_generi>MAX_RECENSIONI) num_generi = MAX_RECENSIONI; //eliminare i valori in più per portarlo al valore della costante
             for(short i=0;i<num_generi;i++){
                 printf("Inserisci il genere %hd: ",i+1);
                 fgets(videogioco.genere[i], sizeof(videogioco.genere[i]), stdin);
                 videogioco.genere[i][strcspn(videogioco.genere[i], "\n")] = '\0';
             }
+            // Inizializza i generi vuoti rimanenti
+            for(short i=num_generi; i<MAX_RECENSIONI; i++){
+                strcpy(videogioco.genere[i], "");
+            }
 
             //Altri dati per gli utenti
             videogioco.copie_vendute=0;
             videogioco.recensione.recensione_num=0;
-            videogioco.recensione.recensione_scritta="";
+            strcpy(videogioco.recensione.recensione_scritta, ""); // CORREZIONE: usa strcpy invece di =
 
             //Aggiornamento dati del file con fseek
             fseek(file,0,SEEK_END);
@@ -201,30 +210,38 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
             printf("\nSe vuoi continuare ad aggiungere un gioco, digita 1, altrimenti 0 per uscire: ");
             scanf("%hd", &x);
+            while(getchar() != '\n'); // Pulisci il buffer dopo scanf
         }while(x==1);
         
         Visualizzaizer(nomeFile,videogioco);
 
         fclose(file);
     }
-    else printf("\nError");
+    else printf("\nErrore nell'apertura del file");
 }
 
-//Momentanea
+//Funzione per visualizzare tutti i giochi
 void Visualizzaizer(char *nomeFile, videogame_t videogioco){
     FILE *file=fopen(nomeFile,"rb");
     if(file!=NULL){
+        printf("\n=== CATALOGO VIDEOGIOCHI ===\n");
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            printf("\n--- GIOCO ---");
             printf("\nNome: %s", videogioco.nome);
             printf("\nEditore: %s", videogioco.editore);
             printf("\nSviluppatore: %s", videogioco.sviluppatore);
             printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
             printf("\nAnno di uscita: %d", videogioco.anno_uscita);
-            printf("\nGenere: %s", videogioco.genere);
-            printf("\nRecensione: %d", videogioco.recensione);
+            printf("\nGeneri: ");
+            for(int i=0; i<MAX_RECENSIONI && strlen(videogioco.genere[i])>0; i++){
+                printf("%s", videogioco.genere[i]);
+                if(i<MAX_RECENSIONI-1 && strlen(videogioco.genere[i+1])>0) printf(", ");
+            }
+            printf("\nRecensione numerica: %d", videogioco.recensione.recensione_num);
+            printf("\nRecensione scritta: %s", videogioco.recensione.recensione_scritta);
             printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
         }
         fclose(file);
     }
-    
+    else printf("\nErrore nell'apertura del file per la visualizzazione");
 }
