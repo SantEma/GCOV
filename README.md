@@ -3,12 +3,12 @@ Progetto d'esame Laboratorio di Informatica M-Z traccia di primo e secondo appel
 Creato da Andrea Milo e Emanuele Santoruvo
 
 ### Check-list per eventuali cose da fare
-- Creazione file di default
-- Menu principale
+- Creazione file di default [ X ]
+- Menu principale [ ]
 	- Admin
-		- [ ] Ricerca admin
-			- [ ] Modifica campo
-			- [ ] Cancellazione record
+		- [ X ] Ricerca admin
+			- [ X ] Modifica campo
+			- [ X ] Cancellazione record
 			- [ ] Aggiunta record
 			- [ ] Visualizzazione recensione
 	- Visitatore
