@@ -1,8 +1,10 @@
 # GCOV
 Progetto d'esame Laboratorio di Informatica M-Z traccia di primo e secondo appello 2024-2025
+
 Creato da Andrea Milo e Emanuele Santoruvo
 
 ### Check-list per eventuali cose da fare
+<<<<<<< HEAD
 - Creazione file di default - [x]
 - Menu principale - [x]
 	- Admin
@@ -10,6 +12,15 @@ Creato da Andrea Milo e Emanuele Santoruvo
 			- [x] Modifica campo
 			- [x] Cancellazione record
 			- [] Aggiunta record
+=======
+- Creazione file di default [ X ]
+- Menu principale [ X ]
+	- Admin
+		- [ X ] Ricerca admin
+			- [ X ] Modifica campo
+			- [ X ] Cancellazione record
+			- [ ] Aggiunta record
+>>>>>>> ff2ba0e113cfe0339a2bed40a145d353eaf9e7d0
 			- [ ] Visualizzazione recensione
 	- Visitatore
 		- [] Ricerca visitatore
