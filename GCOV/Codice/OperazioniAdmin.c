@@ -155,13 +155,12 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
             //Editore
             printf("\nInserire l'editore: ");
-            while(getchar()!='\n');
+            getchar();
             fgets(videogioco.editore,sizeof(videogioco.editore),stdin);
             videogioco.editore[strcspn(videogioco.editore, "\n")]=0;
 
             //Sviluppatore
             printf("\nInserire lo sviluppatore: ");
-            while(getchar()!='\n');
             fgets(videogioco.sviluppatore,sizeof(videogioco.sviluppatore),stdin);
             videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
 
@@ -170,7 +169,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             scanf("%hd", &scelta_descrizione);
             if(scelta_descrizione==1){
                 printf("\nInserire la descrizione del gioco: ");
-                while(getchar()!='\n');
+                getchar();
                 fgets(videogioco.descrizione_breve_gioco,sizeof(videogioco.descrizione_breve_gioco),stdin);
                 videogioco.descrizione_breve_gioco[strcspn(videogioco.descrizione_breve_gioco, "\n")]=0;
             }
@@ -183,6 +182,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             int num_generi=0;
             printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d", MAX_RECENSIONI);
             scanf("%d",&num_generi);
+            getchar();
             if(num_generi>MAX_RECENSIONI) num_generi = MAX_RECENSIONI; //eliminare i valori in più per potrarlo al valore della costante
             for(short i=0;i<num_generi;i++){
                 printf("Inserisci il genere %hd: ",i+1);
