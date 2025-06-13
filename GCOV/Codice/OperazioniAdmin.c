@@ -166,7 +166,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
 
             //Descrizione
-            printf("\nVuoi inserire la descrizione?: 1-Si 0-No");
+            printf("\nVuoi inserire la descrizione?: 1-Si 0-No: ");
             scanf("%hd", &scelta_descrizione);
             if(scelta_descrizione==1){
                 printf("\nInserire la descrizione del gioco: ");
@@ -193,7 +193,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             //Altri dati per gli utenti
             videogioco.copie_vendute=0;
             videogioco.recensione.recensione_num=0;
-            videogioco.recensione.recensione_scritta[0]="";
+            videogioco.recensione.recensione_scritta[0]='\0';
 
             //Aggiornamento dati del file con fseek
             fseek(file,0,SEEK_END);
