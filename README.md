@@ -5,7 +5,7 @@ Creato da Andrea Milo e Emanuele Santoruvo
 
 ### Check-list per eventuali cose da fare
 - Creazione file di default [ X ]
-- Menu principale [ ]
+- Menu principale [ X ]
 	- Admin
 		- [ X ] Ricerca admin
 			- [ X ] Modifica campo
