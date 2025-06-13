@@ -10,13 +10,13 @@
 //Funzione per la modifica di un gioco
 void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
     FILE *file= fopen(nomeFile, "rb+");
-    short campo_modifica=0; //variabile per la scelta del campo da modificare
-    short x=0; //variabile per il ciclo di modifica del gioco
-    int pos=-1; //variabile per la posizione del gioco da modificare
-    long offset=0; //variabile per salvare la posizione trovata
+    short campo_modifica=0; //Variabile per la scelta del campo da modificare
+    short x=0; //Variabile per il ciclo di modifica del gioco
+    int pos=-1; //Variabile per la posizione del gioco da modificare
+    long offset=0; //Variabile per salvare la posizione trovata
 
     if(file != NULL){
-        //verfifca della posizione del gioco da modificare
+        //Verifica della posizione del gioco da modificare
         int found_pos=0;
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
             if(strcmp(videogioco.nome,nome_ricerca)==0) pos = found_pos;

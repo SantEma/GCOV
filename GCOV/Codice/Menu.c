@@ -10,7 +10,7 @@
 void MenuPrincipale(videogame_t videogame){
     //Impostazione del flag per decretare il ruolo del visitatore al catalogo
     short check_admin=0;
-    char input_password[MAX_CARATTERI]; //Lunghezza media della password prescelta per gli admin e per i visualizzatori
+    char input_password[MAX_CARATTERI_PASSWORD]; //Lunghezza media della password prescelta per gli admin e per i visualizzatori
 
     //Fase di autentificazione
     printf("\n--Si prega di indentificarsi inserendo la password riconosciuta per gli admin, altrimenti digitare 'visitatore' come riportato.--\n--Ricordiamo che si ha solo una possibilita' per inserire la passowrd,altrimenti bisognera' riavviare il programma--\nPassword: ");
