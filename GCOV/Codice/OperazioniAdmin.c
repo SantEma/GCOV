@@ -193,7 +193,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             //Altri dati per gli utenti
             videogioco.copie_vendute=0;
             videogioco.recensione.recensione_num=0;
-            videogioco.recensione.recensione_scritta="";
+            videogioco.recensione.recensione_scritta[0]="";
 
             //Aggiornamento dati del file con fseek
             fseek(file,0,SEEK_END);
