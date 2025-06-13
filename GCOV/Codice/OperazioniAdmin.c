@@ -10,13 +10,13 @@
 //Funzione per la modifica di un gioco
 void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
     FILE *file= fopen(nomeFile, "rb+");
-    short campo_modifica=0; //Variabile per la scelta del campo da modificare
-    short x=0; //Variabile per il ciclo di modifica del gioco
-    int pos=-1; //Variabile per la posizione del gioco da modificare
-    long offset=0; //Variabile per salvare la posizione trovata
+    short campo_modifica=0; //variabile per la scelta del campo da modificare
+    short x=0; //variabile per il ciclo di modifica del gioco
+    int pos=-1; //variabile per la posizione del gioco da modificare
+    long offset=0; //variabile per salvare la posizione trovata
 
     if(file != NULL){
-        //Verfifca della posizione del gioco da modificare
+        //verfifca della posizione del gioco da modificare
         int found_pos=0;
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
             if(strcmp(videogioco.nome,nome_ricerca)==0) pos = found_pos;
@@ -76,8 +76,8 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             case 6:
                 /* genere */
                 printf("\nInserisci il nuovo genere del videogioco: ");
-                fgets(videogioco.genere, sizeof(videogioco.genere), stdin);
-                videogioco.genere[strcspn(videogioco.genere, "\n")] = '\0';
+                fgets(videogioco.genere[0], sizeof(videogioco.genere[0]), stdin);
+                videogioco.genere[0][strcspn(videogioco.genere[0], "\n")] = '\0';
                 break;    
             
             default:
@@ -96,25 +96,13 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         fseek(file,0,SEEK_SET);
 
         printf("\nQueste sono state le modifiche apportate");
-        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            printf("\nNome: %s", videogioco.nome);
-            printf("\nEditore: %s", videogioco.editore);
-            printf("\nSviluppatore: %s", videogioco.sviluppatore);
-            printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
-            printf("\nAnno di uscita: %d", videogioco.anno_uscita);
-            printf("\nGenere: %s", videogioco.genere);
-            printf("\nRecensione: %d", videogioco.recensione);
-            printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
-        }
+        Visualizzaizer(nomeFile,videogioco);
 
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per la modifica del gioco");
 }
 
-void AggiungiGioco(char *nomeFile, videogame_t videogioco){
-    printf("Da implementare\n");
-}
 
 void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 
@@ -148,4 +136,95 @@ void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         remove("temp.dat");
         printf("\nGioco '%s' non trovato nel catalogo.\n",nome_ricerca);
     }
+}
+
+
+void AggiungiGioco(char *nomeFile, videogame_t videogioco){
+    FILE *file=fopen(nomeFile,"rb+");
+    short x=0; //variabile per il ciclo di modifica del gioco
+    short scelta_descrizione=0; //Variabile per la scelta dell'inseirmento della descrizione
+    
+    if(file!=NULL){
+        //Inserimento nuovo gioco
+        do{
+            //Nome
+            printf("\nInserire il nome: ");
+            fgets(videogioco.nome,sizeof(videogioco.nome),stdin);
+            videogioco.nome[strcspn(videogioco.nome, "\n")]=0;
+
+            //Editore
+            printf("\nInserire l'editore: ");
+            fgets(videogioco.editore,sizeof(videogioco.editore),stdin);
+            videogioco.editore[strcspn(videogioco.editore, "\n")]=0;
+
+            //Sviluppatore
+            printf("\nInserire lo sviluppatore: ");
+            fgets(videogioco.sviluppatore,sizeof(videogioco.sviluppatore),stdin);
+            videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
+
+            //Descrizione
+            printf("\nVuoi inserire la descrizione?: 1-Si 0-No");
+            scanf("%hd", &scelta_descrizione);
+            if(scelta_descrizione==1){
+                printf("\nInserire la descrizione del gioco: ");
+                fgets(videogioco.descrizione_breve_gioco,sizeof(videogioco.descrizione_breve_gioco),stdin);
+                videogioco.descrizione_breve_gioco[strcspn(videogioco.descrizione_breve_gioco, "\n")]=0;
+            }
+
+            //Anno uscita
+            printf("\nInserire l'anno di uscita: ");
+            scanf("%d",videogioco.anno_uscita); 
+            
+            //Genere
+            int num_generi=0;
+            printf("\nQuanti generi vuoi inserire? Rispetta sempre il massimo valore di %d", MAX_RECENSIONI);
+            scanf("%d",&num_generi);
+            if(num_generi>MAX_RECENSIONI) num_generi = MAX_RECENSIONI; //eliminare i valori in più per potrarlo al valore della costante
+            for(short i=0;i<num_generi;i++){
+                printf("Inserisci il genere %hd: ",i+1);
+                fgets(videogioco.genere[i], sizeof(videogioco.genere[i]), stdin);
+                videogioco.genere[i][strcspn(videogioco.genere[i], "\n")] = '\0';
+            }
+
+            //Altri dati per gli utenti
+            videogioco.copie_vendute=0;
+            videogioco.recensione.recensione_num=0;
+            videogioco.recensione.recensione_scritta="";
+
+            //Aggiornamento dati del file con fseek
+            fseek(file,0,SEEK_END);
+            if(fwrite(&videogioco,sizeof(videogame_t),1,file)!=1) printf("\nErrore nella scrittura del record sul file");
+            else printf("\nGioco aggiunto");
+
+            //Riposizionamento del pointer all'inizio del file
+            fseek(file,0,SEEK_SET);
+
+            printf("\nSe vuoi continuare ad aggiungere un gioco, digita 1, altrimenti 0 per uscire: ");
+            scanf("%hd", &x);
+        }while(x==1);
+        
+        Visualizzaizer(nomeFile,videogioco);
+
+        fclose(file);
+    }
+    else printf("\nError");
+}
+
+//Momentanea
+void Visualizzaizer(char *nomeFile, videogame_t videogioco){
+    FILE *file=fopen(nomeFile,"rb");
+    if(file!=NULL){
+        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            printf("\nNome: %s", videogioco.nome);
+            printf("\nEditore: %s", videogioco.editore);
+            printf("\nSviluppatore: %s", videogioco.sviluppatore);
+            printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
+            printf("\nAnno di uscita: %d", videogioco.anno_uscita);
+            printf("\nGenere: %s", videogioco.genere);
+            printf("\nRecensione: %d", videogioco.recensione);
+            printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
+        }
+        fclose(file);
+    }
+    
 }

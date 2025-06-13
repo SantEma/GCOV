@@ -26,7 +26,7 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
         nome_ricerca[strcspn(nome_ricerca, "\n")] = 0; // Rimuove il newline finale
         videogioco.nome[strcspn(videogioco.nome, "\n")] = 0;
 
-        //Da finire con la ricerca in sottostringhe e di upperCase e lowercase
+        //Da finire con la ricerca in sottostringhe e di upperCase e lowercase e sottostringhe
 
         //ciclo per la ricerca del gioco
         while(fread(&videogioco,sizeof(videogame_t), 1, file) == 1){
@@ -66,5 +66,5 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
 }
 
 void RicercaVisitatore(char *nomeFile, videogame_t videogioco){
-    printf("Da implementare\n");
+    printf("\nDa implementare");
 }
