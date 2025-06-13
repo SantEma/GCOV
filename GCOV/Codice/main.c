@@ -8,29 +8,6 @@
 int main(){
     videogame_t videogame;
     ScriviCatalogo("catalogo.dat"); // Creazione del file catalogo.dat con i videogiochi iniziali
-    int scelta=Menu();
-
-    do{
-
-    switch (scelta){
-        case 1:
-            RicercaAdmin("catalogo.dat",videogame);
-            break;
-    
-        case 2:
-            RicercaVisitatore("catalogo.dat",videogame);
-            break;
-        case 3:
-            printf("\nVisualizzazione delle recensioni non implementata\n");
-            break;
-    
-        
-        case -1:
-            printf("\nUscita dal programma...\n");
-            break;
-        default:
-            break;
-    }
-    }while(scelta!=-1);
+    MenuPrincipale(); //Attivazione del menu principale per la gestione del catalogo
     return 0;
 }

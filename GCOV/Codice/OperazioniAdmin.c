@@ -114,10 +114,10 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 
 void AggiungiGioco(char *nomeFile, videogame_t videogioco){
     printf("Da implementare\n");
-    
 }
 
 void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
+
     FILE *file_originale=fopen(nomeFile,"rb"); //Apre il file dati in lettura binaria.
     FILE *file_temporaneo=fopen("temp.dat","wb"); //Crea un file temporaneo in scrittura binaria.
     int trovato=0; //Flag per verificare se il gioco è stato trovato.
@@ -133,9 +133,8 @@ void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
         //Se il nome del gioco corrente è diverso da quello da cancellare lo scrive nel file temporaneo.
         if(strcmp(videogioco.nome,nome_ricerca)!=0){
             fwrite(&videogioco,sizeof(videogame_t),1,file_temporaneo);
-        }else{
-            trovato=1; //Se il nome del gioco corrente corrisponde a quello da cancellare, imposta il flag trovato a 1.
         }
+        else trovato=1; //Se il nome del gioco corrente corrisponde a quello da cancellare, imposta il flag trovato a 1.
     }
 
     fclose(file_originale);
