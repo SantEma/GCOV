@@ -49,10 +49,13 @@ In ogni file sarà presente, tramite gli appositi controlli, sia la funzione ese
 ...
 
 L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un upper-case. Per ipotesi e per non aggiungere informazioni superflue, l'admin avrà solo una possibilità per inserire il codice in maniera corretta, altrimenti dovrà rilanciare il programma.
+Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene reinderizzati al menu corretto e alle funzioni che quel determinato utente può fare (visitatore o amministratore)
 
 ...
 
-La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c Dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica. 
+La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica.
+Per l'eliminazione andiamo ad usare un sistema di scambi: il file catalogo.dat viene riscritto su un file temporaneo temp.dat, quest'ultimo inserisce tutti i giochi fin quando non trova il gioco che si vuole cancellare e lo salta, in modo da non inserire quei byte. Una volta fatto ciò, l'utente in caso positivo viene avvisato del successo dell'operazione (con il file originale rimosso e quello temporaneo rinominato a quello originale), nel caso contrario viene avvisato di non aver trovato quel gioco nel catalogo
+
 L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione [continua].
 
 La ricerca del videogioco da parte dell'admin e dell'utente deve comprende la possibilità di filtrare in sottostringhe e di gestire l'upperCase e il LowerCase.
