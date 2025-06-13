@@ -65,7 +65,6 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
     else printf("\nErrore nell'apertura del file");
 }
 
-
 void RicercaVisitatore(char *nomeFile, videogame_t videogioco){
     printf("Da implementare\n");
 }

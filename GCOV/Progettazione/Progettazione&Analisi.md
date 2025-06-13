@@ -52,7 +52,7 @@ L'autentificazione dell'utente in admin o visualizzatore viene gestita nella fun
 
 ...
 
-La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c Dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica. Per l'eliminazione sarà eliminato il record di quell'intero gioco.
+La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c Dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica. 
 L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione [continua].
 
 La ricerca del videogioco da parte dell'admin e dell'utente deve comprende la possibilità di filtrare in sottostringhe e di gestire l'upperCase e il LowerCase.
