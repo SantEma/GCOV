@@ -22,6 +22,12 @@
 #define MAX_CARATTERI_DESCRIZIONI 200 //caratteri massimi per la recensione e descrizione
 #define MAX_RECENSIONI 5 //Numero massimo di recensioni inseribili
 
+//Struttura per le recensioni
+typedef struct {
+    int recensione_num; // 0-5, obbligatoria
+    char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
+} recensione_t;
+
 //Struttura per i videogiochi
 typedef struct {
     char nome[70]; // gioco col nome più lungo al mondo
@@ -33,12 +39,6 @@ typedef struct {
     recensione_t recensione; 
     int copie_vendute; // contatore degli acquisti -> utile per le statistiche
 } videogame_t;
-
-//Struttura per le recensioni
-typedef struct{
-    int recensione_num; // 0-5, obbligatoria
-    char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
-}recensione_t;
 
 
 //Funzione per la gestione del menu
