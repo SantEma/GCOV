@@ -33,9 +33,9 @@ typedef struct {
 } videogame_t;
 
 //Funzione per la gestione del menu
-void MenuPrincipale();
-void MenuAdmin();
-void MenuVisitatore();
+void MenuPrincipale(videogame_t videogame);
+void MenuAdmin(videogame_t videogame);
+void MenuVisitatore(videogame_t videogame);
 
 //Funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);

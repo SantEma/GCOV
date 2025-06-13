@@ -7,7 +7,7 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-void MenuPrincipale(){
+void MenuPrincipale(videogame_t videogame){
     //Impostazione del flag per decretare il ruolo del visitatore al catalogo
     short check_admin=0;
     char input_password[MAX_CARATTERI]; //Lunghezza media della password prescelta per gli admin e per i visualizzatori
@@ -21,21 +21,21 @@ void MenuPrincipale(){
     if(strcmp(input_password, PASSWORD)==0){
         check_admin=1;
         printf("\nPassword corretta, benvenuto amministratore!");
-        MenuAdmin(); // Riportiamo al menu dell'amministratore
+        MenuAdmin(videogame); // Riportiamo al menu dell'amministratore
     }
     else if(strcmp(input_password,"visitatore")==0){
         printf("\nPassword corretta, benvenuto visitatore");
-        MenuVisitatore();
+        MenuVisitatore(videogame);
         // Riportiamo al menu del visitatore
     }
     else{
         printf("\nPassword errata, benvenuto visitatore");
-        MenuVisitatore();
-        
+        MenuVisitatore(videogame);
+        // Riportiamo al menu del visitatore
     }
 }
 
-void MenuAdmin(){
+void MenuAdmin(videogame_t videogame){
     short SceltaAdmin=0; //Variabile per la scelta dell'operazione da eseguire
     printf("\n\n--- MENU AMMINISTRATORE ---\n");
     printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1-Ricerca prodotto");
@@ -43,14 +43,14 @@ void MenuAdmin(){
     while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
     do{
         switch (SceltaAdmin) {
-            
+
         }
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
     }while(SceltaAdmin!=-1);
 }
 
 
-void MenuVisitatore(){
+void MenuVisitatore(videogame_t videogame){
     short SceltaGuest=0;
     printf("\n\n--- MENU VISITATORE ---\n");
     printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1-Ricerca prodotto\n3-Visualizzare una recensione\n");
