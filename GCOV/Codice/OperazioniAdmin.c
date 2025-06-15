@@ -232,3 +232,7 @@ void Visualizzaizer(char *nomeFile, videogame_t videogioco){
     }
     
 }
+
+void Visualizza_Recensione(char *nomeFile, videogame_t videogioco){
+
+}
