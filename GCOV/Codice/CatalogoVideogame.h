@@ -49,7 +49,7 @@ void MenuVisitatore(videogame_t videogame, char *nomeFile, short);
 
 //Funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
-void Ricerca(char *nomeFile, videogame_t);
+void Ricerca(char *nomeFile, videogame_t, short);
 
 //Funzioni per la gestione dei videogiochi da parte dell'admin
 void ModificaGioco(char *nomeFile, videogame_t, char*);

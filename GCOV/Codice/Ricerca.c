@@ -57,6 +57,9 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                             break;
                     }
                 }
+                else{
+                    printf("\nMangusta");
+                }
             }
         }
         fclose(file);
