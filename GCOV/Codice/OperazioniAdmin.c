@@ -237,9 +237,25 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
     FILE *file=fopen(nomeFile,"rb");
     if(file!=NULL){
         while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            printf("\nNon è questo il gioco");
             if(strcmp(videogioco.nome,nome_ricerca)==0){
-                printf("\nE' questo");
+                printf("\nLe recensioni relative al gioco %s sono: ", nome_ricerca);
+                if(videogioco.recensione.recensione_num==0){
+                    printf("\nPessimo");
+                    printf("\nRecensioni scritte: %s ",videogioco.recensione.recensione_scritta);
+                }
+                else if(videogioco.recensione.recensione_num>0 && videogioco.recensione.recensione_num<=2){
+                    printf("\nInsufficente");
+                    printf("\nRecensioni scritte: %s ",videogioco.recensione.recensione_scritta);
+                }
+                else if(videogioco.recensione.recensione_num>2 && videogioco.recensione.recensione_num<=4){
+                    printf("\nBuono");
+                    printf("\nRecensioni scritte: %s ",videogioco.recensione.recensione_scritta);
+                }
+                else if(videogioco.recensione.recensione_num>4 && videogioco.recensione.recensione_num<=5){
+                    printf("\nEccellente");
+                    printf("\nRecensioni scritte: %s ",videogioco.recensione.recensione_scritta);
+                }
+                else printf("\n Valore indesiderato per la recensione");
             }
         }
         
