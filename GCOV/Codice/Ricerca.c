@@ -37,7 +37,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                 if(check_admin){
                     //Scelta dell'operazione da eseguire con richiamo alla sua funzione
                     printf("\nScegli l'operazione da eseguire:\n");
-                    printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n");
+                    printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco");
                     short scelta_operazioneFile;
                     scanf("%hd", &scelta_operazioneFile);
                     switch (scelta_operazioneFile){
@@ -52,7 +52,11 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         case 3:
                             AggiungiGioco(nomeFile, videogioco);
                             break;
-
+                        
+                        case 4:
+                            Visualizza_Recensione(nomeFile,videogioco, nome_ricerca);
+                            break;
+                        
                         default:
                             break;
                     }

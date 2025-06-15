@@ -211,7 +211,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
         fclose(file);
     }
-    else printf("\nError");
+    else printf("\nErrore nell'apertura del file per l'aggiunta del gioco");
 }
 
 //Momentanea
@@ -233,6 +233,17 @@ void Visualizzaizer(char *nomeFile, videogame_t videogioco){
     
 }
 
-void Visualizza_Recensione(char *nomeFile, videogame_t videogioco){
-    
+void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
+    FILE *file=fopen(nomeFile,"rb");
+    if(file!=NULL){
+        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            printf("\nNon è questo il gioco");
+            if(strcmp(videogioco.nome,nome_ricerca)==0){
+                printf("\nE' questo");
+            }
+        }
+        
+        fclose(file);
+    }
+    else printf("\nErrore nell'apertura del file per visualizzare la recensione");
 }

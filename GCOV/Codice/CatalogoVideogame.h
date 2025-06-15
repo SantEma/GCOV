@@ -56,5 +56,5 @@ void ModificaGioco(char *nomeFile, videogame_t, char*);
 void CancellaGioco(char *nomeFile, videogame_t, char*);
 void AggiungiGioco(char *nomeFile, videogame_t);
 void Visualizzaizer(char *nomeFile, videogame_t);
-void Visualizza_Recensione(char *nomeFile, videogame_t);
+void Visualizza_Recensione(char *nomeFile, videogame_t, char*);
 #endif
