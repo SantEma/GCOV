@@ -16,7 +16,7 @@
         * e aggiungere una recensione
         */ 
 
-void RicercaAdmin(char *nomeFile, videogame_t videogioco){
+void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
     char nome_ricerca[70];
     short check_name=0; //flag per verificare se il nome del gioco è stato trovato
     FILE *file = fopen(nomeFile, "rb");
@@ -34,26 +34,28 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
                 check_name=1; //se il gioco è stato trovato
                 printf("\nGioco trovato:\n");
                 
-                //Scelta dell'operazione da eseguire con richiamo alla sua funzione
-                printf("\nScegli l'operazione da eseguire:\n");
-                printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n");
-                short scelta_operazioneFile;
-                scanf("%hd", &scelta_operazioneFile);
-                switch (scelta_operazioneFile){
-                case 1:
-                    ModificaGioco(nomeFile, videogioco, nome_ricerca);
-                    break;
+                if(check_admin){
+                    //Scelta dell'operazione da eseguire con richiamo alla sua funzione
+                    printf("\nScegli l'operazione da eseguire:\n");
+                    printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n");
+                    short scelta_operazioneFile;
+                    scanf("%hd", &scelta_operazioneFile);
+                    switch (scelta_operazioneFile){
+                        case 1:
+                            ModificaGioco(nomeFile, videogioco, nome_ricerca);
+                            break;
                 
-                case 2:
-                    CancellaGioco(nomeFile, videogioco, nome_ricerca);
-                    break;
+                        case 2:
+                            CancellaGioco(nomeFile, videogioco, nome_ricerca);
+                            break;
 
-                case 3:
-                    AggiungiGioco(nomeFile, videogioco);
-                    break;
+                        case 3:
+                            AggiungiGioco(nomeFile, videogioco);
+                            break;
 
-                default:
-                    break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -63,8 +65,4 @@ void RicercaAdmin(char *nomeFile, videogame_t videogioco){
         }
     }
     else printf("\nErrore nell'apertura del file");
-}
-
-void RicercaVisitatore(char *nomeFile, videogame_t videogioco){
-    printf("\nDa implementare");
 }

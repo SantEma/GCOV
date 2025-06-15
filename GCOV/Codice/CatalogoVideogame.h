@@ -44,13 +44,12 @@ typedef struct {
 
 //Funzione per la gestione del menu
 void MenuPrincipale(videogame_t videogame);
-void MenuAdmin(videogame_t videogame, char *nomeFile);
-void MenuVisitatore(videogame_t videogame, char *nomeFile);
+void MenuAdmin(videogame_t videogame, char *nomeFile, short);
+void MenuVisitatore(videogame_t videogame, char *nomeFile, short);
 
 //Funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
-void RicercaAdmin(char *nomeFile, videogame_t);
-void RicercaVisitatore(char *nomeFile, videogame_t);
+void Ricerca(char *nomeFile, videogame_t);
 
 //Funzioni per la gestione dei videogiochi da parte dell'admin
 void ModificaGioco(char *nomeFile, videogame_t, char*);

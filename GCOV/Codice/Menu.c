@@ -21,23 +21,23 @@ void MenuPrincipale(videogame_t videogioco){
     if(strcmp(input_password, PASSWORD)==0){
         check_admin=1;
         printf("\nPassword corretta, benvenuto amministratore!");
-        MenuAdmin(videogioco, "catalogo.dat"); // Riportiamo al menu dell'amministratore
+        MenuAdmin(videogioco, "catalogo.dat", check_admin); // Riportiamo al menu dell'amministratore
     }
     else if(strcmp(input_password,"visitatore")==0){
         printf("\nPassword corretta, benvenuto visitatore");
-        MenuVisitatore(videogioco, "catalogo.dat");
+        MenuVisitatore(videogioco, "catalogo.dat",check_admin);
         // Riportiamo al menu del visitatore
     }
     else{
         printf("\nPassword errata, benvenuto visitatore");
-        MenuVisitatore(videogioco, "catalogo.dat");
+        MenuVisitatore(videogioco, "catalogo.dat",check_admin);
         // Riportiamo al menu del visitatore
     }
+
 }
 
-void MenuAdmin(videogame_t videogioco, char *nomeFile){
+void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
     short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire
-    
     do{
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
         printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n-1) Uscire\nScelta:");
@@ -46,7 +46,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile){
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         switch (sceltadmin){
             case 1:
-                RicercaAdmin(nomeFile, videogioco);
+                Ricerca(nomeFile, videogioco,check_admin);
                 break;
             case -1:
                 printf("\nUscita dal programma...\n");
@@ -59,7 +59,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile){
     }while(sceltadmin!=-1);
 }
 
-void MenuVisitatore(videogame_t videogioco, char* nomeFile){
+void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
     short sceltaguest=0;
     
     do{
@@ -70,7 +70,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile){
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         switch(sceltaguest){
             case 1:
-                RicercaVisitatore(nomeFile, videogioco);
+                Ricerca(nomeFile, videogioco,check_admin);
                 break;
             case -1:
                 printf("\nUscita dal programma...\n");
