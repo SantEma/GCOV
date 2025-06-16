@@ -61,5 +61,10 @@ Per l'eliminazione andiamo ad usare un sistema di scambi: il file catalogo.dat v
 
 L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione permette all'admin di aggiungere un nuovo videogame nel catalogo ponendolo come ultimo presente nella lista dei videogiochi e così via per ogni nuova aggiunta che sarà inserita, la posizione nel file binario sarà riportata all'inizio in caso si vogliano eseguire altre operazioni che richiedono uno spostamento della posizione.
 
-La gestione delle recensioni per l'admin consiste nel [continua]
+Il gioco ricercato da parte dell'admin sarà lo stesso gioco sul quale si potrà effettuare anche l'operazione di visualizzazione delle recensioni. L'admin visualizzerà le recensioni numeriche e scritte per ogni utente che inserito la recensione, inoltre la recensione sarà gestita da dei messaggi che faranno capire il grado di apprezzamento del gioco in base alla positività o negatività delle recensioni numeriche; le fasce si dividono in:
+- Pessimo
+- Insufficiente
+- Buono
+- Eccellente
+O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.[DA TESTARE INSERENDO DELLE RECENSIONI]
 ## Problemi riscontrati

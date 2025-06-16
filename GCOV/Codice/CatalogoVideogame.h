@@ -20,7 +20,8 @@
 #define PASSWORD "Admin157" //codice per accedere come admin, altrimenti si è ospiti (di solito non andrebbero mai messe hardcode le password, ma per semplicità lo si implementa in questa maniera)
 #define MAX_CARATTERI_PASSWORD 10 //caratteri massimi per la password
 #define MAX_CARATTERI_DESCRIZIONI 200 //caratteri massimi per la recensione e descrizione
-#define MAX_RECENSIONI 5 //Numero massimo di recensioni inseribili
+#define MAX_GENERI 5 //Numero massimo di generi inseribili
+#define MAX_RECENSIONI 70 //Numero massimo di recensioni inseribili per ogni gioco, che sia un valore accettabile
 
 typedef struct{
     int recensione_num; // 0-5, obbligatoria
@@ -33,14 +34,10 @@ typedef struct {
     char sviluppatore[50]; // aumentato per gestire nomi lunghi
     char descrizione_breve_gioco[MAX_CARATTERI_DESCRIZIONI]; // facoltativa
     int anno_uscita;
-    char genere[MAX_RECENSIONI][MAX_CARATTERI_DESCRIZIONI]; // dimensioni corrette per evitare overflow
-    recensione_t recensione; 
+    char genere[MAX_GENERI][MAX_CARATTERI_DESCRIZIONI]; // dimensioni corrette per evitare overflow
+    recensione_t recensione[MAX_RECENSIONI]; // array di recensioni, ogni gioco può avere più recensioni
     int copie_vendute; // contatore degli acquisti -> utile per le statistiche
 } videogame_t;
-
-//Struttura per le recensioni
-
-
 
 //Funzione per la gestione del menu
 void MenuPrincipale(videogame_t videogame);
