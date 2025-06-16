@@ -30,3 +30,4 @@ void VisualizzaVideogioco(char *nomeFile, videogame_t videogioco, char* nome_ric
     }
     else printf("\nErrore nell'apertura del file per la visualizzazione del gioco.");
 }
+
