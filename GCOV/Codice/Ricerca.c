@@ -13,7 +13,7 @@
         * MODIFICA(tra cui aggiunta), CANCELLAZIONE, VISUALIZZARE RECENSIONE
         * 
         * L'utente invece può solamente ricercare per visualizzare le informazioni di un gioco
-        * e aggiungere una recensione
+        * e aggiungere una recensione ed acquistare il gioco.
         */ 
 
 void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
@@ -35,34 +35,63 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                 printf("\nGioco trovato:\n");
                 
                 if(check_admin){
-                    //Scelta dell'operazione da eseguire con richiamo alla sua funzione
+                    //Scelta dell'operazione da eseguire con richiamo alla sua funzione - Admin
                     printf("\nScegli l'operazione da eseguire:\n");
                     printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco ");
                     short scelta_operazioneFile;
-                    scanf("%hd", &scelta_operazioneFile);
-                    switch (scelta_operazioneFile){
-                        case 1:
-                            ModificaGioco(nomeFile, videogioco, nome_ricerca);
-                            break;
+                    
+                    do{
+                        scanf("%hd", &scelta_operazioneFile);
+                        switch (scelta_operazioneFile){
+                            case 1:
+                                ModificaGioco(nomeFile, videogioco, nome_ricerca);
+                                break;
                 
-                        case 2:
-                            CancellaGioco(nomeFile, videogioco, nome_ricerca);
-                            break;
+                            case 2:
+                                CancellaGioco(nomeFile, videogioco, nome_ricerca);
+                                break;
 
-                        case 3:
-                            AggiungiGioco(nomeFile, videogioco);
-                            break;
+                            case 3:
+                                AggiungiGioco(nomeFile, videogioco);
+                                break;
                         
-                        case 4:
-                            Visualizza_Recensione(nomeFile,videogioco, nome_ricerca);
-                            break;
+                            case 4:
+                                Visualizza_Recensione(nomeFile,videogioco, nome_ricerca);
+                                break;
                         
-                        default:
-                            break;
-                    }
+                            default:
+                                printf("\nOperazione non valida. Reinserire valore corretto");
+                                break;
+                        }
+                    } while(scelta_operazioneFile < 1 || scelta_operazioneFile > 4); // Assicura che la scelta sia tra 1 e 4
                 }
+
                 else{
-                    printf("\nMangusta");
+                    //Scelta dell'operazione da eseguire con richiamo alla sua funzione - Utente
+                    printf("\nScegli l'operazione da eseguire:\n");
+                    printf("1 - Visualizza informazioni del gioco\n2 - Acquista un gioco\n3 - Aggiungi una recensione al gioco");
+                    short scelta_operazioneFile;
+                    
+                    do{
+                        scanf("%hd", &scelta_operazioneFile);
+                        switch (scelta_operazioneFile){
+                            case 1:
+                                VisualizzaVideogioco(nomeFile, videogioco, nome_ricerca);
+                                break;
+                
+                            case 2:
+                                //AcquistaGioco(nomeFile, videogioco, nome_ricerca);
+                                break;
+
+                            case 3:
+                                //AggiungiRecensione(nomeFile, videogioco, nome_ricerca);
+                                break;
+                        
+                            default:
+                                printf("\nOperazione non valida. Reinserire valore corretto");
+                                break;
+                        }
+                    } while(scelta_operazioneFile < 1 || scelta_operazioneFile > 3); // Assicura che la scelta sia tra 1 e 3
                 }
             }
         }
