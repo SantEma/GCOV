@@ -1,7 +1,7 @@
 **ISTRUZIONI ESAME LABORATORIO DI INFORMATICA**
 
 Generali:
-1. La prima traccia è disponibile per i primi due appelli per poter lavorare più tranquillamente (ricordarsi che bisogna consegnarla entro 10 giorni prima di ogni appello)
+1. La prima traccia è disponibile per i primi due appelli per poter lavorare più tranquillamente (ricordarsi che bisogna consegnarla entro 5 giorni prima di ogni appello)
 2. La traccia si basa su un task principale e si suddivide in sotto-task per tutte le funzionalità
 3. I dettagli superflui costituiranno un elemento negativo ai fini della valutazione (non inserire informazioni fuori traccia, e se inserite motivarle bene per non influenzare la valutazione)
 
