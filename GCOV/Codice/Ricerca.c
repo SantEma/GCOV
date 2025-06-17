@@ -36,7 +36,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                 if(check_admin){
                     //Scelta dell'operazione da eseguire con richiamo alla sua funzione - Admin
                     printf("\nScegli l'operazione da eseguire:\n");
-                    printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco ");
+                    printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco\nScelta:");
                     short scelta_operazioneFile;
                     
                     do{
@@ -68,7 +68,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                 else{
                     //Scelta dell'operazione da eseguire con richiamo alla sua funzione - Utente
                     printf("\nScegli l'operazione da eseguire:\n");
-                    printf("1 - Visualizza informazioni del gioco\n2 - Acquista un gioco\n3 - Aggiungi una recensione al gioco");
+                    printf("1 - Visualizza informazioni del gioco\n2 - Acquista un gioco\n3 - Aggiungi una recensione al gioco\nScelta:");
                     short scelta_operazioneFile;
                     
                     do{
