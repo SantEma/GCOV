@@ -3,7 +3,12 @@ Inserire due tipologie di utente:
 - **Visualizzatore**
 ## FILE ESTERNI
 - **Creazione**: creare il file binario col catalogo con già 20 record
-- **Menu**: il menu conterrà la chiamata alle general function, sarà controllato tramite un **check_admin** se sarà eseguito da admin e visualizzatore
+- **Menu**: Esistono 3 menu principali:
+	- Menu generale: Menu che permette la scelta di autenticazione preferita, se autenticarsi direttamente come utente o admin
+	- Menu utente: Menu che permette la ricerca e le funzioni per un utente normale
+	- Menu admin: Menu che permette la ricerca e le funzioni per un amministratore
+
+L'autenticazione viene fatta in una funzione differente che restituisce una flag booleana per constatare se l'utente abbia messo una password giusta o meno, nel caso non fosse così l'utente ha possibilità di riprovare e nel caso di loggarsi come utente se non sia autorizzato ad entrare
 ## General Function
 - **Ricerca**: la ricerca dev'essere **richiamabile e generica che soddisfi ogni modalità di scelta** di ricerca che può essere fatta in base a titolo, editore, genere, anno, sviluppatore. La ricerca deve lavorare anche sulle **sottostringhe**.
 	- **Ricerca admin**
@@ -42,7 +47,7 @@ Ogni videogioco è caratterizzato da:
 ## Schema lavorativo
 ![[Pasted image 20250523174021.png]]
 In base a questo schema si è deciso di inserire nel file **header** che funge da libreria tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro e quelle chiamabili ed il record dei videogiochi. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
-- Il file per il menu
+- Il file per i menu
 - Il file per la ricerca
 - Il file per l'operazioni Admin
 - Il file per le operazione Utente

@@ -82,6 +82,8 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
                 break;    
             
             default:
+                printf("\nScelta sbagliata,reinserire\n");
+                campo_modifica=0;
                 break;
             }
 
@@ -101,7 +103,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 
         fclose(file);
     }
-    else printf("\nErrore nell'apertura del file per la modifica del gioco");
+    else printf("\nErrore nell'apertura del file per la modifica del gioco\n");
 }
 
 
@@ -113,7 +115,7 @@ void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 
     //Controlla se i file sono stati aperti correttamente.
     if(file_originale==NULL||file_temporaneo==NULL){
-        printf("\nErrore nell'apertura dei file per la cancellazione.");
+        printf("\nErrore nell'apertura dei file per la cancellazione.\n");
         return; //Termina la funzione in caso di errore.
     }
 
@@ -213,7 +215,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
 
         fclose(file);
     }
-    else printf("\nErrore nell'apertura del file per l'aggiunta del gioco");
+    else printf("\nErrore nell'apertura del file per l'aggiunta del gioco\n");
 }
 
 //Momentanea

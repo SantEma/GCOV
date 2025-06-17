@@ -59,7 +59,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                                 break;
                         
                             default:
-                                printf("\nOperazione non valida. Reinserire valore corretto");
+                                printf("\nOperazione non valida. Reinserire valore corretto\n");
                                 break;
                         }
                     } while(scelta_operazioneFile < 1 || scelta_operazioneFile > 4); // Assicura che la scelta sia tra 1 e 4
@@ -87,7 +87,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                                 break;
                         
                             default:
-                                printf("\nOperazione non valida. Reinserire valore corretto");
+                                printf("\nOperazione non valida. Reinserire valore corretto\n");
                                 break;
                         }
                     } while(scelta_operazioneFile < 1 || scelta_operazioneFile > 3); // Assicura che la scelta sia tra 1 e 3

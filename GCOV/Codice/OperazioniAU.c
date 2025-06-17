@@ -39,7 +39,7 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
                         printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
                         eccellente++;
                     }
-                    else printf("\n Valore indesiderato per la recensione"); 
+                    else printf("\nValore indesiderato per la recensione"); 
                 }
 
                 // Stampa la recensione generale
@@ -71,5 +71,5 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
         
         fclose(file);
     }
-    else printf("\nErrore nell'apertura del file per visualizzare la recensione");
+    else printf("\nErrore nell'apertura del file per visualizzare la recensione\n");
 }

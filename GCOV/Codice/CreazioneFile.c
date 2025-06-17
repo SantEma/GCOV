@@ -46,7 +46,7 @@ void ScriviCatalogo(char *nomeFile){
             else printf("\nSCRITTO");
             fclose(file);
         }
-        else printf("\nError");
+        else printf("\nError\n");
         }
     else{
         //Il file esiste già, non dobbiamo riscriverlo
