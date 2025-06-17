@@ -16,6 +16,7 @@ void MenuPrincipale(videogame_t videogioco){
     printf("\n--Si prega di indentificarsi inserendo la password riconosciuta per gli admin, altrimenti digitare 'visitatore' come riportato.--\n--Ricordiamo che si ha solo una possibilita' per inserire la passowrd,altrimenti bisognera' riavviare il programma--\nPassword: ");
     fgets(input_password, sizeof(input_password), stdin);
     input_password[strcspn(input_password, "\n")]=0; // Rimuove il newline finale
+    printf("DEBUG: Password letta = \"%s\"\n", input_password);
     
     //Controllo della password inserita
     if(strcmp(input_password, PASSWORD)==0){

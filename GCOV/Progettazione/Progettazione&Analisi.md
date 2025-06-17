@@ -35,13 +35,18 @@ Ogni videogioco è caratterizzato da:
 - anno di pubblicazione
 - uno o più generi
 - una o più recensioni (*obbligatoria, che va da 0 a 5*)
-## Variabili utilizzate
+## Variabili principali utilizzate
+
+...
 
 ## Schema lavorativo
 ![[Pasted image 20250523174021.png]]
 In base a questo schema si è deciso di inserire nel file **header** che funge da libreria tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro e quelle chiamabili ed il record dei videogiochi. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
 - Il file per il menu
-- Il file per la ricerca e la scrittura di recensione
+- Il file per la ricerca
+- Il file per l'operazioni Admin
+- Il file per le operazione Utente
+- Il file per le operazioni di entrambi
 - Il file per l'ordinamento
 - il file per le statistiche
 In ogni file sarà presente, tramite gli appositi controlli, sia la funzione eseguibile dall'**admin** che dall'**utente**. Questa scelta progettuale è stata adottata per rendere più **snello** il main e favorire l'**information hiding**, tra le varie funzioni e compiti da svolgere. Favorendo una struttura ad albero e un approccio **modulare** alla risoluzione della richiesta.
@@ -67,4 +72,13 @@ Il gioco ricercato da parte dell'admin sarà lo stesso gioco sul quale si potrà
 - Buono
 - Eccellente
 O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.[DA TESTARE INSERENDO DELLE RECENSIONI]
-## Problemi riscontrati
+La funzione di visualizzazione delle recensioni viene posta nel file delle operazioni comuni, poiché anche l'utente quando visualizza un prodotto, tramite la sua apposita funzione, deve visualizzare lo stesso tipo di recensioni.
+
+La prima funzione possibile da svolgere per quanto riguarda l'utente è la possibilità di visualizzare tutte le informazioni del videogioco che è stato precedentemente richiesto nella fase di ricerca. Questa funzione viene facilmente implementata cercando nel file il gioco desiderato, come eseguito per le funzioni precedenti ad essa, e mostrare a schermo le informazioni relative a quello specifico gioco, se trovato, infine si richiama la funzione di visualizzazione delle recensioni per mostrare anche quest'ultimo parametro.
+## Problemi riscontrati e risoluzioni
+1. Durante la compilazione del progetto, anche se il file esisteva e non si specificava il file c CreazioneFile durante la compilazione, l'intero progetto non veniva eseguito, poiché il main non riusciva a capire dove fosse specificata la funzione ScriviCatalogo, funzione che possiede già il controllo di uscire se il file è già creato. 
+   **Risoluzione**: Per risolvere questo problema è bastato togliere dal repository di GitHub il file, in maniera tale che anche se esistente non venga considerato univoco per tutti, e specificare ugualmente tutti i file del progetto nella fase di compilazione, così da poter essere eseguito.
+2. Durante l'accesso al Menu, se l'utente digitava *visitatore* per potervi accedere come tale veniva restituito il messaggio destinato all'inserimento di una password errata.
+   **Risoluzione**: Attraverso un messaggio di debug si è riscontrato che la stringa letta non era *visitatore* ma *visitator*:
+   ![[Pasted image 20250617142026.png]] 
+   Per risolverlo quindi si è [CONTINUARE]

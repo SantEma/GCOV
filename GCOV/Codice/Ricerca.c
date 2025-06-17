@@ -24,7 +24,6 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
         printf("\nInserire il nome del gioco da ricercare: ");
         fgets(nome_ricerca, sizeof(nome_ricerca), stdin);
         nome_ricerca[strcspn(nome_ricerca, "\n")] = 0; // Rimuove il newline finale
-        videogioco.nome[strcspn(videogioco.nome, "\n")] = 0;
 
         //Da finire con la ricerca in sottostringhe e di upperCase e lowercase e sottostringhe
 
