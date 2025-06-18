@@ -13,7 +13,6 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
     short campo_modifica=0; //Variabile per la scelta del campo da modificare
     short x=0; //Variabile per il ciclo di modifica del gioco
     int pos=-1; //Variabile per la posizione del gioco da modificare
-    long offset=0; //Variabile per salvare la posizione trovata
 
     if(file != NULL){
         //Verifica della posizione del gioco da modificare
@@ -95,11 +94,9 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
             scanf("%hd", &x);
         }while(x==1);
 
-        // Stampa le modifiche apportate
+        // Stampa le modifiche apportate e riportare il puntatore all'inizio del file in caso di ulteriori operazioni
         fseek(file,0,SEEK_SET);
-
-        printf("\nQueste sono state le modifiche apportate");
-        Visualizzaizer(nomeFile,videogioco);
+        printf("\nModifiche apportate con successo\n");
 
         fclose(file);
     }
@@ -210,8 +207,8 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             printf("\nSe vuoi continuare ad aggiungere un gioco, digita 1, altrimenti 0 per uscire: ");
             scanf("%hd", &x);
         }while(x==1);
-        
-        Visualizzaizer(nomeFile,videogioco);
+
+        printf("\nTutti i giochi sono stati aggiunti correttamente\n");
 
         fclose(file);
     }
