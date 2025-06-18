@@ -55,9 +55,9 @@ void CancellaGioco(char *nomeFile, videogame_t, char*);
 void AggiungiGioco(char *nomeFile, videogame_t);
 
 //Funzioni per la gestione dei videogiochi da parte dell'utente
-//void AggiungiRecensione(char *nomeFile, videogame_t, char*);
 //void AcquistaGioco(char *nomeFile, videogame_t, char*);
-void VisualizzaVideogioco(char *nomeFile, videogame_t, char*); 
+void VisualizzaVideogioco(char *nomeFile, videogame_t, char*);
+void AggiungiRecensione(char *nomeFile, videogame_t, char*);
 
 //Funzioni per la gestione dei videogiochi per entrambi i ruoli
 void Visualizza_Recensione(char *nomeFile, videogame_t, char*);

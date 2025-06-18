@@ -11,7 +11,7 @@ void VisualizzaVideogioco(char *nomeFile, videogame_t videogioco, char* nome_ric
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         // Ricerca del gioco da visualizzare
-        while(fread(&videogioco.nome, sizeof(videogame_t), 1, file) == 1){
+        while(fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
             if(strcmp(videogioco.nome, nome_ricerca) == 0){
                 printf("\nNome: %s", videogioco.nome);
                 printf("\nEditore: %s", videogioco.editore);
@@ -41,6 +41,7 @@ void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricer
         while(fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
             if(strcmp(videogioco.nome, nome_ricerca) == 0){
                 pos = found_pos;
+                break; // Esce dal ciclo se trova il gioco, altrimenti sovrascrive l'ultima posizione trovata
             }
             found_pos++;
         }
@@ -58,8 +59,9 @@ void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricer
                 printf("Vuoi inserire una recensione scritta? (s/n): ");
                 do{
                     scanf("%c", &scelta_recensionescritt);
+                    while (getchar() != '\n'); // Svuota il buffer
                     if(scelta_recensionescritt == 's' || scelta_recensionescritt == 'S'){
-                        printf("Inserisci la recensione scritta (max %d caratteri): ", MAX_CARATTERI_DESCRIZIONI);
+                        printf("Inserisci la recensione scritta (max %d caratteri): ", MAX_CARATTERI_DESCRIZIONI-1);
                         fgets(videogioco.recensione[i].recensione_scritta, sizeof(videogioco.recensione[i].recensione_scritta), stdin);
                         videogioco.recensione[i].recensione_scritta[strcspn(videogioco.recensione[i].recensione_scritta, "\n")] = 0; // Rimuove il newline finale
                     }
@@ -69,20 +71,20 @@ void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricer
                     else printf("\nScelta non valida, rinserire: \n");
                 }while(scelta_recensionescritt != 's' && scelta_recensionescritt != 'S' && scelta_recensionescritt != 'n' && scelta_recensionescritt != 'N');
             }
-            else printf("Sono presenti gia' abbastanza recensioni per questo gioco.\n");
+            else if(videogioco.recensione[i].recensione_num != -1 && i == MAX_RECENSIONI - 1){
+                printf("\nNon è possibile aggiungere altre recensioni, il massimo è %d.\n", MAX_RECENSIONI);
+            }
+            break; // Esce dalla funzione se non ci sono più spazi per le recensioni
         }
         // Aggiorna il file con la nuova recensione
         fseek(file, pos * sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
         if(fwrite(&videogioco, sizeof(videogame_t), 1, file) != 1) printf("\nErrore nella scrittura della recensione nel file.\n");            
         else printf("\nRecensione aggiunta con successo!\n");
 
-        fseek(file,0,SEEK_SET);
-
         //Test
         printf("\nQueste sono le recensioni del gioco con questa nuova aggiunta '%s':\n", videogioco.nome);
-        Visualizza_Recensione(nomeFile, videogioco, nome_ricerca);
-        
         fclose(file);
+        Visualizza_Recensione(nomeFile, videogioco, nome_ricerca);
     }
     else printf("\nErrore nell'apertura del file per l'aggiunta della recensione.\n");
 }

@@ -83,7 +83,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                                 break;
 
                             case 3:
-                                //AggiungiRecensione(nomeFile, videogioco, nome_ricerca);
+                                AggiungiRecensione(nomeFile, videogioco, nome_ricerca);
                                 break;
                         
                             default:

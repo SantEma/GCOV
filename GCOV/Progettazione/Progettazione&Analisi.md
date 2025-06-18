@@ -90,3 +90,9 @@ Questa funzione, dopo aver trovato il gioco desiderato, verifica se ci sono altr
    **Risoluzione**: Per risolvere questo problema è bastato togliere dal repository di GitHub il file, in maniera tale che anche se esistente non venga considerato univoco per tutti, e specificare ugualmente tutti i file del progetto nella fase di compilazione, così da poter essere eseguito.
 2. Durante l'esecuzione del progetto ad un certo punto il file veniva aperto correttamente ma il contenuto non veniva più letto.
    **Risoluzione**: Avendo modificato la struttura del record del catalogo il file era andando in contrasto, è bastato ricrearlo una nuova volta.
+3. Durante l'inserimento di una recensione, alla sua verifica il file veniva corrotto, poiché non era presente il break nel ciclo in cui veniva cercata la posizione, quindi una volta trovata continuava a contare le altre arrivando a fine file e renderlo inaccessibile. Dopo aver risolto questo problema si è riscontrato che il valore -1 delle recensioni (posto di deafault) era impostato solo al primo non a tutte le possibili recensioni.
+   **Spiegazione**: Questo è avvenuto perché nel codice si è usato le {} classiche, che andavano bene per la gestione di array di char, come la descrizione, ma non per un array di record, in cui per impostare quel valore a tutti i record serve la notazione {{{}}}, in modo tale che le prime parentesi fanno riferimento al record e le seconde all'array della struttura.
+   **Prima `{`**: Inizia l'inizializzazione della struttura `videogame_t`
+   **Seconda `{`**: Inizia l'inizializzazione dell'array `recensione[MAX_RECENSIONI]`
+   **Terza `{`**: Inizia l'inizializzazione della struttura `recensione_t`
+   In più si va ad implementare nel file di CreazioneFile, un ciclo per impostare inizialmente tutti i valori numerici della recensione a -1 in maniera pulita e comprensibile, così da non creare contrasto nella dichiarazione precedente dell'array del catalogo.

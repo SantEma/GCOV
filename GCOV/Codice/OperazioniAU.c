@@ -18,28 +18,29 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
                 printf("\nLe recensioni relative al gioco %s sono: ", nome_ricerca);
 
                 for(short i=0; i<MAX_RECENSIONI; i++){
-                    if(videogioco.recensione[i].recensione_num==-1) break; // Salta le recensioni non inserite
-                    if(videogioco.recensione[i].recensione_num==0){
-                        printf("\nPessimo");
-                        printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
-                        pessimo++;
+                    if(videogioco.recensione[i].recensione_num!=-1){
+                        printf("\nRecensione %d e' %d", i, videogioco.recensione[i].recensione_num);
+                        if(videogioco.recensione[i].recensione_num==0){
+                            printf("\nPessimo");
+                            printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
+                            pessimo++;
+                        }
+                        else if(videogioco.recensione[i].recensione_num>0 && videogioco.recensione[i].recensione_num<=2){
+                            printf("\nInsufficiente");
+                            printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
+                            insufficiente++;
+                        }
+                        else if(videogioco.recensione[i].recensione_num>2 && videogioco.recensione[i].recensione_num<=4){
+                            printf("\nBuono");
+                            printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
+                            buono++;
+                        }
+                        else if(videogioco.recensione[i].recensione_num>4 && videogioco.recensione[i].recensione_num<=5){
+                            printf("\nEccellente");
+                            printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);                            eccellente++;
+                        }
+                        else printf("\nValore indesiderato per la recensione"); 
                     }
-                    else if(videogioco.recensione[i].recensione_num>0 && videogioco.recensione[i].recensione_num<=2){
-                        printf("\nInsufficiente");
-                        printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
-                        insufficiente++;
-                    }
-                    else if(videogioco.recensione[i].recensione_num>2 && videogioco.recensione[i].recensione_num<=4){
-                        printf("\nBuono");
-                        printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
-                        buono++;
-                    }
-                    else if(videogioco.recensione[i].recensione_num>4 && videogioco.recensione[i].recensione_num<=5){
-                        printf("\nEccellente");
-                        printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
-                        eccellente++;
-                    }
-                    else printf("\nValore indesiderato per la recensione"); 
                 }
 
                 // Stampa la recensione generale
@@ -70,7 +71,6 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
         }
         
         fclose(file);
-    }
     else printf("\nErrore nell'apertura del file per visualizzare la recensione\n");
 }
 
