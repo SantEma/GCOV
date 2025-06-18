@@ -217,22 +217,3 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
     }
     else printf("\nErrore nell'apertura del file per l'aggiunta del gioco\n");
 }
-
-//Momentanea
-void Visualizzaizer(char *nomeFile, videogame_t videogioco){
-    FILE *file=fopen(nomeFile,"rb");
-    if(file!=NULL){
-        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            printf("\nNome: %s", videogioco.nome);
-            printf("\nEditore: %s", videogioco.editore);
-            printf("\nSviluppatore: %s", videogioco.sviluppatore);
-            printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
-            printf("\nAnno di uscita: %d", videogioco.anno_uscita);
-            printf("\nGenere: %s", videogioco.genere[0]);
-            printf("\nRecensione: %d", videogioco.recensione[0].recensione_num);
-            printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
-        }
-        fclose(file);
-    }
-    
-}

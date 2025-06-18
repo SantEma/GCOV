@@ -58,7 +58,7 @@ In ogni file sarà presente, tramite gli appositi controlli, sia la funzione ese
 
 ...
 
-L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un upper-case. Per ipotesi e per non aggiungere informazioni superflue, l'admin avrà solo una possibilità per inserire il codice in maniera corretta, altrimenti dovrà rilanciare il programma.
+L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un upper-case. L'admin se inserisce la password in modo errato può decidere di riscriverla o continuare come visitatore al sito.
 Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene reinderizzati al menu corretto e alle funzioni che quel determinato utente può fare (visitatore o amministratore)
 
 ...
@@ -83,7 +83,5 @@ La prima funzione possibile da svolgere per quanto riguarda l'utente è la possi
 ## Problemi riscontrati e risoluzioni
 1. Durante la compilazione del progetto, anche se il file esisteva e non si specificava il file c CreazioneFile durante la compilazione, l'intero progetto non veniva eseguito, poiché il main non riusciva a capire dove fosse specificata la funzione ScriviCatalogo, funzione che possiede già il controllo di uscire se il file è già creato. 
    **Risoluzione**: Per risolvere questo problema è bastato togliere dal repository di GitHub il file, in maniera tale che anche se esistente non venga considerato univoco per tutti, e specificare ugualmente tutti i file del progetto nella fase di compilazione, così da poter essere eseguito.
-2. Durante l'accesso al Menu, se l'utente digitava *visitatore* per potervi accedere come tale veniva restituito il messaggio destinato all'inserimento di una password errata.
-   **Risoluzione**: Attraverso un messaggio di debug si è riscontrato che la stringa letta non era *visitatore* ma *visitator*:
-   ![[Pasted image 20250617142026.png]] 
-   Per risolverlo quindi si è [CONTINUARE]
+2. Durante l'esecuzione del progetto ad un certo punto il file veniva aperto correttamente ma il contenuto non veniva più letto.
+   **Risoluzione**: Avendo modificato la struttura del record del catalogo il file era andando in contrasto, è bastato ricrearlo una nuova volta.

@@ -47,7 +47,7 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
                 if(pessimo>=insufficiente && pessimo>=buono && pessimo>=eccellente) recensione_generale=0; //Ponendo maggiore o uguale, sarà visualizzata comunque una recensione, se fosse solo maggiore si creerebbe un conflitto
                 else if(insufficiente>=pessimo && insufficiente>=buono && insufficiente>=eccellente) recensione_generale=1;
                 else if(buono>=pessimo && buono>=insufficiente && buono>=eccellente) recensione_generale=2;
-                else if(eccellente>=pessimo && eccellente>=insufficiente && eccellente>=buono) recensione_generale=3;
+                else if(eccellente>pessimo && eccellente>insufficiente && eccellente>buono) recensione_generale=3;
                 else printf("\nValore indesiderato per la recensione generale");
                 switch (recensione_generale) {
                     case 0:
@@ -72,4 +72,24 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per visualizzare la recensione\n");
+}
+
+
+//Momentanea
+void Visualizzaizer(char *nomeFile, videogame_t videogioco){
+    FILE *file=fopen(nomeFile,"rb");
+    if(file!=NULL){
+        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            printf("\nNome: %s", videogioco.nome);
+            printf("\nEditore: %s", videogioco.editore);
+            printf("\nSviluppatore: %s", videogioco.sviluppatore);
+            printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
+            printf("\nAnno di uscita: %d", videogioco.anno_uscita);
+            printf("\nGenere: %s", videogioco.genere[0]);
+            printf("\nRecensione: %d", videogioco.recensione[0].recensione_num);
+            printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
+        }
+        fclose(file);
+    }
+    else printf("\nErrore nell'apertura del file per la visualizzazione di tutto il catalogo\n");
 }
