@@ -81,8 +81,53 @@ void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricer
         fseek(file, pos * sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
         if(fwrite(&videogioco, sizeof(videogame_t), 1, file) != 1) printf("\nErrore nella scrittura della recensione nel file.\n");            
         else printf("\nRecensione aggiunta con successo!\n");
+        fseek(file,0,SEEK_SET);
 
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per l'aggiunta della recensione.\n");
+}
+
+void AcquistaGioco(char *nomeFile, videogame_t videogioco, char* nome_ricerca){
+    short gioco_acquistato = 0; // Flag per indicare se il gioco è stato acquistato
+    short pos=-1;
+    short found_pos=0;
+
+    FILE *file=fopen(nomeFile, "rb+");
+    if(file!=NULL){
+        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
+            if(strcmp(videogioco.nome,nome_ricerca)==0){
+                videogioco.copie_vendute++;
+                gioco_acquistato = 1;
+                pos=found_pos;
+                break; // Esce dal ciclo se trova il gioco
+            }
+            found_pos++;
+        }
+
+        //Aggiornamento contatore delle copie vendute
+        if(gioco_acquistato){
+            fseek(file,pos*sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
+            if(fwrite(&videogioco, sizeof(videogame_t), 1, file) != 1) printf("\nErrore nella scrittura del file per l'acquisto del gioco.\n");
+            else printf("\nIl gioco %s e' stato acquistato con successo!\n", videogioco.nome);
+            
+            //Richiesta di recensione
+            printf("\nVuoi aggiungere una recensione al gioco appena acquistato? (s/n): ");
+            char scelta_recensione;
+            scanf(" %c", &scelta_recensione);
+            if(scelta_recensione == 's' || scelta_recensione == 'S'){
+                AggiungiRecensione(nomeFile, videogioco, nome_ricerca);
+            }
+            else if(scelta_recensione == 'n' || scelta_recensione == 'N'){
+                printf("\nRecensione non aggiunta.\n");
+            }
+            else printf("\nScelta non valida, recensione non aggiunta.\n");
+            
+        }
+        else printf("\nGioco non disponibile nel catalogo.\n");
+
+        fclose(file);
+    }
+    else printf("\nErrore nell'apertura del file per l'acquisto del gioco.\n");
+
 }

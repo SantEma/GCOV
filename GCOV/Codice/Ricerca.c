@@ -21,6 +21,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
     short check_name=0; //flag per verificare se il nome del gioco è stato trovato
     FILE *file = fopen(nomeFile, "rb");
     if (file != NULL) {
+        printf("\n-------------------------");
         printf("\nInserire il nome del gioco da ricercare: ");
         fgets(nome_ricerca, sizeof(nome_ricerca), stdin);
         nome_ricerca[strcspn(nome_ricerca, "\n")] = 0; // Rimuove il newline finale
@@ -79,7 +80,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                                 break;
                 
                             case 2:
-                                //AcquistaGioco(nomeFile, videogioco, nome_ricerca);
+                                AcquistaGioco(nomeFile, videogioco, nome_ricerca);
                                 break;
 
                             case 3:

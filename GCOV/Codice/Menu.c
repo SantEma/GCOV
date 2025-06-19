@@ -77,6 +77,10 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         switch(sceltaguest){
             case 1:
+                //Visualizza l'intero catalogo dei videogiochi
+                printf("\nEcco il catalogo dei videogiochi disponibili e alcuni dettagli così da guidarti nella tua scelta:\n");
+                VisualizzaCat(nomeFile, videogioco);
+                //Fase di ricerca del gioco
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
             case -1:

@@ -44,10 +44,11 @@ void MenuPrincipale(videogame_t videogame);
 void MenuAdmin(videogame_t videogame, char *nomeFile, short);
 void MenuVisitatore(videogame_t videogame, char *nomeFile, short);
 int AutenticazioneAdmin();
+
 //Funzioni per la gestione del catalogo
 void ScriviCatalogo(char *nomeFile);
 void Ricerca(char *nomeFile, videogame_t, short);
-void Visualizzaizer(char *nomeFile, videogame_t);
+void VisualizzaCat(char *nomeFile, videogame_t);
 
 //Funzioni per la gestione dei videogiochi da parte dell'admin
 void ModificaGioco(char *nomeFile, videogame_t, char*);
@@ -55,10 +56,14 @@ void CancellaGioco(char *nomeFile, videogame_t, char*);
 void AggiungiGioco(char *nomeFile, videogame_t);
 
 //Funzioni per la gestione dei videogiochi da parte dell'utente
-//void AcquistaGioco(char *nomeFile, videogame_t, char*);
+void AcquistaGioco(char *nomeFile, videogame_t, char*);
 void VisualizzaVideogioco(char *nomeFile, videogame_t, char*);
 void AggiungiRecensione(char *nomeFile, videogame_t, char*);
 
 //Funzioni per la gestione dei videogiochi per entrambi i ruoli
 void Visualizza_Recensione(char *nomeFile, videogame_t, char*);
+/*  void Statistica(char *nomeFile, videogame_t, char*);
+    void Ordinamento_copie_vendute(char *nomeFile, videogame_t);
+    void Ordinamento_statistiche(char *nomeFile, videogame_t);
+*/
 #endif
