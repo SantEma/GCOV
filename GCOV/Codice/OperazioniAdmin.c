@@ -8,20 +8,12 @@
 #include "CatalogoVideogame.h"
 
 //Funzione per la modifica di un gioco
-void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
+void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,short pos){
     FILE *file= fopen(nomeFile, "rb+");
     short campo_modifica=0; //Variabile per la scelta del campo da modificare
     short x=0; //Variabile per il ciclo di modifica del gioco
-    int pos=-1; //Variabile per la posizione del gioco da modificare
 
     if(file != NULL){
-        //Verifica della posizione del gioco da modificare
-        int found_pos=0;
-        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            if(strcmp(videogioco.nome,nome_ricerca)==0) pos = found_pos;
-            found_pos++;
-        }
-        
         //Modifica campi del gioco
         printf("\nChe campo vuoi modificare del gioco '%s'?\n", nome_ricerca);
         do{
@@ -104,7 +96,7 @@ void ModificaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
 }
 
 
-void CancellaGioco(char *nomeFile, videogame_t videogioco, char *nome_ricerca){
+void CancellaGioco(char *nomeFile, char *nome_ricerca,videogame_t videogioco, short pos){
 
     FILE *file_originale=fopen(nomeFile,"rb"); //Apre il file dati in lettura binaria.
     FILE *file_temporaneo=fopen("temp.dat","wb"); //Crea un file temporaneo in scrittura binaria.

@@ -7,46 +7,33 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-void VisualizzaVideogioco(char *nomeFile, videogame_t videogioco, char* nome_ricerca){
+void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco, short pos ){
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         // Ricerca del gioco da visualizzare
-        while(fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
-            if(strcmp(videogioco.nome, nome_ricerca) == 0){
-                printf("\nNome: %s", videogioco.nome);
-                printf("\nEditore: %s", videogioco.editore);
-                printf("\nSviluppatore: %s", videogioco.sviluppatore);
-                printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
-                printf("\nAnno di uscita: %d", videogioco.anno_uscita);
-                printf("\nGeneri: ");
-                for(short i=0; i<MAX_GENERI && videogioco.genere[i][0] != '\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
-                    printf("%s ", videogioco.genere[i]);
-                }
-                Visualizza_Recensione(nomeFile, videogioco, nome_ricerca);
-                printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
-            }
+        printf("\nNome: %s", videogioco.nome);
+        printf("\nEditore: %s", videogioco.editore);
+        printf("\nSviluppatore: %s", videogioco.sviluppatore);
+        printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
+        printf("\nAnno di uscita: %d", videogioco.anno_uscita);
+        printf("\nGeneri: ");
+        for(short i=0; i<MAX_GENERI && videogioco.genere[i][0] != '\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
+            printf("%s ", videogioco.genere[i]);
         }
+        Visualizza_Recensione(nomeFile, nome_ricerca, videogioco, pos);
+        printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
+        
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per la visualizzazione del gioco.\n");
 }
 
-void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricerca){
+void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogioco, short pos){
     char scelta_recensionescritt;
-    int pos=-1; //Variabile per la posizione del gioco da modificare
-    int found_pos=0; // Variabile per tenere traccia della posizione del gioco nel file
     short recensione_impostata=0; // Flag per verificare se è stata impostata una recensione
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
-        while(fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
-            if(strcmp(videogioco.nome, nome_ricerca) == 0){
-                pos = found_pos;
-                break; // Esce dal ciclo se trova il gioco, altrimenti sovrascrive l'ultima posizione trovata
-            }
-            found_pos++;
-        }
-            
         for(short i=0; i<MAX_RECENSIONI; i++){
             if(videogioco.recensione[i].recensione_num == -1){ // Trova la prima recensione vuota
                 printf("\nInserisci la valutazione (0-5): ");
@@ -88,22 +75,13 @@ void AggiungiRecensione(char *nomeFile, videogame_t videogioco, char* nome_ricer
     else printf("\nErrore nell'apertura del file per l'aggiunta della recensione.\n");
 }
 
-void AcquistaGioco(char *nomeFile, videogame_t videogioco, char* nome_ricerca){
+void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,short pos){
     short gioco_acquistato = 0; // Flag per indicare se il gioco è stato acquistato
-    short pos=-1;
-    short found_pos=0;
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
-        while(fread(&videogioco,sizeof(videogame_t),1,file)==1){
-            if(strcmp(videogioco.nome,nome_ricerca)==0){
-                videogioco.copie_vendute++;
-                gioco_acquistato = 1;
-                pos=found_pos;
-                break; // Esce dal ciclo se trova il gioco
-            }
-            found_pos++;
-        }
+        videogioco.copie_vendute++;
+        gioco_acquistato = 1;
 
         //Aggiornamento contatore delle copie vendute
         if(gioco_acquistato){
@@ -116,18 +94,17 @@ void AcquistaGioco(char *nomeFile, videogame_t videogioco, char* nome_ricerca){
             char scelta_recensione;
             scanf(" %c", &scelta_recensione);
             if(scelta_recensione == 's' || scelta_recensione == 'S'){
-                AggiungiRecensione(nomeFile, videogioco, nome_ricerca);
+                AggiungiRecensione(nomeFile, nome_ricerca,videogioco, pos);
             }
             else if(scelta_recensione == 'n' || scelta_recensione == 'N'){
                 printf("\nRecensione non aggiunta.\n");
             }
             else printf("\nScelta non valida, recensione non aggiunta.\n");
-            
+
         }
         else printf("\nGioco non disponibile nel catalogo.\n");
 
         fclose(file);
     }
     else printf("\nErrore nell'apertura del file per l'acquisto del gioco.\n");
-
 }

@@ -47,7 +47,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
     short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire
     do{
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltadmin);
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         
@@ -71,7 +71,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
     
     do{
         printf("\n\n--- MENU VISITATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto:\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltaguest);
         
         while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
@@ -83,9 +83,11 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
                 //Fase di ricerca del gioco
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
+            
             case -1:
                 printf("\nUscita dal programma...\n");
                 break;
+            
             default:
                 printf("\nScelta non valida, riprova:");
                 sceltaguest=0;
