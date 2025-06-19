@@ -19,7 +19,7 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
 
                 for(short i=0; i<MAX_RECENSIONI; i++){
                     if(videogioco.recensione[i].recensione_num!=-1){
-                        printf("\nRecensione %d e' %d", i, videogioco.recensione[i].recensione_num);
+                        printf("\nRecensione %d e' %d", i+1, videogioco.recensione[i].recensione_num);
                         if(videogioco.recensione[i].recensione_num==0){
                             printf("\nPessimo");
                             printf("\nRecensioni scritte: %s ",videogioco.recensione[i].recensione_scritta);
@@ -71,6 +71,7 @@ void Visualizza_Recensione(char *nomeFile, videogame_t videogioco, char *nome_ri
         }
         
         fclose(file);
+    }
     else printf("\nErrore nell'apertura del file per visualizzare la recensione\n");
 }
 

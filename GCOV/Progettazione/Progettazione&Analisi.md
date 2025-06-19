@@ -76,7 +76,7 @@ Il gioco ricercato da parte dell'admin sarà lo stesso gioco sul quale si potrà
 - Insufficiente
 - Buono
 - Eccellente
-O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.[DA TESTARE INSERENDO DELLE RECENSIONI]
+O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.
 La funzione di visualizzazione delle recensioni viene posta nel file delle operazioni comuni, poiché anche l'utente quando visualizza un prodotto, tramite la sua apposita funzione, deve visualizzare lo stesso tipo di recensioni.
 
 La prima funzione possibile da svolgere per quanto riguarda l'utente è la possibilità di visualizzare tutte le informazioni del videogioco che è stato precedentemente richiesto nella fase di ricerca. Questa funzione viene facilmente implementata cercando nel file il gioco desiderato, come eseguito per le funzioni precedenti ad essa, e mostrare a schermo le informazioni relative a quello specifico gioco, se trovato, infine si richiama la funzione di visualizzazione delle recensioni per mostrare anche quest'ultimo parametro.
@@ -95,4 +95,4 @@ Questa funzione, dopo aver trovato il gioco desiderato, verifica se ci sono altr
    **Prima `{`**: Inizia l'inizializzazione della struttura `videogame_t`
    **Seconda `{`**: Inizia l'inizializzazione dell'array `recensione[MAX_RECENSIONI]`
    **Terza `{`**: Inizia l'inizializzazione della struttura `recensione_t`
-   In più si va ad implementare nel file di CreazioneFile, un ciclo per impostare inizialmente tutti i valori numerici della recensione a -1 in maniera pulita e comprensibile, così da non creare contrasto nella dichiarazione precedente dell'array del catalogo.
+   In più si va ad implementare nel file di CreazioneFile, un ciclo per impostare inizialmente tutti i valori numerici della recensione a -1 in maniera pulita e comprensibile, così da non creare contrasto nella dichiarazione precedente dell'array del catalogo. (Per sicurezza nell'aggiunta di una recensione si è inserito un flag per controllare se gli slot per le recensioni fossero liberi o meno).
