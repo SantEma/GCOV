@@ -64,11 +64,28 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         break;
 
                     case 4:
-                        Visualizza_Recensione(nomeFile, nome_ricerca, videogioco, pos);
+                        Visualizza_Recensione(nomeFile, nome_ricerca, videogioco);
                         break;
 
                     case 5:
-                        Statistica(nomeFile, nome_ricerca, videogioco, pos);
+                        char scelta_statistica;
+                        float media_recensione = 0.0;
+                        float mcopie_vendute = 0.0;
+
+                        printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
+                        do{
+                            scanf(" %c", &scelta_statistica);
+                            if(scelta_statistica == 'r' || scelta_statistica == 'R'){
+                                media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
+                                printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
+                            }
+                            else if(scelta_statistica == 'c' || scelta_statistica == 'C'){
+                                mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
+                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
+                                else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
+                            }
+                            else printf("\nScelta non valida, Rinserire: \n");
+                        }while(scelta_statistica != 'c' && scelta_statistica != 'C' && scelta_statistica != 'r' && scelta_statistica != 'R');
                         break;
 
                     default:
@@ -88,7 +105,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                     scanf("%hd", &scelta_operazioneFile);
                     switch (scelta_operazioneFile){
                     case 1:
-                        VisualizzaVideogioco(nomeFile, nome_ricerca, videogioco, pos);
+                        VisualizzaVideogioco(nomeFile, nome_ricerca, videogioco);
                         break;
 
                     case 2:
@@ -100,7 +117,24 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         break;
 
                     case 4:
-                        Statistica(nomeFile, nome_ricerca, videogioco, pos);
+                        char scelta_statistica;
+                        float media_recensione = 0.0;
+                        float mcopie_vendute = 0.0;
+
+                        printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
+                        do{
+                            scanf(" %c", &scelta_statistica);
+                            if(scelta_statistica == 'r' || scelta_statistica == 'R'){
+                                media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
+                                printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
+                            }
+                            else if(scelta_statistica == 'c' || scelta_statistica == 'C'){
+                                mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
+                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
+                                else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
+                            }
+                            else printf("\nScelta non valida, Rinserire: \n");
+                        }while(scelta_statistica != 'c' && scelta_statistica != 'C' && scelta_statistica != 'r' && scelta_statistica != 'R');
                         break;
 
                     default:

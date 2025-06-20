@@ -7,7 +7,7 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco, short pos ){
+void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco){
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         // Ricerca del gioco da visualizzare
@@ -20,7 +20,7 @@ void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videog
         for(short i=0; i<MAX_GENERI && videogioco.genere[i][0] != '\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
             printf("%s ", videogioco.genere[i]);
         }
-        Visualizza_Recensione(nomeFile, nome_ricerca, videogioco, pos);
+        Visualizza_Recensione(nomeFile, nome_ricerca, videogioco);
         printf("\nCopie vendute: %d\n", videogioco.copie_vendute);
         
         fclose(file);
@@ -40,7 +40,7 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
                 do{
                     scanf("%d", &videogioco.recensione[i].recensione_num);
                     while (getchar() != '\n'); // Svuota il buffer
-                    printf("\nValutazione inserita: %d", videogioco.recensione[i].recensione_num);
+                    printf("\nValutazione inserita\n");
                     if(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5) printf("\nValutazione non valida, rinserirla, deve essere compresa tra 0 e 5.\n");
                 }while(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5);
 
@@ -80,8 +80,16 @@ void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,sh
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
-        videogioco.copie_vendute++;
-        gioco_acquistato = 1;
+        if(videogioco.copie_vendute < MAX_PRODUCTION){ // Controlla se ci sono copie disponibili
+            printf("\nIl gioco %s e' disponibile per l'acquisto. Erogazione in corso.\n", videogioco.nome);
+            videogioco.copie_vendute++;
+            gioco_acquistato = 1;
+        }
+        else{
+            printf("\nIl gioco %s non e' disponibile per l'acquisto, tutte le copie sono state vendute.\n", videogioco.nome);
+            fclose(file);
+            return;
+        }
 
         //Aggiornamento contatore delle copie vendute
         if(gioco_acquistato){
