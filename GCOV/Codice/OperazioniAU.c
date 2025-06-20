@@ -7,7 +7,7 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t videogioco,short pos){
+void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
     short recensione_generale = -1;                                      // Variabile per la recensione generale a -1 così da far valere lo 0 nello switch
     short pessimo = -1, insufficiente = -1, buono = -1, eccellente = -1; // Contatori per le recensioni a -1 così da far valere lo 0 nello switch
 
@@ -86,13 +86,12 @@ void VisualizzaCat(char *nomeFile, videogame_t videogioco){
     FILE *file = fopen(nomeFile, "rb");
     if (file != NULL)
     {
-        while (fread(&videogioco, sizeof(videogame_t), 1, file) == 1)
-        {
-            j++;
+        while (fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
             printf("\n--------Gioco %hd---------\n", j + 1);
             printf("\nNome: %s", videogioco.nome);
             printf("\nSviluppatore: %s", videogioco.sviluppatore);
             printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
+            j++;
         }
         fclose(file);
     }
@@ -100,8 +99,34 @@ void VisualizzaCat(char *nomeFile, videogame_t videogioco){
         printf("\nErrore nell'apertura del file per la visualizzazione di tutto il catalogo\n");
 }
 
-void Statistica(char *nomeFile, char *nome_ricerca ,videogame_t, short pos){
+float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t videogioco){
+    float media = 0.0;
+    short count = 0; // Contatore per le recensioni valide
+
+    FILE *file = fopen(nomeFile, "rb");
+    if(file!=NULL){
+        for(short i=0;i<MAX_RECENSIONI;i++){
+            if(videogioco.recensione[i].recensione_num != -1){
+                count++;
+                media += videogioco.recensione[i].recensione_num;
+            }
+        }
+        media=media/count; // Calcola la media delle recensioni
+        fclose(file);
+        return media;
+    }
+    else printf("\nErrore nell'apertura del file per il calcolo della media delle recensioni\n");
+
+}
+float StatisticaCopieVendute(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
     float media = 0.0;
 
     FILE *file = fopen(nomeFile, "rb");
+    if(file!=NULL){
+        if(videogioco.copie_vendute>=0) media=videogioco.copie_vendute/ MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite
+        
+        fclose(file);
+        return media;
+    }
+    else printf("\nErrore nell'apertura del file per il calcolo della media delle recensioni\n");
 }
