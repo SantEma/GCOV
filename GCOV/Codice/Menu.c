@@ -47,7 +47,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
     short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire
     do{
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n2) Ordinamento giochi\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltadmin);
         while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         
@@ -55,7 +55,29 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
             case 1:
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
-            //Pronto per ordinamento
+            case 2:
+                {
+                    short scelta_ordinamento = 0;
+                    printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
+                    do{
+                        scanf("%hd", &scelta_ordinamento);
+                        while (getchar()!='\n'); // Svuota il buffer
+                        
+                        switch(scelta_ordinamento){
+                            case 1:
+                                Ordinamento_copie_vendute(nomeFile, videogioco);
+                                break;
+                            case 2:
+                                Ordinamento_statistiche(nomeFile, videogioco);
+                                break;
+                            default:
+                                printf("\nScelta non valida, riprova (1-2): ");
+                                scelta_ordinamento=0;
+                                break;
+                        }
+                    }while(scelta_ordinamento<1 || scelta_ordinamento>2);
+                }
+                break;
             case -1:
                 printf("\nUscita dal menu...\n");
                 break;
@@ -72,19 +94,38 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
     
     do{
         printf("\n\n--- MENU VISITATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n2) Ordinamento giochi\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltaguest);
         
         while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         switch(sceltaguest){
             case 1:
-                //Visualizza l'intero catalogo dei videogiochi
-                printf("\nEcco il catalogo dei videogiochi disponibili e alcuni dettagli cosi' da guidarti nella tua scelta:\n");
-                VisualizzaCat(nomeFile, videogioco);
                 //Fase di ricerca del gioco
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
-            //Pronto per ordinamento
+            case 2:
+                {
+                    short scelta_ordinamento = 0;
+                    printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
+                    do{
+                        scanf("%hd", &scelta_ordinamento);
+                        while (getchar()!='\n'); // Svuota il buffer
+                        
+                        switch(scelta_ordinamento){
+                            case 1:
+                                Ordinamento_copie_vendute(nomeFile, videogioco);
+                                break;
+                            case 2:
+                                Ordinamento_statistiche(nomeFile, videogioco);
+                                break;
+                            default:
+                                printf("\nScelta non valida, riprova (1-2): ");
+                                scelta_ordinamento=0;
+                                break;
+                        }
+                    }while(scelta_ordinamento<1 || scelta_ordinamento>2);
+                }
+                break;
             case -1:
                 printf("\nUscita dal programma...\n");
                 break;
@@ -105,10 +146,10 @@ int AutenticazioneAdmin(){
     do{
         printf("\nInserire la password di amministratore: ");
         fgets(input_password, sizeof(input_password), stdin);
-        input_password[strcspn(input_password, "\n")] = 0; // Rimuove il newline finale
+        input_password[strcspn(input_password, "\n")]=0; // Rimuove il newline finale
         
         //Controllo della password inserita
-        if(strcmp(input_password, PASSWORD) == 0){
+        if(strcmp(input_password, PASSWORD)==0){
             printf("\nPassword corretta, benvenuto amministratore!\n");
             return 1;
         }
@@ -118,11 +159,10 @@ int AutenticazioneAdmin(){
             
             do{
                 scanf("%hd", &scelta_errore);
-                while (getchar()!='\n'); // Svuota il buffer
+                while (getchar()!='\n');//Svuota il buffer
                 
                 switch(scelta_errore){
                     case 1:
-                        // Continua il ciclo per riprovare
                         break;
                     case 2:
                         printf("\nBenvenuto visitatore!\n");
@@ -136,13 +176,11 @@ int AutenticazioneAdmin(){
                         break;
                 }
             }while(scelta_errore<1 || scelta_errore>3);
-            
-            // Se l'utente ha scelto di riprovare (caso 1), continua il ciclo principale
             if(scelta_errore!=1){
-                break; // Esce dal ciclo se ha scelto opzione 2 o 3
+                break;
             }
         }
     }while(scelta_errore==1);
     
-    return -1; // Dovrebbe essere irraggiungibile, ma per sicurezza
+    return -1; // Dovrebbe essere irraggiungibile, ma per sicurezza meglio lasciarlo così
 }
