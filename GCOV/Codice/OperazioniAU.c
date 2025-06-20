@@ -44,7 +44,7 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
 
         // Stampa la recensione generale
         printf("\n-----------------\nRecensione generale: ");
-        if (pessimo != -1 && insufficiente != -1 && buono != -1 && eccellente != -1){
+        if (pessimo != -1 || insufficiente || -1 || buono || -1 && eccellente || -1){
             if (pessimo >= insufficiente && pessimo >= buono && pessimo >= eccellente)
                 recensione_generale = 0; // Ponendo maggiore o uguale, sarà visualizzata comunque una recensione, se fosse solo maggiore si creerebbe un conflitto
             else if (insufficiente >= pessimo && insufficiente >= buono && insufficiente >= eccellente)
@@ -56,8 +56,7 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
             else
                 printf("\nValore indesiderato per la recensione generale");
         }
-        switch (recensione_generale)
-        {
+        switch (recensione_generale){
         case 0:
             printf("\nPessima");
             break;
@@ -123,8 +122,11 @@ float StatisticaCopieVendute(char *nomeFile, char *nome_ricerca, videogame_t vid
 
     FILE *file = fopen(nomeFile, "rb");
     if(file!=NULL){
-        if(videogioco.copie_vendute>=0) media=videogioco.copie_vendute/ MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite
-        
+        if(videogioco.copie_vendute>=0) media=(float)videogioco.copie_vendute/ MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite ed eseguo il cast temporaneo per poter inserire un float all'interno della variabile media
+        else{
+            printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
+            return 0.0; // Se non ci sono copie vendute, ritorna 0.0
+        }
         fclose(file);
         return media;
     }

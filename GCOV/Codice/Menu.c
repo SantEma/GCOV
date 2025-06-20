@@ -14,7 +14,7 @@ void MenuPrincipale(videogame_t videogioco){
     
     //Fase di autentificazione
     do{
-        printf("Benvenuti!\nScegliere come ci si vuole autenticare:\n1)Admin\n2)Visitatore\n-1)Uscire\nScelta:");
+        printf("\nBenvenuti!\nScegliere come ci si vuole autenticare:\n1)Admin\n2)Visitatore\n-1)Uscire\nScelta:");
         scanf("%hd", &sceltaprincipale);
         while (getchar()!='\n'); // Svuota il buffer
         
@@ -78,7 +78,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
         switch(sceltaguest){
             case 1:
                 //Visualizza l'intero catalogo dei videogiochi
-                printf("\nEcco il catalogo dei videogiochi disponibili e alcuni dettagli così da guidarti nella tua scelta:\n");
+                printf("\nEcco il catalogo dei videogiochi disponibili e alcuni dettagli cosi' da guidarti nella tua scelta:\n");
                 VisualizzaCat(nomeFile, videogioco);
                 //Fase di ricerca del gioco
                 Ricerca(nomeFile, videogioco,check_admin);

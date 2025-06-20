@@ -37,6 +37,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                 check_name = 1; // se il gioco è stato trovato
                 printf("\nGioco trovato:\n");
                 pos = found_pos;
+                break;
             }
             found_pos++;
         }
@@ -45,7 +46,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
             if (check_admin){
                 // Scelta dell'operazione da eseguire con richiamo alla sua funzione - Admin
                 printf("\nScegli l'operazione da eseguire:\n");
-                printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco\nScelta:");
+                printf("1 - Modifica un campo del gioco\n2 - Cancella il gioco\n3 - Aggiungi un gioco dopo questo\n4 - Visualizza recensione del gioco\n5 - Statistica\nScelta:");
                 short scelta_operazioneFile;
 
                 do{
@@ -92,13 +93,13 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         printf("\nOperazione non valida. Reinserire valore corretto\n");
                         break;
                     }
-                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 4); // Assicura che la scelta sia tra 1 e 4
+                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 5); // Assicura che la scelta sia tra 1 e 4
             }
 
             else{
                 // Scelta dell'operazione da eseguire con richiamo alla sua funzione - Utente
                 printf("\nScegli l'operazione da eseguire:\n");
-                printf("1 - Visualizza informazioni del gioco\n2 - Acquista un gioco\n3 - Aggiungi una recensione al gioco\nScelta:");
+                printf("1 - Visualizza informazioni del gioco\n2 - Acquista un gioco\n3 - Aggiungi una recensione al gioco\n4 - Statistica\nScelta:");
                 short scelta_operazioneFile;
 
                 do{
@@ -130,7 +131,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                             }
                             else if(scelta_statistica == 'c' || scelta_statistica == 'C'){
                                 mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
-                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
+                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: %.2f \n", nome_ricerca, mcopie_vendute);
                                 else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
                             }
                             else printf("\nScelta non valida, Rinserire: \n");
@@ -141,7 +142,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         printf("\nOperazione non valida. Reinserire valore corretto\n");
                         break;
                     }
-                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 3); // Assicura che la scelta sia tra 1 e 3
+                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 4); // Assicura che la scelta sia tra 1 e 3
             }
 
             fclose(file);
