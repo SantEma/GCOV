@@ -58,7 +58,7 @@ In ogni file sarà presente, tramite gli appositi controlli, sia la funzione ese
 
 ...
 
-L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un upper-case. L'admin se inserisce la password in modo errato può decidere di riscriverla o continuare come visitatore al sito.
+L'autentificazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autentificazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un lower-case. L'admin se inserisce la password in modo errato può decidere di riscriverla o continuare come visitatore al sito.
 Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene reinderizzati al menu corretto e alle funzioni che quel determinato utente può fare (visitatore o amministratore)
 
 ...
