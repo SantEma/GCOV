@@ -18,25 +18,25 @@
 
 void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
     char nome_ricerca[70];
-    short check_name = 0; // flag per verificare se il nome del gioco è stato trovato
-    short pos = -1;       // Variabile per la posizione del gioco in cui eseguire le operazioni
-    short found_pos = 0;  // Variabile per tenere traccia della posizione del gioco
+    short check_name=0; // flag per verificare se il nome del gioco è stato trovato
+    short pos=-1;       // Variabile per la posizione del gioco in cui eseguire le operazioni
+    short found_pos=0;  // Variabile per tenere traccia della posizione del gioco
 
-    FILE *file = fopen(nomeFile, "rb");
-    if (file != NULL){
+    FILE *file=fopen(nomeFile, "rb");
+    if (file!=NULL){
         printf("\n-------------------------");
         printf("\nInserire il nome del gioco da ricercare: ");
         fgets(nome_ricerca, sizeof(nome_ricerca), stdin);
-        nome_ricerca[strcspn(nome_ricerca, "\n")] = 0; // Rimuove il newline finale
+        nome_ricerca[strcspn(nome_ricerca, "\n")]=0; // Rimuove il newline finale
 
         // Da finire con la ricerca in sottostringhe e di upperCase e lowercase e sottostringhe
 
         // ciclo per la ricerca del gioco
-        while (fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
-            if (strcmp(videogioco.nome, nome_ricerca) == 0){
-                check_name = 1; // se il gioco è stato trovato
+        while (fread(&videogioco, sizeof(videogame_t), 1, file)==1){
+            if (strcmp(videogioco.nome, nome_ricerca)==0){
+                check_name=1; // se il gioco è stato trovato
                 printf("\nGioco trovato:\n");
-                pos = found_pos;
+                pos=found_pos;
                 break;
             }
             found_pos++;
@@ -70,30 +70,30 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
 
                     case 5:
                         char scelta_statistica;
-                        float media_recensione = 0.0;
-                        float mcopie_vendute = 0.0;
+                        float media_recensione=0.0;
+                        float mcopie_vendute=0.0;
 
                         printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
                         do{
                             scanf(" %c", &scelta_statistica);
-                            if(scelta_statistica == 'r' || scelta_statistica == 'R'){
+                            if(scelta_statistica=='r' || scelta_statistica=='R'){
                                 media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
                                 printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
                             }
-                            else if(scelta_statistica == 'c' || scelta_statistica == 'C'){
+                            else if(scelta_statistica=='c' || scelta_statistica=='C'){
                                 mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
-                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
+                                if(mcopie_vendute!=0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
                                 else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
                             }
                             else printf("\nScelta non valida, Rinserire: \n");
-                        }while(scelta_statistica != 'c' && scelta_statistica != 'C' && scelta_statistica != 'r' && scelta_statistica != 'R');
+                        }while(scelta_statistica!='c' && scelta_statistica!='C' && scelta_statistica!='r' && scelta_statistica!='R');
                         break;
 
                     default:
                         printf("\nOperazione non valida. Reinserire valore corretto\n");
                         break;
                     }
-                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 5); // Assicura che la scelta sia tra 1 e 4
+                } while (scelta_operazioneFile<1||scelta_operazioneFile>5); // Assicura che la scelta sia tra 1 e 4
             }
 
             else{
@@ -119,36 +119,36 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
 
                     case 4:
                         char scelta_statistica;
-                        float media_recensione = 0.0;
-                        float mcopie_vendute = 0.0;
+                        float media_recensione=0.0;
+                        float mcopie_vendute=0.0;
 
                         printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
                         do{
                             scanf(" %c", &scelta_statistica);
-                            if(scelta_statistica == 'r' || scelta_statistica == 'R'){
+                            if(scelta_statistica=='r' || scelta_statistica=='R'){
                                 media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
                                 printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
                             }
-                            else if(scelta_statistica == 'c' || scelta_statistica == 'C'){
+                            else if(scelta_statistica=='c' || scelta_statistica=='C'){
                                 mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
                                 if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: %.2f \n", nome_ricerca, mcopie_vendute);
                                 else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
                             }
                             else printf("\nScelta non valida, Rinserire: \n");
-                        }while(scelta_statistica != 'c' && scelta_statistica != 'C' && scelta_statistica != 'r' && scelta_statistica != 'R');
+                        }while(scelta_statistica!='c' && scelta_statistica!='C' && scelta_statistica!='r' && scelta_statistica!='R');
                         break;
 
                     default:
                         printf("\nOperazione non valida. Reinserire valore corretto\n");
                         break;
                     }
-                } while (scelta_operazioneFile < 1 || scelta_operazioneFile > 4); // Assicura che la scelta sia tra 1 e 3
+                } while (scelta_operazioneFile<1||scelta_operazioneFile>4); // Assicura che la scelta sia tra 1 e 3
             }
 
             fclose(file);
         }
 
-        if (check_name == 0){
+        if (check_name==0){
             printf("\nGioco non trovato nel catalogo.");
         }
     }

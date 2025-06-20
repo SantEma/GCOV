@@ -49,7 +49,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
         printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltadmin);
-        while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
+        while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         
         switch (sceltadmin){
             case 1:
@@ -75,7 +75,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
         printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n-1) Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltaguest);
         
-        while (getchar() != '\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
+        while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         switch(sceltaguest){
             case 1:
                 //Visualizza l'intero catalogo dei videogiochi
@@ -100,7 +100,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
 
 int AutenticazioneAdmin(){
     char input_password[MAX_CARATTERI_PASSWORD];
-    short scelta_errore = 0;
+    short scelta_errore=0;
     
     do{
         printf("\nInserire la password di amministratore: ");
@@ -118,7 +118,7 @@ int AutenticazioneAdmin(){
             
             do{
                 scanf("%hd", &scelta_errore);
-                while (getchar() != '\n'); // Svuota il buffer
+                while (getchar()!='\n'); // Svuota il buffer
                 
                 switch(scelta_errore){
                     case 1:
@@ -135,14 +135,14 @@ int AutenticazioneAdmin(){
                         scelta_errore=0;
                         break;
                 }
-            }while(scelta_errore < 1 || scelta_errore > 3);
+            }while(scelta_errore<1 || scelta_errore>3);
             
             // Se l'utente ha scelto di riprovare (caso 1), continua il ciclo principale
-            if(scelta_errore != 1){
+            if(scelta_errore!=1){
                 break; // Esce dal ciclo se ha scelto opzione 2 o 3
             }
         }
-    }while(scelta_errore == 1);
+    }while(scelta_errore==1);
     
     return -1; // Dovrebbe essere irraggiungibile, ma per sicurezza
 }

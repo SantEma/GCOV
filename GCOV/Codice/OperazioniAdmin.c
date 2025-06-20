@@ -9,23 +9,23 @@
 
 //Funzione per la modifica di un gioco
 void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,short pos){
-    FILE *file= fopen(nomeFile, "rb+");
+    FILE *file=fopen(nomeFile, "rb+");
     short campo_modifica=0; //Variabile per la scelta del campo da modificare
     short x=0; //Variabile per il ciclo di modifica del gioco
 
-    if(file != NULL){
+    if(file!=NULL){
         //Modifica campi del gioco
         printf("\nChe campo vuoi modificare del gioco '%s'?\n", nome_ricerca);
         do{
             printf("1 - Nome\n2 - Editore\n3 - Sviluppatore\n4 - Descrizione breve del gioco\n5 - Anno di uscita\n6 - Genere\n");
             do{
                 scanf("%hd", &campo_modifica);
-                if(campo_modifica < 1 || campo_modifica > 6){
+                if(campo_modifica<1 || campo_modifica>6){
                     printf("\nScelta non valida, riprova: ");
                 }
-            }while(campo_modifica < 1 || campo_modifica > 6); // Assicura che il campo sia tra 1 e 6
+            }while(campo_modifica<1 || campo_modifica>6); // Assicura che il campo sia tra 1 e 6
             
-            switch (campo_modifica) {
+            switch(campo_modifica) {
             case 1:
                 /* nome */
                 printf("\nInserisci il nuovo nome del gioco: ");
@@ -69,7 +69,7 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
                 printf("\nInserisci il nuovo genere del videogioco: ");
                 while(getchar()!='\n');
                 fgets(videogioco.genere[0], sizeof(videogioco.genere[0]), stdin);
-                videogioco.genere[0][strcspn(videogioco.genere[0], "\n")] = '\0';
+                videogioco.genere[0][strcspn(videogioco.genere[0], "\n")]='\0';
                 break;    
             
             default:
@@ -178,7 +178,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             for(short i=0;i<num_generi;i++){
                 printf("Inserisci il genere %hd: ",i+1);
                 fgets(videogioco.genere[i], sizeof(videogioco.genere[i]), stdin);
-                videogioco.genere[i][strcspn(videogioco.genere[i], "\n")] = '\0';
+                videogioco.genere[i][strcspn(videogioco.genere[i], "\n")] ='\0';
             }
 
             //Altri dati per gli utenti

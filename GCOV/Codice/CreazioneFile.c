@@ -33,16 +33,16 @@ void ScriviCatalogo(char *nomeFile){
         {"Tetris", "Nintendo", "Alexey Pajitnov", "", 1984, {"Puzzle", "", "", "", ""}, {{-1,""}}, 0}
     };
     //Inizializza tutte le recensioni a -1 per ogni gioco
-    for (short i = 0; i < GIOCHI_START; i++) {
-        for (short j = 0; j < MAX_RECENSIONI; j++) {
-            catalogo[i].recensione[j].recensione_num = -1;
+    for (short i=0; i<GIOCHI_START; i++) {
+        for (short j=0; j<MAX_RECENSIONI; j++) {
+            catalogo[i].recensione[j].recensione_num=-1;
             strcpy(catalogo[i].recensione[j].recensione_scritta, "");
         }
     }
 
     //Verifica se il file esiste già
     FILE* file=fopen(nomeFile, "rb"); //Se il file è apribile in rb allora già esiste, bisogna non entrarci
-    if(file == NULL){
+    if(file==NULL){
         //File non esistente, possiamo inserire i giochi
 
         short flag=1; //Controllare se il file è stato creato correttamente

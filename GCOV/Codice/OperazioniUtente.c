@@ -17,7 +17,7 @@ void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videog
         printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
         printf("\nAnno di uscita: %d", videogioco.anno_uscita);
         printf("\nGeneri: ");
-        for(short i=0; i<MAX_GENERI && videogioco.genere[i][0] != '\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
+        for(short i=0; i<MAX_GENERI && videogioco.genere[i][0]!='\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
             printf("%s ", videogioco.genere[i]);
         }
         Visualizza_Recensione(nomeFile, nome_ricerca, videogioco);
@@ -35,11 +35,11 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
         for(short i=0; i<MAX_RECENSIONI; i++){
-            if(videogioco.recensione[i].recensione_num == -1){ // Trova la prima recensione vuota
+            if(videogioco.recensione[i].recensione_num==-1){ // Trova la prima recensione vuota
                 printf("\nInserisci la valutazione (0-5): ");
                 do{
                     scanf("%d", &videogioco.recensione[i].recensione_num);
-                    while (getchar() != '\n'); // Svuota il buffer
+                    while (getchar()!='\n'); // Svuota il buffer
                     printf("\nValutazione inserita\n");
                     if(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5) printf("\nValutazione non valida, rinserirla, deve essere compresa tra 0 e 5.\n");
                 }while(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5);
@@ -47,26 +47,26 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
                 printf("Vuoi inserire una recensione scritta? (s/n): ");
                 do{
                     scanf("%c", &scelta_recensionescritt);
-                    while (getchar() != '\n'); // Svuota il buffer
-                    if(scelta_recensionescritt == 's' || scelta_recensionescritt == 'S'){
+                    while (getchar()!='\n'); // Svuota il buffer
+                    if(scelta_recensionescritt=='s' || scelta_recensionescritt=='S'){
                         printf("Inserisci la recensione scritta (max %d caratteri): ", MAX_CARATTERI_DESCRIZIONI-1);
                         fgets(videogioco.recensione[i].recensione_scritta, sizeof(videogioco.recensione[i].recensione_scritta), stdin);
-                        videogioco.recensione[i].recensione_scritta[strcspn(videogioco.recensione[i].recensione_scritta, "\n")] = 0; // Rimuove il newline finale
+                        videogioco.recensione[i].recensione_scritta[strcspn(videogioco.recensione[i].recensione_scritta, "\n")]=0; // Rimuove il newline finale
                     }
-                    else if(scelta_recensionescritt == 'n' || scelta_recensionescritt == 'N'){
-                        videogioco.recensione[i].recensione_scritta[0] = '\0'; // Imposta la recensione scritta come vuota
+                    else if(scelta_recensionescritt=='n' || scelta_recensionescritt=='N'){
+                        videogioco.recensione[i].recensione_scritta[0]='\0'; // Imposta la recensione scritta come vuota
                     }
                     else printf("\nScelta non valida, rinserire: \n");
-                }while(scelta_recensionescritt != 's' && scelta_recensionescritt != 'S' && scelta_recensionescritt != 'n' && scelta_recensionescritt != 'N');
+                }while(scelta_recensionescritt!='s' && scelta_recensionescritt!='S' && scelta_recensionescritt!='n' && scelta_recensionescritt!='N');
                 break; // Esce dalla funzione se non ci sono più spazi per le recensioni
             }
             recensione_impostata=1;
         }
-        if(recensione_impostata == 0) printf("\nNon è possibile aggiungere altre recensioni, il massimo è %d.\n", MAX_RECENSIONI);
+        if(recensione_impostata==0) printf("\nNon è possibile aggiungere altre recensioni, il massimo è %d.\n", MAX_RECENSIONI);
         
         // Aggiorna il file con la nuova recensione
         fseek(file, pos * sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
-        if(fwrite(&videogioco, sizeof(videogame_t), 1, file) != 1) printf("\nErrore nella scrittura della recensione nel file.\n");            
+        if(fwrite(&videogioco, sizeof(videogame_t), 1, file)!=1) printf("\nErrore nella scrittura della recensione nel file.\n");            
         else printf("\nRecensione aggiunta con successo!\n");
         fseek(file,0,SEEK_SET);
 
@@ -80,10 +80,10 @@ void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,sh
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
-        if(videogioco.copie_vendute < MAX_PRODUCTION){ // Controlla se ci sono copie disponibili
+        if(videogioco.copie_vendute<MAX_PRODUCTION){ // Controlla se ci sono copie disponibili
             printf("\nIl gioco %s e' disponibile per l'acquisto. Erogazione in corso.\n", videogioco.nome);
             videogioco.copie_vendute++;
-            gioco_acquistato = 1;
+            gioco_acquistato=1;
         }
         else{
             printf("\nIl gioco %s non e' disponibile per l'acquisto, tutte le copie sono state vendute.\n", videogioco.nome);
@@ -94,17 +94,17 @@ void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,sh
         //Aggiornamento contatore delle copie vendute
         if(gioco_acquistato){
             fseek(file,pos*sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
-            if(fwrite(&videogioco, sizeof(videogame_t), 1, file) != 1) printf("\nErrore nella scrittura del file per l'acquisto del gioco.\n");
+            if(fwrite(&videogioco, sizeof(videogame_t), 1, file)!=1) printf("\nErrore nella scrittura del file per l'acquisto del gioco.\n");
             else printf("\nIl gioco %s e' stato acquistato con successo!\n", videogioco.nome);
             
             //Richiesta di recensione
             printf("\nVuoi aggiungere una recensione al gioco appena acquistato? (s/n): ");
             char scelta_recensione;
             scanf(" %c", &scelta_recensione);
-            if(scelta_recensione == 's' || scelta_recensione == 'S'){
+            if(scelta_recensione=='s' || scelta_recensione=='S'){
                 AggiungiRecensione(nomeFile, nome_ricerca,videogioco, pos);
             }
-            else if(scelta_recensione == 'n' || scelta_recensione == 'N'){
+            else if(scelta_recensione=='n' || scelta_recensione=='N'){
                 printf("\nRecensione non aggiunta.\n");
             }
             else printf("\nScelta non valida, recensione non aggiunta.\n");

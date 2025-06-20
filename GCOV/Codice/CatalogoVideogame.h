@@ -23,7 +23,7 @@
 #define MAX_GENERI 5 //Numero massimo di generi inseribili
 #define MAX_RECENSIONI 70 //Numero massimo di recensioni inseribili per ogni gioco, che sia un valore accettabile
 #define MAX_PRODUCTION 100 // Numero massimo di copie distribuite, per evitare valori eccessivi
-
+#define MAX_GIOCHI 50  // Giochi massimi per il catalogo nell'ordinamento, si presuppone non si vada oltre
 typedef struct{
     int recensione_num; // 0-5, obbligatoria
     char recensione_scritta[MAX_CARATTERI_DESCRIZIONI]; //Facoltativa
@@ -65,7 +65,9 @@ void AggiungiRecensione(char *nomeFile, char*,videogame_t, short);
 void Visualizza_Recensione(char *nomeFile, char*,videogame_t);
 float StatisticaRecensione(char *nomeFile, char*, videogame_t);
 float StatisticaCopieVendute(char *nomeFile, char*, videogame_t);
-/*    void Ordinamento_copie_vendute(char *nomeFile, videogame_t);
-    void Ordinamento_statistiche(char *nomeFile, videogame_t);
-*/
+
+//Funzioni per l'ordinamento
+void Ordinamento_copie_vendute(char *nomeFile, videogame_t);
+void Ordinamento_statistiche(char *nomeFile, videogame_t);
+
 #endif

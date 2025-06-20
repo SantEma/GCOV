@@ -8,31 +8,31 @@
 #include "CatalogoVideogame.h"
 
 void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
-    short recensione_generale = -1;                                      // Variabile per la recensione generale a -1 così da far valere lo 0 nello switch
-    short pessimo = -1, insufficiente = -1, buono = -1, eccellente = -1; // Contatori per le recensioni a -1 così da far valere lo 0 nello switch
+    short recensione_generale=-1;                                      // Variabile per la recensione generale a -1 così da far valere lo 0 nello switch
+    short pessimo=-1, insufficiente=-1, buono=-1, eccellente=-1;       // Contatori per le recensioni a -1 così da far valere lo 0 nello switch
 
-    FILE *file = fopen(nomeFile, "rb");
-    if (file != NULL){
+    FILE *file=fopen(nomeFile, "rb");
+    if (file!=NULL){
         printf("\nLe recensioni relative al gioco %s sono: ", nome_ricerca);
-        for (short i = 0; i < MAX_RECENSIONI; i++){
-            if (videogioco.recensione[i].recensione_num != -1){
-                printf("\nRecensione %d e' %d", i + 1, videogioco.recensione[i].recensione_num);
-                if (videogioco.recensione[i].recensione_num == 0){
+        for (short i=0; i<MAX_RECENSIONI; i++){
+            if (videogioco.recensione[i].recensione_num!=-1){
+                printf("\nRecensione %d e' %d", i+1, videogioco.recensione[i].recensione_num);
+                if (videogioco.recensione[i].recensione_num==0){
                     printf("\nPessimo");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
                     pessimo++;
                 }
-                else if (videogioco.recensione[i].recensione_num > 0 && videogioco.recensione[i].recensione_num <= 2){
+                else if (videogioco.recensione[i].recensione_num>0 && videogioco.recensione[i].recensione_num<=2){
                     printf("\nInsufficiente");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
                     insufficiente++;
                 }
-                else if (videogioco.recensione[i].recensione_num > 2 && videogioco.recensione[i].recensione_num <= 4){
+                else if (videogioco.recensione[i].recensione_num>2 && videogioco.recensione[i].recensione_num<=4){
                     printf("\nBuono");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
                     buono++;
                 }
-                else if (videogioco.recensione[i].recensione_num > 4 && videogioco.recensione[i].recensione_num <= 5){
+                else if (videogioco.recensione[i].recensione_num>4 && videogioco.recensione[i].recensione_num<=5){
                     printf("\nEccellente");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
                     eccellente++;
@@ -44,15 +44,15 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
 
         // Stampa la recensione generale
         printf("\n-----------------\nRecensione generale: ");
-        if (pessimo != -1 || insufficiente || -1 || buono || -1 && eccellente || -1){
-            if (pessimo >= insufficiente && pessimo >= buono && pessimo >= eccellente)
-                recensione_generale = 0; // Ponendo maggiore o uguale, sarà visualizzata comunque una recensione, se fosse solo maggiore si creerebbe un conflitto
-            else if (insufficiente >= pessimo && insufficiente >= buono && insufficiente >= eccellente)
-                recensione_generale = 1;
-            else if (buono >= pessimo && buono >= insufficiente && buono >= eccellente)
-                recensione_generale = 2;
-            else if (eccellente > pessimo && eccellente > insufficiente && eccellente > buono)
-                recensione_generale = 3;
+        if (pessimo!=-1 || insufficiente || -1 || buono || -1 && eccellente || -1){
+            if (pessimo>=insufficiente && pessimo>=buono && pessimo>=eccellente)
+                recensione_generale=0; // Ponendo maggiore o uguale, sarà visualizzata comunque una recensione, se fosse solo maggiore si creerebbe un conflitto
+            else if (insufficiente>=pessimo && insufficiente>=buono && insufficiente>=eccellente)
+                recensione_generale=1;
+            else if (buono>=pessimo && buono>=insufficiente && buono>=eccellente)
+                recensione_generale=2;
+            else if (eccellente>pessimo && eccellente>insufficiente && eccellente>buono)
+                recensione_generale=3;
             else
                 printf("\nValore indesiderato per la recensione generale");
         }
@@ -81,12 +81,12 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
 }
 
 void VisualizzaCat(char *nomeFile, videogame_t videogioco){
-    short j = 0; // Contatore per i giochi visualizzati
-    FILE *file = fopen(nomeFile, "rb");
-    if (file != NULL)
+    short j=0; // Contatore per i giochi visualizzati
+    FILE *file=fopen(nomeFile, "rb");
+    if (file!=NULL)
     {
-        while (fread(&videogioco, sizeof(videogame_t), 1, file) == 1){
-            printf("\n--------Gioco %hd---------\n", j + 1);
+        while(fread(&videogioco, sizeof(videogame_t), 1, file)==1){
+            printf("\n--------Gioco %hd---------\n", j+1);
             printf("\nNome: %s", videogioco.nome);
             printf("\nSviluppatore: %s", videogioco.sviluppatore);
             printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
@@ -99,15 +99,15 @@ void VisualizzaCat(char *nomeFile, videogame_t videogioco){
 }
 
 float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t videogioco){
-    float media = 0.0;
-    short count = 0; // Contatore per le recensioni valide
+    float media=0.0;
+    short count=0; // Contatore per le recensioni valide
 
-    FILE *file = fopen(nomeFile, "rb");
+    FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         for(short i=0;i<MAX_RECENSIONI;i++){
-            if(videogioco.recensione[i].recensione_num != -1){
+            if(videogioco.recensione[i].recensione_num!=-1){
                 count++;
-                media += videogioco.recensione[i].recensione_num;
+                media+=videogioco.recensione[i].recensione_num;
             }
         }
         media=media/count; // Calcola la media delle recensioni
@@ -118,9 +118,9 @@ float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t video
 
 }
 float StatisticaCopieVendute(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
-    float media = 0.0;
+    float media=0.0;
 
-    FILE *file = fopen(nomeFile, "rb");
+    FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         if(videogioco.copie_vendute>=0) media=(float)videogioco.copie_vendute/ MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite ed eseguo il cast temporaneo per poter inserire un float all'interno della variabile media
         else{
