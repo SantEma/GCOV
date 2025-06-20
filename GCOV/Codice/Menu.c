@@ -55,6 +55,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
             case 1:
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
+            //Pronto per ordinamento
             case -1:
                 printf("\nUscita dal menu...\n");
                 break;
@@ -83,7 +84,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
                 //Fase di ricerca del gioco
                 Ricerca(nomeFile, videogioco,check_admin);
                 break;
-            
+            //Pronto per ordinamento
             case -1:
                 printf("\nUscita dal programma...\n");
                 break;

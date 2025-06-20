@@ -81,8 +81,6 @@ La funzione di visualizzazione delle recensioni viene posta nel file delle opera
 
 La prima funzione possibile da svolgere per quanto riguarda l'utente è la possibilità di visualizzare tutte le informazioni del videogioco che è stato precedentemente richiesto nella fase di ricerca. Questa funzione viene facilmente implementata cercando nel file il gioco desiderato, come eseguito per le funzioni precedenti ad essa, e mostrare a schermo le informazioni relative a quello specifico gioco, se trovato, infine si richiama la funzione di visualizzazione delle recensioni per mostrare anche quest'ultimo parametro.
 
-[APPORTARE MODIFCA DELLO SPOSTAMENTO DEL CONTROLLO DEL NOME IN RICERCA E NON IN OGNI SINGOLA FUNZIONE]
-
 La funzione di aggiunta di una recensione da parte dell'utente sarà possibile eseguirla sia nel menu delle scelte dell'utente, sia a fine di un acquisto per inserire una recensione prima che esca dal catalogo.
 Questa funzione, dopo aver trovato il gioco desiderato, verifica se ci sono altre recensioni presenti, nelle 70 possibili recensioni inseribili, se questo valore è diverso da -1 (non c'è una recensione), alla prima posizione libera inserisce la recensione dettata dall'utente, altrimenti continua a ciclare fin quando non trova la prima posizione libera, ammesso che ci sia. Se l'utente vuole può anche inserire quella scritta oltre al valore numerico. Inoltre se non ci sono recensione al momento dell'apertura del catalogo per quel gioco sarà fatta presente questa info all'utente.
 
