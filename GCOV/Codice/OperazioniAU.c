@@ -58,19 +58,19 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
         }
         switch (recensione_generale){
         case 0:
-            printf("\nPessima");
+            printf("Pessima");
             break;
         case 1:
-            printf("\nInsufficiente");
+            printf("Insufficiente");
             break;
         case 2:
-            printf("\nBuona");
+            printf("Buona");
             break;
         case 3:
-            printf("\nEccellente");
+            printf("Eccellente");
             break;
         default:
-            printf("\nRecensione generale non presente attualmente");
+            printf("Recensione generale non presente attualmente");
             break;
         }
         fclose(file);
