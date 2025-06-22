@@ -80,24 +80,6 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
         printf("\nErrore nell'apertura del file per visualizzare la recensione\n");
 }
 
-void VisualizzaCat(char *nomeFile, videogame_t videogioco){
-    short j=0; // Contatore per i giochi visualizzati
-    FILE *file=fopen(nomeFile, "rb");
-    if (file!=NULL)
-    {
-        while(fread(&videogioco, sizeof(videogame_t), 1, file)==1){
-            printf("\n--------Gioco %hd---------\n", j+1);
-            printf("\nNome: %s", videogioco.nome);
-            printf("\nSviluppatore: %s", videogioco.sviluppatore);
-            printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
-            j++;
-        }
-        fclose(file);
-    }
-    else
-        printf("\nErrore nell'apertura del file per la visualizzazione di tutto il catalogo\n");
-}
-
 float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t videogioco){
     float media=0.0;
     short count=0; // Contatore per le recensioni valide

@@ -76,7 +76,7 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
 }
 
 void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,short pos){
-    short gioco_acquistato = 0; // Flag per indicare se il gioco è stato acquistato
+    short gioco_acquistato=0; // Flag per indicare se il gioco è stato acquistato
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){

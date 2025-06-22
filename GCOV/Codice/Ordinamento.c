@@ -7,8 +7,6 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-
-
 void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
     FILE *file=fopen(nomeFile, "rb");
     if(file==NULL){
@@ -70,7 +68,7 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
     }
 }
 
-void Ordinamento_statistiche(char *nomeFile, videogame_t videogioco){
+void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
     FILE *file=fopen(nomeFile, "rb");
     if(file==NULL){
         printf("\nErrore nell'apertura del file per l'ordinamento per statistiche\n");
@@ -116,7 +114,7 @@ void Ordinamento_statistiche(char *nomeFile, videogame_t videogioco){
             }
         }
         if (contatore > 0) medie_recensioni[i] = somma / contatore;
-        else medie_recensioni[i] = -1.0; // -1 quando le recensioni non ci sono
+        else medie_recensioni[i]=-1.0; // -1 quando le recensioni non ci sono
 
     }
     fclose(file);

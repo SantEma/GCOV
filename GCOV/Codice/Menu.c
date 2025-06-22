@@ -105,7 +105,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
                 break;
             case 2:
                 {
-                    short scelta_ordinamento = 0;
+                    short scelta_ordinamento=0;
                     printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
                     do{
                         scanf("%hd", &scelta_ordinamento);
@@ -154,9 +154,8 @@ int AutenticazioneAdmin(){
             return 1;
         }
         else{
-            printf("\nPassword errata!\nCosa si vuole fare?\n1)Riprovare con un'altra password\n2)Continuare come visitatore\n3)Uscire dal programma\n");
-            printf("Scelta: ");
-            
+            printf("\nATTENZIONE!Password errata!\nCosa si vuole fare?\n1)Riprovare l'inserimento\n2)Continuare come visitatore\n3)Uscire dal programma\nScelta: ");
+
             do{
                 scanf("%hd", &scelta_errore);
                 while (getchar()!='\n');//Svuota il buffer
@@ -182,5 +181,4 @@ int AutenticazioneAdmin(){
         }
     }while(scelta_errore==1);
     
-    return -1; // Dovrebbe essere irraggiungibile, ma per sicurezza meglio lasciarlo così
 }

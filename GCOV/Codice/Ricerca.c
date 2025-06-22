@@ -7,7 +7,7 @@
 #include <string.h>
 #include "CatalogoVideogame.h"
 
-// Fase di -> Ricerca
+// Fase di Ricerca
 /* La ricerca del videogame si divide in due tipi:
  * l'admin potrà ricercare un videogame solo per effettuare 3 operazioni madri:
  * MODIFICA(tra cui aggiunta), CANCELLAZIONE, VISUALIZZARE RECENSIONE
@@ -18,7 +18,7 @@
 
 void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
     char nome_ricerca[70];
-    short check_name=0; // flag per verificare se il nome del gioco è stato trovato
+    short check_name=0; // Flag per verificare se il nome del gioco è stato trovato
     short pos=-1;       // Variabile per la posizione del gioco in cui eseguire le operazioni
     short found_pos=0;  // Variabile per tenere traccia della posizione del gioco
 

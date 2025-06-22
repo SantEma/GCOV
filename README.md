@@ -10,16 +10,16 @@ Creato da Andrea Milo e Emanuele Santoruvo
 		- [x] Ricerca admin
 			- [x] Modifica campo
 			- [x] Cancellazione record
-			- [ ] Aggiunta record
-			- [ ] Visualizzazione recensione
+			- [x] Aggiunta record
+			- [x] Visualizzazione recensione
 	- Visitatore
-		- [ ] Ricerca visitatore
-			- [ ] Visualizzazione recensioni
-			- [ ] Inserire recensione
-			- [ ] Acquisto videogioco
+		- [x] Ricerca visitatore
+			- [x] Visualizzazione recensioni
+			- [x] Inserire recensione
+			- [x] Acquisto videogioco
 	- Entrambi
-		- [ ] Statistiche videogioco
-		- [ ] Ordinamento
-			- [ ] Per media recensione
-			- [ ] Per copie vendute
+		- [x] Statistiche videogioco
+		- [x] Ordinamento
+			- [x] Per media recensione
+			- [x] Per copie vendute
 
