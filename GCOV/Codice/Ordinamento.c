@@ -1,3 +1,7 @@
+/*
+    Inserire il doxygen
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,7 +14,7 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
         videogame_t catalogo[MAX_GIOCHI];
         int num_giochi=0;
 
-        while (num_giochi<MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
+        while (num_giochi < MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
             num_giochi++;
         }
         fclose(file);
@@ -20,7 +24,6 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
             return;
         }
 
-        // Shell sort per copie vendute 
         int intervallo=num_giochi/2;
         while (intervallo>0){
             for (int i=intervallo; i<num_giochi; i++){
@@ -42,7 +45,7 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
             printf("\n-------------------------------------\n");
             printf("%s\n", catalogo[i].nome);
             printf("Copie vendute: %d\n", catalogo[i].copie_vendute);
-            if (catalogo[i].copie_vendute >= 0) {
+            if (catalogo[i].copie_vendute>=0) {
                  printf("Statistica vendite (rapporto su max produzione): %.2f\n", media_copie);
             }
             printf("Editore: %s\n", catalogo[i].editore);
@@ -65,8 +68,8 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
             for (short x=0; x<MAX_RECENSIONI; x++){
                 if (catalogo[i].recensione[x].recensione_num!=-1){
                     printf("- Voto: %d/5", catalogo[i].recensione[x].recensione_num);
-                     if (strlen(catalogo[i].recensione[x].recensione_scritta) > 0) {
-                        printf("| Testo: %s", catalogo[i].recensione[x].recensione_scritta);
+                     if (catalogo[i].recensione[x].recensione_scritta[0]!='\0') {
+                        printf(" | Testo: %s", catalogo[i].recensione[x].recensione_scritta);
                     }
                     printf("\n");
                     recensioni_stampate++;
@@ -75,7 +78,7 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
             if(recensioni_stampate==0) {
                  printf("Nessuna recensione presente.\n");
             }
-        } 
+        }
         printf("\n-------------------------------------\n");
     }
     else{
@@ -84,24 +87,23 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
 }
 
 void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
-    FILE *file=fopen(nomeFile, "rb");
-    if(file!=NULL){
+    FILE *file = fopen(nomeFile, "rb");
+    if(file != NULL){
         videogame_t catalogo[MAX_GIOCHI];
         float medie_recensioni[MAX_GIOCHI];
         int num_giochi=0;
-        
-        while(num_giochi < MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
+
+        while(num_giochi<MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
             medie_recensioni[num_giochi]=StatisticaRecensione(nomeFile, catalogo[num_giochi].nome, catalogo[num_giochi]);
             num_giochi++;
         }
         fclose(file);
-        
+
         if(num_giochi==0){
             printf("\nNessun gioco presente nel catalogo\n");
             return;
         }
-        
-        // Shell Sort per media recensioni 
+
         int intervallo=num_giochi/2;
         while(intervallo>0){
             for(int i=intervallo; i<num_giochi; i++){
@@ -125,36 +127,36 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
             printf("%s\n", catalogo[i].nome);
 
             if(medie_recensioni[i]>0.0){
-                printf("Media recensioni: %.2f/5\n", medie_recensioni[i]);
+                printf("Media recensioni: %.2f\n", medie_recensioni[i]);
             } else {
                 printf("Media recensioni: Non disponibile\n");
             }
             printf("Editore: %s\n", catalogo[i].editore);
             printf("Sviluppatore: %s\n", catalogo[i].sviluppatore);
-            if(strlen(catalogo[i].descrizione_breve_gioco) > 0){
+            if((catalogo[i].descrizione_breve_gioco[0])!='\0'){
                 printf("Descrizione: %s\n", catalogo[i].descrizione_breve_gioco);
             }
             printf("Anno: %d\n", catalogo[i].anno_uscita);
             printf("Copie vendute: %d\n", catalogo[i].copie_vendute);
-            
+
             printf("Generi: ");
-            short generi_stampati = 0;
+            short generi_stampati=0;
             for(short j=0; j<MAX_GENERI; j++){
                 if(catalogo[i].genere[j][0]!='\0'){
-                    if(generi_stampati > 0) printf(", ");
+                    if(generi_stampati>0) printf(", ");
                     printf("%s", catalogo[i].genere[j]);
                     generi_stampati++;
                 }
             }
             if(generi_stampati==0) printf("N/D");
             printf("\n");
-            
+
             printf("Recensioni:\n");
             short recensioni_stampate=0;
             for (short x=0; x<MAX_RECENSIONI; x++){
                 if (catalogo[i].recensione[x].recensione_num!=-1){
                     printf("- Voto: %d/5", catalogo[i].recensione[x].recensione_num);
-                     if (strlen(catalogo[i].recensione[x].recensione_scritta) > 0) {
+                     if (catalogo[i].recensione[x].recensione_scritta[0]!='\0') {
                         printf(" | Testo: %s", catalogo[i].recensione[x].recensione_scritta);
                     }
                     printf("\n");
@@ -166,7 +168,7 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
             }
         }
         printf("\n-------------------------------------\n");
-    }else{
+    } else {
         printf("\nErrore nell'apertura del file per l'ordinamento\n");
     }
 }

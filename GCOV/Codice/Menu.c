@@ -9,7 +9,7 @@
 
 void MenuPrincipale(){
     videogame_t videogioco; // Struttura per il gioco da ricercare
-    //Impostazione del flag per decretare il ruolo del visitatore al catalogo
+
     short sceltaprincipale=0;
     int check_admin=0;
     
@@ -58,13 +58,8 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
                 break;
             case 2:
                 {
-<<<<<<< HEAD
                     short scelta_ordinamento=0;
                     printf("\nScegli il tipo di ordinamento:\n1)Ordinamento per copie vendute\n2)Ordinamento per statistiche recensioni\nScelta: ");
-=======
-                    short scelta_ordinamento = 0;
-                    printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
->>>>>>> 3cadf16bccd5fdff5fdec1395872b6e20846fcfe
                     do{
                         scanf("%hd", &scelta_ordinamento);
                         while (getchar()!='\n'); // Svuota il buffer

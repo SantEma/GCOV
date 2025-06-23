@@ -89,7 +89,7 @@ float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t video
                 media+=videogioco.recensione[i].recensione_num;
             }
         }
-        media=media/count; // Calcola la media delle recensioni
+        if(count>0) media=media/count; // Calcola la media delle recensioni se maggiori di 0
         fclose(file);
         return media;
     }
