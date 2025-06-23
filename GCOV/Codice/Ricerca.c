@@ -114,53 +114,66 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
             fclose(file);
         }
 
-        if (check_name==0){
-            short scelta_sottostringa_utente;
-            short found_substring=0; // Flag per verificare se è stata trovata una sottostringa
-            videogame_t giochi_momentanei[MAX_GIOCHI]; // Array per memorizzare i giochi trovati
+        if (check_name == 0) {
+            // Se non viene trovata una corrispondenza esatta, si passa alla ricerca per sottostringa.
+            // Il file originale viene chiuso per evitare resource leak.
+            fclose(file);
+
+            short scelta;
+            short trovati = 0;
+            videogame_t risultati[MAX_GIOCHI];
 
             printf("\nGioco non trovato nel catalogo, potrebbe essere inesistente o con nome errato, ecco le alternative trovate.");
-            while(getchar()!='\n'); // Pulisce il buffer di input
+            while(getchar()!='\n');
 
-            FILE *file2=fopen(nomeFile, "rb");
-            if (file2!=NULL){
+            FILE *file_sub = fopen(nomeFile, "rb");
+            if (file_sub != NULL) {
                 printf("\nVideogiochi trovati con la sottostringa '%s':\n", nome_ricerca);
-                while (fread(&videogioco, sizeof(videogame_t), 1, file2)==1 && found_substring < MAX_GIOCHI){
-                    if (strcmp(videogioco.nome, nome_ricerca)==0){ // Controlla se la sottostringa è presente nel nome
+                while (fread(&videogioco, sizeof(videogame_t), 1, file_sub) == 1 && trovati < MAX_GIOCHI) {
+                    if (strstr(videogioco.nome, nome_ricerca) != NULL) {
                         printf("- %s\n", videogioco.nome);
-                        giochi_momentanei[found_substring] = videogioco; // Salva il gioco trovato nell'array
-                        found_substring++; // Incrementa il contatore se viene trovata una sottostringa
+                        risultati[trovati] = videogioco;
+                        trovati++;
                     }
                 }
-                if (found_substring>0){
-                    printf("\nSono stati trovati %hd giochi con la sottostringa '%s'.\n", found_substring, nome_ricerca);
-                    do{
-                        printf("\nScegli il gioco da visualizzare (0-%hd): ", found_substring-1);
-                        scanf("%hd", &scelta_sottostringa_utente);
 
-                        if (scelta_sottostringa_utente >=0 && scelta_sottostringa_utente < found_substring){
-                            // Visualizza le informazioni del gioco scelto
-                            videogioco = giochi_momentanei[scelta_sottostringa_utente];
-                            check_name = 1; // Imposta il flag a 1 per indicare che è stato trovato un gioco
-                            strcpy(nome_ricerca, videogioco.nome); // Copia il nome del gioco scelto nella variabile di ricerca
+                if (trovati > 0) {
+                    printf("\nSono stati trovati %hd giochi con la sottostringa '%s'.\n", trovati, nome_ricerca);
+                    do {
+                        printf("\nScegli il gioco da visualizzare (0-%hd): ", trovati - 1);
+                        scanf("%hd", &scelta);
 
-                            //Trovare la posizione del gioco scelto nel file
-                            while (fread(&videogioco, sizeof(videogame_t), 1, file2) == 1) {
-                                if (strcmp(videogioco.nome, nome_ricerca) == 0) {
-                                    pos = found_pos;
-                                    break;
+                        if (scelta >= 0 && scelta < trovati) {
+                            videogioco = risultati[scelta];
+                            check_name = 1;
+                            strcpy(nome_ricerca, videogioco.nome);
+
+                            fclose(file_sub);
+                            file_sub = fopen(nomeFile, "rb");
+
+                            if (file_sub != NULL) {
+                                short indice = 0;
+                                videogame_t tmp;
+                                while (fread(&tmp, sizeof(videogame_t), 1, file_sub) == 1) {
+                                    if (strcmp(tmp.nome, nome_ricerca) == 0) {
+                                        pos = indice;
+                                        break;
+                                    }
+                                    indice++;
                                 }
-                                found_pos++;
                             }
+
+                        } else {
+                            printf("\nScelta non valida. Reinserire un numero tra 0 e %hd.\n", trovati - 1);
                         }
-                        else printf("\nScelta non valida. Reinserire un numero tra 0 e %hd.\n", found_substring-1);
-                    }while(scelta_sottostringa_utente < 0 || scelta_sottostringa_utente >= found_substring); // Assicura che la scelta sia valida
-                        
-                    fclose(file2);
+                    } while (scelta < 0 || scelta >= trovati);
+                }
+
+                if (file_sub != NULL) {
+                    fclose(file_sub);
                 }
             }
         }
-        else printf("\nNessun gioco trovato");
     }
     else printf("\nErrore nell'apertura del file");
 }
