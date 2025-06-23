@@ -13,10 +13,9 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
 
     FILE *file=fopen(nomeFile, "rb");
     if (file!=NULL){
-        printf("\nLe recensioni relative al gioco %s sono: ", nome_ricerca);
         for (short i=0; i<MAX_RECENSIONI; i++){
             if (videogioco.recensione[i].recensione_num!=-1){
-                printf("\nRecensione %d e' %d", i+1, videogioco.recensione[i].recensione_num);
+                printf("\nDebbugBIl valore di ora e' %d", i);
                 if (videogioco.recensione[i].recensione_num==0){
                     printf("\nPessimo");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
@@ -37,14 +36,12 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
                     eccellente++;
                 }
-                else
-                    printf("\nValore indesiderato per la recensione");
             }
         }
 
         // Stampa la recensione generale
         printf("\n-----------------\nRecensione generale: ");
-        if (pessimo!=-1 || insufficiente || -1 || buono || -1 && eccellente || -1){
+        if (pessimo != -1 || insufficiente != -1 || buono != -1 || eccellente != -1){
             if (pessimo>=insufficiente && pessimo>=buono && pessimo>=eccellente)
                 recensione_generale=0; // Ponendo maggiore o uguale, sarà visualizzata comunque una recensione, se fosse solo maggiore si creerebbe un conflitto
             else if (insufficiente>=pessimo && insufficiente>=buono && insufficiente>=eccellente)

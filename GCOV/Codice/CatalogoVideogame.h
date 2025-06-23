@@ -41,7 +41,7 @@ typedef struct {
 } videogame_t;
 
 //Funzione per la gestione del menu
-void MenuPrincipale(videogame_t videogame);
+void MenuPrincipale();
 void MenuAdmin(videogame_t videogame, char *nomeFile, short);
 void MenuVisitatore(videogame_t videogame, char *nomeFile, short);
 int AutenticazioneAdmin();
