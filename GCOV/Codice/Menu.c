@@ -57,7 +57,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
                 break;
             case 2:
                 {
-                    short scelta_ordinamento = 0;
+                    short scelta_ordinamento=0;
                     printf("\nScegli il tipo di ordinamento:\n1)Ordinamento per copie vendute\n2)Ordinamento per statistiche recensioni\nScelta: ");
                     do{
                         scanf("%hd", &scelta_ordinamento);
