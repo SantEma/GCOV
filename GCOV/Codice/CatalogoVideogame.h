@@ -30,14 +30,14 @@ typedef struct{
 }recensione_t;
 //Struttura per i videogiochi
 typedef struct {
-    char nome[80]; // aumentato per gestire nomi lunghi
-    char editore[50]; // aumentato per gestire nomi lunghi
-    char sviluppatore[50]; // aumentato per gestire nomi lunghi
+    char nome[70]; // gioco col nome più lungo al mondo
+    char editore[40]; // editore col nome più lungo al mondo
+    char sviluppatore[40];
     char descrizione_breve_gioco[MAX_CARATTERI_DESCRIZIONI]; // facoltativa
     int anno_uscita;
-    char genere[MAX_GENERI][MAX_CARATTERI_DESCRIZIONI]; // dimensioni corrette per evitare overflow
+    char genere[MAX_GENERI][MAX_CARATTERI_DESCRIZIONI]; 
     recensione_t recensione[MAX_RECENSIONI]; // array di recensioni, ogni gioco può avere più recensioni
-    int copie_vendute; // contatore degli acquisti -> utile per le statistiche
+    int copie_vendute; // Contatore degli acquisti
 } videogame_t;
 
 //Funzione per la gestione del menu
@@ -65,6 +65,7 @@ void AggiungiRecensione(char *nomeFile, char*,videogame_t, short);
 void Visualizza_Recensione(char *nomeFile, char*,videogame_t);
 float StatisticaRecensione(char *nomeFile, char*, videogame_t);
 float StatisticaCopieVendute(char *nomeFile, char*, videogame_t);
+void VisualizzaStatistiche(char *nomeFile, char*, videogame_t );
 
 //Funzioni per l'ordinamento
 void Ordinamento_copie_vendute(char *nomeFile, videogame_t);

@@ -68,7 +68,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
                                 Ordinamento_copie_vendute(nomeFile, videogioco);
                                 break;
                             case 2:
-                                Ordinamento_statistiche(nomeFile, videogioco);
+                                Ordinamento_media_recensioni(nomeFile, videogioco);
                                 break;
                             default:
                                 printf("\nScelta non valida, riprova (1-2): ");
@@ -116,7 +116,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
                                 Ordinamento_copie_vendute(nomeFile, videogioco);
                                 break;
                             case 2:
-                                Ordinamento_statistiche(nomeFile, videogioco);
+                                Ordinamento_media_recensioni(nomeFile, videogioco);
                                 break;
                             default:
                                 printf("\nScelta non valida, riprova (1-2): ");
@@ -180,5 +180,7 @@ int AutenticazioneAdmin(){
             }
         }
     }while(scelta_errore==1);
+
+    return -1;
     
 }

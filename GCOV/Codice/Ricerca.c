@@ -69,24 +69,7 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         break;
 
                     case 5:
-                        char scelta_statistica;
-                        float media_recensione=0.0;
-                        float mcopie_vendute=0.0;
-
-                        printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
-                        do{
-                            scanf(" %c", &scelta_statistica);
-                            if(scelta_statistica=='r' || scelta_statistica=='R'){
-                                media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
-                                printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
-                            }
-                            else if(scelta_statistica=='c' || scelta_statistica=='C'){
-                                mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
-                                if(mcopie_vendute!=0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
-                                else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
-                            }
-                            else printf("\nScelta non valida, Rinserire: \n");
-                        }while(scelta_statistica!='c' && scelta_statistica!='C' && scelta_statistica!='r' && scelta_statistica!='R');
+                        VisualizzaStatistiche(nomeFile, nome_ricerca, videogioco);
                         break;
 
                     default:
@@ -118,29 +101,13 @@ void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
                         break;
 
                     case 4:
-                        char scelta_statistica;
-                        float media_recensione=0.0;
-                        float mcopie_vendute=0.0;
-
-                        printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
-                        do{
-                            scanf(" %c", &scelta_statistica);
-                            if(scelta_statistica=='r' || scelta_statistica=='R'){
-                                media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
-                                printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
-                            }
-                            else if(scelta_statistica=='c' || scelta_statistica=='C'){
-                                mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
-                                if(mcopie_vendute != 0.0) printf("\nMedia delle copie vendute del gioco %s: %.2f \n", nome_ricerca, mcopie_vendute);
-                                else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
-                            }
-                            else printf("\nScelta non valida, Rinserire: \n");
-                        }while(scelta_statistica!='c' && scelta_statistica!='C' && scelta_statistica!='r' && scelta_statistica!='R');
+                        VisualizzaStatistiche(nomeFile, nome_ricerca, videogioco);
                         break;
 
                     default:
                         printf("\nOperazione non valida. Reinserire valore corretto\n");
                         break;
+
                     }
                 } while (scelta_operazioneFile<1||scelta_operazioneFile>4); // Assicura che la scelta sia tra 1 e 3
             }

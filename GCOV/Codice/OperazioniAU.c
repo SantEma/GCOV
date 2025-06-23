@@ -96,15 +96,17 @@ float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t video
         fclose(file);
         return media;
     }
-    else printf("\nErrore nell'apertura del file per il calcolo della media delle recensioni\n");
-
+    else{
+        printf("\nErrore nell'apertura del file per il calcolo della media delle recensioni\n");
+        return 0.0;
+    }
 }
 float StatisticaCopieVendute(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
     float media=0.0;
 
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
-        if(videogioco.copie_vendute>=0) media=(float)videogioco.copie_vendute/ MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite ed eseguo il cast temporaneo per poter inserire un float all'interno della variabile media
+        if(videogioco.copie_vendute>=0) media=(float)videogioco.copie_vendute/MAX_PRODUCTION; // Calcola la media delle copie centinaia in migliaia di copie distribuite ed eseguo il cast temporaneo per poter inserire un float all'interno della variabile media
         else{
             printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
             return 0.0; // Se non ci sono copie vendute, ritorna 0.0
@@ -113,4 +115,25 @@ float StatisticaCopieVendute(char *nomeFile, char *nome_ricerca, videogame_t vid
         return media;
     }
     else printf("\nErrore nell'apertura del file per il calcolo della media delle recensioni\n");
+}
+
+void VisualizzaStatistiche(char *nomeFile, char* nome_ricerca, videogame_t videogioco){
+    char scelta_statistica;
+    float media_recensione=0.0;
+    float mcopie_vendute=0.0;                    
+    
+    printf("\nVisualizzare le statistiche del gioco in base alle copie vendute o le recensione? (c/r): \n");
+    do{
+        scanf(" %c", &scelta_statistica);
+        if(scelta_statistica=='r' || scelta_statistica=='R'){
+            media_recensione=StatisticaRecensione(nomeFile, nome_ricerca, videogioco);
+            printf("\nMedia delle recensioni del gioco %s: %.2f\n",nome_ricerca, media_recensione);
+        }
+        else if(scelta_statistica=='c' || scelta_statistica=='C'){
+            mcopie_vendute=StatisticaCopieVendute(nomeFile, nome_ricerca, videogioco);
+            if(mcopie_vendute!=0.0) printf("\nMedia delle copie vendute del gioco %s: \n", nome_ricerca, mcopie_vendute);
+            else printf("\nIl gioco %s non ha copie vendute registrate.\n", nome_ricerca);
+        }
+        else printf("\nScelta non valida, Rinserire: \n");
+    }while(scelta_statistica!='c' && scelta_statistica!='C' && scelta_statistica!='r' && scelta_statistica!='R');
 }
