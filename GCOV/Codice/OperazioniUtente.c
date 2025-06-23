@@ -41,8 +41,8 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
                     scanf("%d", &videogioco.recensione[i].recensione_num);
                     while (getchar()!='\n'); // Svuota il buffer
                     printf("\nValutazione inserita\n");
-                    if(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5) printf("\nValutazione non valida, rinserirla, deve essere compresa tra 0 e 5.\n");
-                }while(videogioco.recensione[i].recensione_num < 0 || videogioco.recensione[i].recensione_num > 5);
+                    if(videogioco.recensione[i].recensione_num<0 || videogioco.recensione[i].recensione_num>5) printf("\nValutazione non valida, rinserirla, deve essere compresa tra 0 e 5.\n");
+                }while(videogioco.recensione[i].recensione_num<0 || videogioco.recensione[i].recensione_num>5);
 
                 printf("Vuoi inserire una recensione scritta? (s/n): ");
                 do{

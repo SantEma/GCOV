@@ -17,7 +17,7 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
         //Modifica campi del gioco
         printf("\nChe campo vuoi modificare del gioco '%s'?\n", nome_ricerca);
         do{
-            printf("1 - Nome\n2 - Editore\n3 - Sviluppatore\n4 - Descrizione breve del gioco\n5 - Anno di uscita\n6 - Genere\n");
+            printf("1)Nome\n2)Editore\n3)Sviluppatore\n4)Descrizione breve del gioco\n5)Anno di uscita\n6)Genere\n");
             do{
                 scanf("%hd", &campo_modifica);
                 if(campo_modifica<1 || campo_modifica>6){

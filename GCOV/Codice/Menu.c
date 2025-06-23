@@ -47,7 +47,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
     short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire
     do{
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n2) Ordinamento giochi\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1)Ricerca prodotto\n2)Ordinamento giochi\n-1)Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltadmin);
         while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
         
@@ -58,7 +58,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
             case 2:
                 {
                     short scelta_ordinamento = 0;
-                    printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
+                    printf("\nScegli il tipo di ordinamento:\n1)Ordinamento per copie vendute\n2)Ordinamento per statistiche recensioni\nScelta: ");
                     do{
                         scanf("%hd", &scelta_ordinamento);
                         while (getchar()!='\n'); // Svuota il buffer
@@ -94,7 +94,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
     
     do{
         printf("\n\n--- MENU VISITATORE ---\n");
-        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1) Ricerca prodotto\n2) Ordinamento giochi\n-1) Uscire dal Menu\nScelta:");
+        printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata:\n1)Ricerca prodotto\n2)Ordinamento giochi\n-1)Uscire dal Menu\nScelta:");
         scanf("%hd", &sceltaguest);
         
         while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo nella ricerca
@@ -106,7 +106,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
             case 2:
                 {
                     short scelta_ordinamento=0;
-                    printf("\nScegli il tipo di ordinamento:\n1) Ordinamento per copie vendute\n2) Ordinamento per statistiche recensioni\nScelta: ");
+                    printf("\nScegli il tipo di ordinamento:\n1)Ordinamento per copie vendute\n2)Ordinamento per statistiche recensioni\nScelta: ");
                     do{
                         scanf("%hd", &scelta_ordinamento);
                         while (getchar()!='\n'); // Svuota il buffer
