@@ -1,0 +1,24 @@
+var _catalogo_videogame_8h =
+[
+    [ "recensione_t", "structrecensione__t.html", null ],
+    [ "videogame_t", "structvideogame__t.html", null ],
+    [ "GIOCHI_START", "_catalogo_videogame_8h.html#af0fc9a2146b7c71a55d2a560f4602ef6", null ],
+    [ "AcquistaGioco", "_catalogo_videogame_8h.html#afff31af7876a71695faaeb04c509f6e5", null ],
+    [ "AggiungiGioco", "_catalogo_videogame_8h.html#abd84693d4e1b6b981b1b0b24a1335e02", null ],
+    [ "AggiungiRecensione", "_catalogo_videogame_8h.html#a4bde146ba7a81e8a789b22aeebd213bb", null ],
+    [ "AutenticazioneAdmin", "_catalogo_videogame_8h.html#a5caccba52753c72ad5f513f647c0f98d", null ],
+    [ "CancellaGioco", "_catalogo_videogame_8h.html#a31c671412c14b459a1ab052ca51e76f9", null ],
+    [ "MenuAdmin", "_catalogo_videogame_8h.html#a3890a8c3f9985d31d03c19524c3b9bbb", null ],
+    [ "MenuPrincipale", "_catalogo_videogame_8h.html#a6aebfe540d926f665b364e76bd1359cc", null ],
+    [ "MenuVisitatore", "_catalogo_videogame_8h.html#a3b0651e7b1fbb1bfac7c4338be92d882", null ],
+    [ "ModificaGioco", "_catalogo_videogame_8h.html#a5ccd449d2275276a54a158c64d6b30e5", null ],
+    [ "Ordinamento_copie_vendute", "_catalogo_videogame_8h.html#a51da4624189726417b29c1bf0fd9b887", null ],
+    [ "Ordinamento_media_recensioni", "_catalogo_videogame_8h.html#a792310341101ebb76fbc1519b355475b", null ],
+    [ "Ricerca", "_catalogo_videogame_8h.html#a07e620421b1dc3bcfb83a11140c0e310", null ],
+    [ "ScriviCatalogo", "_catalogo_videogame_8h.html#aba01b7008d8a6ca855999856e07770bc", null ],
+    [ "StatisticaCopieVendute", "_catalogo_videogame_8h.html#ac4377de31a09b1e31a4945e23ba30cf7", null ],
+    [ "StatisticaRecensione", "_catalogo_videogame_8h.html#aca602f7d02458c187c68eddd159c43ba", null ],
+    [ "Visualizza_Recensione", "_catalogo_videogame_8h.html#a53269eb7a30770960ff3112d20a34637", null ],
+    [ "VisualizzaStatistiche", "_catalogo_videogame_8h.html#a88736f23d86647f23d74ca8ab5681554", null ],
+    [ "VisualizzaVideogioco", "_catalogo_videogame_8h.html#afe0b39afc88092477f66ca06949dda33", null ]
+];
