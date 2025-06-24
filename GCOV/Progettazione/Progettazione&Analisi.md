@@ -5,6 +5,12 @@
 	- Menu generale: Menu che permette la scelta di autenticazione preferita, se autenticarsi direttamente come utente o admin
 	- Menu utente: Menu che permette la ricerca e le funzioni per un utente normale
 	- Menu admin: Menu che permette la ricerca e le funzioni per un amministratore
+- **OperazioniAdmin**: si trova tutto ciò che riguarda il lato amministratore
+- **OperazioniAU**: si trova tutte le operazioni comuni che possono eseguire entrambi e che servono ad altre funzioni
+- **OperazioniUtente**: si trova tutto ciò che può fare solo il visitatore
+- **Ordinamento**: si trovano i due tipi di ordinamenti eseguibili
+- **Ricerca**: viene effettuata la ricerca sul **nome** del gioco e la posizione di esso per eseguire le operazioni richieste o dall'utente o dall'admin
+- **TestGCOV**: si trovano le funzioni di test, per visualizzare le asserzioni e verificare tramite Unity il corretto funzionamento delle funzioni create per la gestione del file e del catalogo
 
 L'autenticazione viene fatta in una funzione differente che restituisce una flag booleana per constatare se l'utente abbia messo una password giusta o meno, nel caso non fosse così l'utente ha possibilità di riprovare e nel caso di autenticarsi come utente se non sia autorizzato ad entrare
 ## General Function
@@ -13,7 +19,7 @@ L'autenticazione viene fatta in una funzione differente che restituisce una flag
 	- **Ricerca visualizzatore**
 - **Recensioni**:
 	- **Recensioni admin (solo visualizzazione)**
-	- **Recensioni visualizzatore (visualizzazione e l;a **
+	- **Recensioni visualizzatore (visualizzazione e l'admin) **
 - **Statistiche** in base alle recensioni calcolare la media di quei videogiochi
 - **Ordinamento**: in base alle **copie vendute** e allestire una **classifica di copie vendute**, si è scelto di adoperare in questo contesto un ordinamento di tipo **Shell Sort**, perché ha una complessità vicina a $O(n\log n)$ e, anche se di poco superiore all'Insertion Sort, è comunque più semplice da implementare rispetto agli altri algoritmi, specialmente se si lavora con strutture di dati semplici come i campi di un videogioco. 
   Se l’ordine relativo di videogiochi con lo stesso punteggio/vendite non è critico (es. due giochi con media 4.5 possono essere scambiati), Shell Sort è adatto perché **non è stabile**. 
@@ -101,7 +107,6 @@ Nel menu è possibile ordinare in due modi:
 - Per copie vendute
 In tutti i due casi l'ordinamento avviene per ordine decrescente, in modo da risaltare i videogiochi con una media o copie vendute alte.
 In modo da ottenere i dati e non ricalcolarli per una seconda volta , si chiamano le funzioni riguardante il calcolo della statistica e si assegnano in una funzione, una volta fatto ciò si crea un catalogo temporaneo che servirà unicamente per l'output in maniera ordinata, che viene sovrascritto ogni volta che si ordina. 
-
 ## Problemi riscontrati e risoluzioni
 1. Durante la compilazione del progetto, anche se il file esisteva e non si specificava il file c CreazioneFile durante la compilazione, l'intero progetto non veniva eseguito, poiché il main non riusciva a capire dove fosse specificata la funzione ScriviCatalogo, funzione che possiede già il controllo di uscire se il file è già creato. 
    **Risoluzione**: Per risolvere questo problema è bastato togliere dal repository di GitHub il file, in maniera tale che anche se esistente non venga considerato univoco per tutti, e specificare ugualmente tutti i file del progetto nella fase di compilazione, così da poter essere eseguito.
@@ -113,3 +118,11 @@ In modo da ottenere i dati e non ricalcolarli per una seconda volta , si chiaman
    **Seconda `{`**: Inizia l'inizializzazione dell'array `recensione[MAX_RECENSIONI]`
    **Terza `{`**: Inizia l'inizializzazione della struttura `recensione_t`
    In più si va ad implementare nel file di CreazioneFile, un ciclo per impostare inizialmente tutti i valori numerici della recensione a -1 in maniera pulita e comprensibile, così da non creare contrasto nella dichiarazione precedente dell'array del catalogo. (Per sicurezza nell'aggiunta di una recensione si è inserito un flag per controllare se gli slot per le recensioni fossero liberi o meno).
+## Test Unity
+Per i test delle funzioni si verificano le asserzioni restituite dalle loro corrispettive funzioni di test.
+In particolare si va a testare tramite le librerie di Unity le seguenti funzioni create durante il programma:
+- **La Creazione del file**, verificando se il file viene creato correttamente inserendo il record di test senza dare errori.
+- **La Statistica delle medie recensioni**, verifica che il valore ritornato dalla media sia corretto
+- **La Statistica delle copie vendute rispetto alla produzione**, verifica che qualsiasi videogioco passato faccia tornare la statistica delle sue copie vendute qualsiasi esso sia e che questo valore sia corretto
+- **La Cancellazione del gioco**, verifica che dopo la cancellazione di un gioco sul file dei test siano rimasti solamente i giochi dei test senza quello appena modificato
+- 
