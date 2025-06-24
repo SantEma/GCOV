@@ -1,7 +1,8 @@
-
+Documento trattante l'analisi e la progettazione del catalogo di videogiochi
 ## File esterni
-- **Creazione**: creare il file binario col catalogo con già 20 record
-- **Menu**: Esistono 3 menu principali:
+Il progetto è strutturato in moduli logici, ciascuno gestito da un file `.c` separato favorendo la modularità e l'information hiding.
+- **CreazioneFile**: creare il file binario col catalogo con già 20 record
+- **Menu**: esistono 3 menu principali:
 	- Menu generale: Menu che permette la scelta di autenticazione preferita, se autenticarsi direttamente come utente o admin
 	- Menu utente: Menu che permette la ricerca e le funzioni per un utente normale
 	- Menu admin: Menu che permette la ricerca e le funzioni per un amministratore
@@ -12,36 +13,43 @@
 - **Ricerca**: viene effettuata la ricerca sul **nome** del gioco e la posizione di esso per eseguire le operazioni richieste o dall'utente o dall'admin
 - **TestGCOV**: si trovano le funzioni di test, per visualizzare le asserzioni e verificare tramite Unity il corretto funzionamento delle funzioni create per la gestione del file e del catalogo
 
-L'autenticazione viene fatta in una funzione differente che restituisce una flag booleana per constatare se l'utente abbia messo una password giusta o meno, nel caso non fosse così l'utente ha possibilità di riprovare e nel caso di autenticarsi come utente se non sia autorizzato ad entrare
+L'autenticazione viene fatta in una funzione dedicata, internamente al modulo *Menu.c*. Questa funzione restituisce un flag booleano per constatare se l'utente che vi accede al catalogo abbia digitato una password corretta o errata, nel caso fosse errata, l'utente ha possibilità di riprovare o di procedere come visitatore.
 ## General Function
-- **Ricerca**: la ricerca dev'essere **richiamabile e generica che soddisfi ogni modalità di scelta** di ricerca che può essere fatta in base a titolo, editore, genere, anno, sviluppatore. La ricerca deve lavorare anche sulle **sottostringhe**.
+- **Ricerca**: la ricerca dev'essere **richiamabile e generica** da ogni contesto, filtrando per il nome inserito. Inoltre la ricerca lavora anche sulle **sottostringhe**.
 	- **Ricerca admin**
-	- **Ricerca visualizzatore**
+	- **Ricerca visitatore**
 - **Recensioni**:
 	- **Recensioni admin (solo visualizzazione)**
-	- **Recensioni visualizzatore (visualizzazione e l'admin) **
-- **Statistiche** in base alle recensioni calcolare la media di quei videogiochi
-- **Ordinamento**: in base alle **copie vendute** e allestire una **classifica di copie vendute**, si è scelto di adoperare in questo contesto un ordinamento di tipo **Shell Sort**, perché ha una complessità vicina a $O(n\log n)$ e, anche se di poco superiore all'Insertion Sort, è comunque più semplice da implementare rispetto agli altri algoritmi, specialmente se si lavora con strutture di dati semplici come i campi di un videogioco. 
-  Se l’ordine relativo di videogiochi con lo stesso punteggio/vendite non è critico (es. due giochi con media 4.5 possono essere scambiati), Shell Sort è adatto perché **non è stabile**. 
-  Lo Shell Sort può essere facilmente adattato per ordinare in base a diversi campi (es. numero di copie vendute, media recensioni), modificando semplicemente il confronto all'interno del ciclo. Questo lo rende comodo e riutilizzabile in più contesti all'interno del progetto. Shell Sort generalizza l’Insertion Sort migliorandone drasticamente le prestazioni nei casi in cui i dati sono **parzialmente ordinati** — una situazione frequente quando i dati nel catalogo sono solo occasionalmente aggiornati. Nel contesto del progetto, il file deve contenere almeno 20 record (anche se il valore potrebbe aumentare in base alle scelte degli admin). Per data-set di queste dimensioni, lo Shell Sort può risultare addirittura **più veloce nella pratica** rispetto a QuickSort.
-  
-  L'ordinamento può essere fatto  da entrambi per ordinare i videogiochi nel catalogo per filtrare il catalogo in base a due operazioni:
-- O per media recensione
-- O per copie vendute
-  In tutti i due casi l'ordinamento avviene per ordine decrescente, in modo da risaltare i videogiochi con una media o copie vendute alte
+	- **Recensioni visitatore (visualizzazione e aggiunta)**
+- **Statistiche** in base alle recensioni calcolare la media di quei videogiochi selezionati, in base a due possibili scelte dell'utente.
+- **Ordinamento**: Permette di ordinare il catalogo in base a due criteri principali:
+	- **Copie Vendute**: Genera una classifica dei videogiochi in base al numero di copie vendute.
+	- **Media Recensioni**: Ordina i videogiochi in base al punteggio medio delle recensioni.
+
+	In entrambi i casi, l'ordinamento avviene in **ordine decrescente** per mettere in risalto i videogiochi con i valori più alti. Per l'ordinamento è stato scelto di adottare l'algoritmo **Shell Sort** per le seguenti motivazioni:
+
+	- Ha una complessità computazionale vicina a O(nlogn).
+	- È relativamente semplice da implementare, specialmente con strutture di dati semplici come `videogame_t`.
+	- Sebbene leggermente meno efficiente di algoritmi come QuickSort nel caso peggiore, lo Shell Sort è più performante dell'Insertion Sort e può risultare sorprendentemente veloce nella pratica per dataset di dimensioni medie (come un catalogo di 20-50+ record).
+	- È facilmente adattabile per ordinare in base a diversi campi (copie vendute, media recensioni) modificando solo la funzione di confronto.
+	- La sua efficienza è notevole quando i dati sono **parzialmente ordinati**, una situazione comune in un catalogo che viene aggiornato periodicamente.
+	- Non essendo un algoritmo stabile, Shell Sort è adatto poiché l'ordine relativo di videogiochi con gli stessi valori di vendite o recensioni non è critico.
+
+	L'ordinamento è accessibile a entrambi i ruoli per permettere una migliore consultazione del catalogo filtrato.
 
 Si ipotizza che per ogni gioco si possa mettere lo stesso titolo, poichè potrebbero esistere diverse versioni come le remastered (come Silent Hill 2 che ha due versioni, una del 2001 e una del 2025)
 ### Specific Function - Admin
 - **Ricerca**: l'admin deve ricercare un videogioco per poter eseguire tre operazioni:
-	- **Modificare prodotto** $\to$ aggiungere o modificare
-	- **Cancellare prodotto**
-- **Recensioni**: vedere la recensione
-### Specific Function - Visualizzatore
-- **Ricerca**: il visualizzatore può attuare la ricerca per:
+	- **Modificare prodotto** $\to$ modificare le informazioni relative al gioco cercato
+	- **Cancellare prodotto** -> rimozione di un gioco dal catalogo
+	- **Aggiunta prodotto** -> aggiunta di un nuovo prodotto al catalogo
+- **Recensioni** -> l'admin può **solamente** vedere la recensione del gioco selezionato
+### Specific Function - Visitatore
+- **Ricerca**: il visitatore può attuare la ricerca per:
 	- **Recensioni**: eventualmente scrivere e visualizzarle anche in seguito da altri utenti quando viene effettuata la ricerca
 - **Acquisto**: simulare solo la compravendita di un gioco e conteggiare con un **contatore** le copie vendute per videogioco
 ## Record videogame e vincoli
-Ogni videogioco è caratterizzato da: 
+Ogni videogioco è rappresentato dalla struttura `videogame_t` caratterizzato da: 
 - titolo
 - editore
 - sviluppatore
@@ -49,6 +57,7 @@ Ogni videogioco è caratterizzato da:
 - anno di pubblicazione
 - uno o più generi
 - una o più recensioni (*obbligatoria, che va da 0 a 5*)
+- copie vendute
 ## Variabili principali utilizzate
 
 * `videogame_t`: È la struttura dati centrale che definisce il modello per ogni videogioco, contenendo tutti i suoi attributi come nome, sviluppatore, anno e copie vendute.
@@ -62,7 +71,7 @@ Ogni videogioco è caratterizzato da:
 
 ## Schema lavorativo
 ![[Pasted image 20250523174021.jpg]]
-In base a questo schema si è deciso di inserire nel file **header** che funge da libreria tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro e quelle chiamabili ed il record dei videogiochi. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
+In base a questo schema si è deciso di inserire nel file **header**, che funge da libreria, tutte le informazioni al fine della creazione del progetto, come le funzioni di lavoro, quelle chiamabili, le costanti ed il record dei videogiochi e delle recensioni. Separatamente ci saranno diversi file di lavoro, seguendo la descrizione delle *general function*, in cui saranno richiamate diverse funzioni:
 - Il file per i menu e autenticazione
 - Il file per la ricerca
 - Il file per l'operazioni Admin
@@ -70,45 +79,49 @@ In base a questo schema si è deciso di inserire nel file **header** che funge d
 - Il file per le operazioni di entrambi
 - Il file per l'ordinamento
 - il file per le statistiche
-In ogni file sarà presente, tramite gli appositi controlli, sia la funzione eseguibile dall'**admin** che dall'**utente**. Questa scelta progettuale è stata adottata per rendere più **snello** il main e favorire l'**information hiding**, tra le varie funzioni e compiti da svolgere. Favorendo una struttura ad albero e un approccio **modulare** alla risoluzione della richiesta.
-## Autenticazione
-L'autenticazione dell'utente in admin o visualizzatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autenticazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché non si tollera un lower-case. L'admin se inserisce la password in modo errato può decidere di riscriverla o continuare come visitatore al sito.
-Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene renderizzati al menu corretto e alle funzioni che quel determinato utente può fare (visitatore o amministratore)
-
-## Ricerca
-La ricerca del videogioco da parte dell'admin e dell'utente deve comprende la possibilità di filtrare in sottostringhe e di gestire l'upperCase e il LowerCase.
-**SOTTOSTRINGHE**$\to$ Cerchi fif (su 50 fif diversi che stanno, come fifa fifoloide ecc.. fifoloide 3) e poi l'utente deve inserire il nome completo del gioco che vuole selezionare tra quelli mostrati. 
-La funzione strstr è una funzione standard della libreria C <string.h>, cerca l'occorenza di una sottostringa in una stringa più grande tra quelle selezionate.
-La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica.
-Per l'eliminazione andiamo ad usare un sistema di scambi: il file catalogo.dat viene riscritto su un file temporaneo temp.dat, quest'ultimo inserisce tutti i giochi fin quando non trova il gioco che si vuole cancellare e lo salta, in modo da non inserire quei byte. Una volta fatto ciò, l'utente in caso positivo viene avvisato del successo dell'operazione (con il file originale rimosso e quello temporaneo rinominato a quello originale), nel caso contrario viene avvisato di non aver trovato quel gioco nel catalogo
-
+- (e quello per i test)
+Questa scelta progettuale è stata adottata favorendo una struttura ad albero e un approccio **modulare** alla risoluzione della richiesta.
+### Autenticazione
+L'autenticazione dell'utente in admin o visitatore viene gestita nella funzione del menu, prima delle possibili scelte effettuabili, attraverso una autenticazione password, la password di accesso per gli admin è *Admin157*, ponendo attenzione alla scrittura poiché case-sensitive.
+L'admin se inserisce la password in modo errato può decidere di riscriverla o continuare come visitatore al sito.
+Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene rindirizzati al menu corretto e alle funzioni che quel determinato utente può fare (visitatore o amministratore)
+### Ricerca
+La funzione di ricerca, utilizzata sia dall'admin che dall'utente, consente di filtrare i videogiochi per nome, gestendo sia la ricerca per **sottostringhe** sia la corrispondenza case-insensitive.
+- **Ricerca per sottostringa**: L'utente può inserire una porzione del nome del gioco (es. "fif"). La funzione visualizzerà tutti i giochi che contengono quella sottostringa (es. "Fifa 24", "fifone&birba 3"). L'utente dovrà poi selezionare il nome completo del gioco desiderato tra quelli proposti.
+- La funzione `strstr()` della libreria standard C `<string.h>` è utilizzata per trovare le occorrenze delle sottostringhe.
+### Modifica
+Per l'admin, la ricerca di un videogioco per **nome** è il prerequisito per eseguire operazioni di modifica o eliminazione. Queste azioni sono implementate in sotto-funzioni all'interno del file `OperazioniAdmin.c`. Dopo la ricerca e la selezione del gioco, l'admin potrà scegliere quale campo specifico modificare.
+### Cancella
+La **cancellazione** di un gioco avviene tramite un processo di riscrittura: il contenuto del file `catalogo.dat` viene copiato in un file temporaneo (`temp.dat`), omettendo il record del gioco da eliminare. Una volta completata la copia, il file originale viene rimosso e il file temporaneo viene rinominato con il nome del file originale. L'utente riceve un messaggio di conferma in caso di successo o di fallimento (se il gioco non viene trovato).
 ### Aggiunta gioco
-L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione permette all'admin di aggiungere un nuovo videogame nel catalogo ponendolo come ultimo presente nella lista dei videogiochi e così via per ogni nuova aggiunta che sarà inserita, la posizione nel file binario sarà riportata all'inizio in caso si vogliano eseguire altre operazioni che richiedono uno spostamento della posizione.
+L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione permette all'admin di aggiungere un nuovo videogame nel catalogo ponendolo come ultimo nella lista dei videogiochi e così via per ogni nuova aggiunta che sarà inserita, la posizione nel file binario sarà riportata all'inizio in caso si vogliano eseguire altre operazioni che richiedono uno spostamento della posizione.
 ### Recensioni
-Il gioco ricercato da parte dell'admin sarà lo stesso gioco sul quale si potrà effettuare anche l'operazione di visualizzazione delle recensioni. L'admin visualizzerà le recensioni numeriche e scritte per ogni utente che inserito la recensione, inoltre la recensione sarà gestita da dei messaggi che faranno capire il grado di apprezzamento del gioco in base alla positività o negatività delle recensioni numeriche, le fasce si dividono in:
+Il gioco ricercato da parte dell'admin sarà lo stesso gioco sul quale si potrà effettuare anche l'operazione di visualizzazione delle recensioni. L'admin visualizzerà le recensioni numeriche e scritte per ogni utente che inserito la recensione, inoltre la recensione sarà gestita da dei messaggi che gestiranno il grado di apprezzamento del gioco in base alla positività o negatività delle recensioni numeriche, le fasce si dividono in:
 - Pessimo
 - Insufficiente
 - Buono
 - Eccellente
-O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.
-La funzione di visualizzazione delle recensioni viene posta nel file delle operazioni comuni, poiché anche l'utente quando visualizza un prodotto, tramite la sua apposita funzione, deve visualizzare lo stesso tipo di recensioni.
-#### Visualizzazione gioco
+O valore indesiderato, in caso ci sia un valore numerico che non rientra nei limiti o se non è presente ancora alcuna recensione. Dopo di che, attraverso dei contatori, saranno conteggiate le varie fasce di apprezzamento del gioco, infine saranno messe a confronto e come messaggio finale sarà mostrata la fascia con contatore maggiore.
+La funzione di visualizzazione delle recensioni viene posta nel file delle operazioni comuni (`OperazioniAU.c`), poiché anche l'utente quando visualizza un prodotto, tramite la sua apposita funzione, deve visualizzare lo stesso tipo di recensioni.
+### Visualizzazione gioco
 La prima funzione possibile da svolgere per quanto riguarda l'utente è la possibilità di visualizzare tutte le informazioni del videogioco che è stato precedentemente richiesto nella fase di ricerca. Questa funzione viene facilmente implementata cercando nel file il gioco desiderato, come eseguito per le funzioni precedenti ad essa, e mostrare a schermo le informazioni relative a quello specifico gioco, se trovato, infine si richiama la funzione di visualizzazione delle recensioni per mostrare anche quest'ultimo parametro.
 
+### Aggiungi recensione
 La funzione di aggiunta di una recensione da parte dell'utente sarà possibile eseguirla sia nel menu delle scelte dell'utente, sia a fine di un acquisto per inserire una recensione prima che esca dal catalogo.
-Questa funzione, dopo aver trovato il gioco desiderato, verifica se ci sono altre recensioni presenti, nelle 70 possibili recensioni inseribili, se questo valore è diverso da -1 (non c'è una recensione), alla prima posizione libera inserisce la recensione dettata dall'utente, altrimenti continua a ciclare fin quando non trova la prima posizione libera, ammesso che ci sia. Se l'utente vuole può anche inserire quella scritta oltre al valore numerico. Inoltre se non ci sono recensione al momento dell'apertura del catalogo per quel gioco sarà fatta presente questa info all'utente.
+Questa funzione, dopo aver trovato il gioco desiderato, verifica se ci sono altre recensioni presenti, nelle 70 possibili recensioni inseribili, se questo valore è diverso da -1 (non c'è una recensione), alla prima posizione libera inserisce la recensione dettata dall'utente, altrimenti continua a ciclare fin quando non trova la prima posizione libera, ammesso che ci sia. Se l'utente vuole può anche inserire quella scritta, oltre al valore numerico. Inoltre se non ci sono recensione al momento dell'apertura del catalogo per quel gioco sarà fatta presente questa info all'utente.
 
+### Acquista videogioco
 La funzione di acquisizione di un videogioco propone di acquisire un gioco presente nel catalogo specificato nella fase di ricerca dall'utente, con gli appositi controlli. Una volta trovata la corrispondenza tra il gioco inserito dall'utente e quello presente nel file viene salvata la posizione presente sul file così da poter aggiornare il contatore delle copie vendute e viene simulato un acquisto tra il software e l'utente, tramite scambi di messaggi. Dopo di che vi si aggiorna il file completo e si richiede se vuole inserire una recensione del gioco appena riscontrato, se l'esito è positivo viene chiamata la funzione di aggiunta recensione, altrimenti viene salvato e chiuso il file e si torna alle scelte nel Menù.
 ### Statistica
-La statistica è stata suddivisa in due possibili scelte in base a come l'utente o l'admin le voglia visualizzare. Possono scegliere di visualizzare la statistica in base alle medie recensioni del gioco inserito nella ricerca o in base alla medie delle loro copie vendute in base alla loro distribuzione. Nelle due funzioni viene eseguita una classica somma dei valori e divisione per ogni valore presente e che sia valido ed in entrambi i casi ritorna il valore della media per far visualizzare i risultati fuori dalla funzione, questo perché si tende a rendere la funzione il più neutra possibile per poter essere richiamate entrambe nei due ordinamenti, in maniera tale da agevolare il lavoro dell'implementazione degli ordinamenti delle medie recensioni e delle copie vendute.
+La statistica è stata suddivisa in due possibili scelte in base a come l'utente o l'admin vogliano visualizzarle. Possono scegliere di visualizzare la statistica in base alle medie recensioni del gioco inserito nella ricerca o in base alla medie delle loro copie vendute in relazione alla sua distribuzione. Nelle due funzioni viene eseguita una classica somma dei valori per ogni valore presente e che sia valido e diviso per il totale dei valori validi,  ed in entrambi i casi ritorna il valore della media per far visualizzare i risultati fuori dalla funzione, questo perché si tende a rendere le funzioni il più neutrali possibile per poter essere richiamate nei due ordinamenti, in maniera tale da agevolare il lavoro dell'implementazione degli ordinamenti delle medie recensioni e delle copie vendute.
 ### Ordinamento
 Nel menu è possibile ordinare in due modi:
 - Per media recensione
 - Per copie vendute
-In tutti i due casi l'ordinamento avviene per ordine decrescente, in modo da risaltare i videogiochi con una media o copie vendute alte.
-In modo da ottenere i dati e non ricalcolarli per una seconda volta , si chiamano le funzioni riguardante il calcolo della statistica e si assegnano in una funzione, una volta fatto ciò si crea un catalogo temporaneo che servirà unicamente per l'output in maniera ordinata, che viene sovrascritto ogni volta che si ordina. 
+Per evitare ricalcoli, le funzioni che calcolano le statistiche vengono richiamate e i loro valori assegnati a un catalogo temporaneo in memoria. Questo catalogo temporaneo viene poi ordinato (utilizzando lo Shell Sort) e visualizzato; viene sovrascritto ad ogni nuova richiesta di ordinamento.
+Si fa uso delle funzioni di statistica.
 ## Problemi riscontrati e risoluzioni
-1. Durante la compilazione del progetto, anche se il file esisteva e non si specificava il file c CreazioneFile durante la compilazione, l'intero progetto non veniva eseguito, poiché il main non riusciva a capire dove fosse specificata la funzione ScriviCatalogo, funzione che possiede già il controllo di uscire se il file è già creato. 
+1. Durante la compilazione del progetto, anche se il file esisteva e non si specificava il file `CreazioneFile.c` durante la compilazione, l'intero progetto non veniva eseguito, poiché il main non riusciva a capire dove fosse specificata la funzione ScriviCatalogo, funzione che possiede già il controllo di uscire se il file è già creato. 
    **Risoluzione**: Per risolvere questo problema è bastato togliere dal repository di GitHub il file, in maniera tale che anche se esistente non venga considerato univoco per tutti, e specificare ugualmente tutti i file del progetto nella fase di compilazione, così da poter essere eseguito.
 2. Durante l'esecuzione del progetto ad un certo punto il file veniva aperto correttamente ma il contenuto non veniva più letto.
    **Risoluzione**: Avendo modificato la struttura del record del catalogo il file era andando in contrasto, è bastato ricrearlo una nuova volta.
@@ -119,10 +132,9 @@ In modo da ottenere i dati e non ricalcolarli per una seconda volta , si chiaman
    **Terza `{`**: Inizia l'inizializzazione della struttura `recensione_t`
    In più si va ad implementare nel file di CreazioneFile, un ciclo per impostare inizialmente tutti i valori numerici della recensione a -1 in maniera pulita e comprensibile, così da non creare contrasto nella dichiarazione precedente dell'array del catalogo. (Per sicurezza nell'aggiunta di una recensione si è inserito un flag per controllare se gli slot per le recensioni fossero liberi o meno).
 ## Test Unity
-Per i test delle funzioni si verificano le asserzioni restituite dalle loro corrispettive funzioni di test.
-In particolare si va a testare tramite le librerie di Unity le seguenti funzioni create durante il programma:
-- **La Creazione del file**, verificando se il file viene creato correttamente inserendo il record di test senza dare errori.
-- **La Statistica delle medie recensioni**, verifica che il valore ritornato dalla media sia corretto
+Per i test delle funzioni è stato utilizzato il framework Unity, verificando le asserzioni restituite dalle loro corrispettive funzioni di test.
+In particolare sono state testate le seguenti funzioni create durante il programma:
+- **La Creazione del file**, verifica la corretta creazione del file del catalogo e l'inserimento dei record di test senza errori.
+- **La Statistica delle medie recensioni**, verifica che il valore ritornato dalla media delle recensioni sia corretto
 - **La Statistica delle copie vendute rispetto alla produzione**, verifica che qualsiasi videogioco passato faccia tornare la statistica delle sue copie vendute qualsiasi esso sia e che questo valore sia corretto
-- **La Cancellazione del gioco**, verifica che dopo la cancellazione di un gioco sul file dei test siano rimasti solamente i giochi dei test senza quello appena modificato
-- 
+- **La Cancellazione del gioco**, verifica che dopo la cancellazione di un gioco, il file dei test contenga solamente i giochi rimanenti, escluso quello eliminato
