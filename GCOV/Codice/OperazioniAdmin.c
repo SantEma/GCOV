@@ -1,7 +1,3 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,7 +5,7 @@
 
 //Funzione per la modifica di un gioco
 void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,short pos){
-    FILE *file=fopen(nomeFile, "rb+");
+    FILE *file=fopen(nomeFile, "rb+"); 
     short campo_modifica=0; //Variabile per la scelta del campo da modificare
     short x=0; //Variabile per il ciclo di modifica del gioco
 
@@ -23,27 +19,27 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
                 if(campo_modifica<1 || campo_modifica>6){
                     printf("\nScelta non valida, riprova: ");
                 }
-            }while(campo_modifica<1 || campo_modifica>6); // Assicura che il campo sia tra 1 e 6
+            }while(campo_modifica<1 || campo_modifica>6); 
             
             switch(campo_modifica) {
             case 1:
-                /* nome */
+               //Nome del gioco
                 printf("\nInserisci il nuovo nome del gioco: ");
-                while (getchar() != '\n');
+                while (getchar()!='\n'); // Svuota il buffer, per evitare problemi con l'input successivo
                 fgets(videogioco.nome, sizeof(videogioco.nome), stdin);
                 videogioco.nome[strcspn(videogioco.nome, "\n")] = 0; // Rimuove il newline finale
                 break;
             
             case 2:
-                /* editore */
+                //Editore del gioco
                 printf("\nInserisci il nuovo nome dell'editore: ");
-                while(getchar()!='\n');
+                while(getchar()!='\n');// Svuota il buffer, per evitare problemi con l'input successivo
                 fgets(videogioco.editore,sizeof(videogioco.editore),stdin);
                 videogioco.editore[strcspn(videogioco.editore, "\n")]=0;
                 break;
 
             case 3:
-                /* sviluppatore */
+                //Sviluppatore del gioco
                 printf("\nInserisci il nuovo nome dello sviluppatore: ");
                 while(getchar()!='\n');
                 fgets(videogioco.sviluppatore,sizeof(videogioco.sviluppatore),stdin);
@@ -51,7 +47,7 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
                 break;
             
             case 4:
-                /* desc */
+                //Descrizione del gioco
                 printf("\nInserisci la nuova descrizione breve del videogioco: ");
                 while(getchar()!='\n');
                 fgets(videogioco.descrizione_breve_gioco,sizeof(videogioco.descrizione_breve_gioco),stdin);
@@ -59,13 +55,13 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
                 break;
             
             case 5:
-                /* anno di uscita */
+                //Anno di uscita del gioco
                 printf("\nInserire il nuovo anno di uscita del videogioco: ");
                 scanf("%d",&videogioco.anno_uscita);
                 break;
             
             case 6:
-                /* genere */
+                //Genere del gioco 
                 printf("\nInserisci il nuovo genere del videogioco: ");
                 while(getchar()!='\n');
                 fgets(videogioco.genere[0], sizeof(videogioco.genere[0]), stdin);
@@ -98,7 +94,7 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
 
 void CancellaGioco(char *nomeFile, char *nome_ricerca,videogame_t videogioco, short pos){
 
-    FILE *file_originale=fopen(nomeFile,"rb"); //Apre il file dati in lettura binaria.
+    FILE *file_originale=fopen(nomeFile,"rb");
     FILE *file_temporaneo=fopen("temp.dat","wb"); //Crea un file temporaneo in scrittura binaria.
     int trovato=0; //Flag per verificare se il gioco è stato trovato.
 
@@ -108,21 +104,22 @@ void CancellaGioco(char *nomeFile, char *nome_ricerca,videogame_t videogioco, sh
         return; //Termina la funzione in caso di errore.
     }
 
-    //Scorre ogni record (videogioco) nel file originale.
+    //Scorre ogni videogioco nel file originale.
     while(fread(&videogioco,sizeof(videogame_t),1,file_originale)==1){
-        //Se il nome del gioco corrente è diverso da quello da cancellare lo scrive nel file temporaneo.
+        //Se il nome del gioco corrente è diverso da quello da cancellare lo scrive nel file temporaneo
         if(strcmp(videogioco.nome,nome_ricerca)!=0){
             fwrite(&videogioco,sizeof(videogame_t),1,file_temporaneo);
         }
-        else trovato=1; //Se il nome del gioco corrente corrisponde a quello da cancellare, imposta il flag trovato a 1.
+        else trovato=1;
     }
 
     fclose(file_originale);
     fclose(file_temporaneo);
 
+    //Se il gioco viene trovato il file originale viene cancellato e quello temporaneo rinominato con il nome dell'originale, altrimenti viene soltanto eliminato quello temporaneo
     if(trovato){
         remove(nomeFile); 
-        rename("temp.dat",nomeFile); //Rinomina il file temporaneo con il nome dell'originale, altrimenti, se non trovato, elimina il file temporaneo.
+        rename("temp.dat",nomeFile); 
         printf("\nGioco '%s' cancellato con successo.\n",nome_ricerca);
     }else{
         remove("temp.dat");
@@ -155,7 +152,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogioco){
             fgets(videogioco.sviluppatore,sizeof(videogioco.sviluppatore),stdin);
             videogioco.sviluppatore[strcspn(videogioco.sviluppatore, "\n")]=0;
 
-            //Descrizione
+            //Descrizione (opzionale-+)
             printf("\nVuoi inserire la descrizione?: 1-Si 0-No: ");
             scanf("%hd", &scelta_descrizione);
             if(scelta_descrizione==1){

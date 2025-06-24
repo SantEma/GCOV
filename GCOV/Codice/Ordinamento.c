@@ -1,7 +1,3 @@
-/*
-    Inserire il doxygen
-*/
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -11,10 +7,10 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
     FILE *file=fopen(nomeFile, "rb");
 
     if (file!=NULL){
-        videogame_t catalogo[MAX_GIOCHI];
+        videogame_t catalogo[MAX_GIOCHI]; //Catalogo temporaneo, viene utilizzato per riordinare 
         int num_giochi=0;
 
-        while (num_giochi < MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
+        while (num_giochi < MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){ // Si leggono tutti i record dal file binario e li si carica nell'array 'temporaneo
             num_giochi++;
         }
         fclose(file);
@@ -24,29 +20,32 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
             return;
         }
 
-        int intervallo=num_giochi/2;
+        //Shell sort (ordine decrescente)
+        int intervallo=num_giochi/2; //Intervallo iniziale, verrà ridotto progressivamente
         while (intervallo>0){
             for (int i=intervallo; i<num_giochi; i++){
-                videogame_t temp=catalogo[i];
+                videogame_t temp=catalogo[i];//Variabile temporanea per salvarsi la posizione corrente
                 int j=i;
                 while (j>=intervallo && catalogo[j-intervallo].copie_vendute<temp.copie_vendute){
                     catalogo[j]=catalogo[j-intervallo];
                     j-=intervallo;
                 }
-                catalogo[j]=temp;
+                catalogo[j]=temp; 
             }
-            intervallo/=2;
+            intervallo=intervallo/2; //Riduzione dell'intervallo 
         }
 
+        //Stampa dell'elenco dei giochi ordinato per copie vendute
         printf("\n---CLASSIFICA GIOCHI PER COPIE VENDUTE---\n");
         for(int i=0; i<num_giochi; i++){
+            //La media di copie 
             float media_copie=StatisticaCopieVendute(nomeFile, catalogo[i].nome, catalogo[i]);
 
             printf("\n-------------------------------------\n");
             printf("%s\n", catalogo[i].nome);
             printf("Copie vendute: %d\n", catalogo[i].copie_vendute);
             if (catalogo[i].copie_vendute>=0) {
-                 printf("Statistica vendite (rapporto su max produzione): %.2f\n", media_copie);
+                 printf("Statistica vendite (in rapporto su max produzione): %.2f\n", media_copie);
             }
             printf("Editore: %s\n", catalogo[i].editore);
             printf("Sviluppatore: %s\n", catalogo[i].sviluppatore);
@@ -61,8 +60,10 @@ void Ordinamento_copie_vendute(char *nomeFile, videogame_t videogioco){
                     generi_stampati++;
                 }
             }
+            // Stampa dei generi del gioco con un separatore 
             if(generi_stampati==0) printf("N/D");
             printf("\n");
+            // Stampa delle recensioni numeriche e testuali.
             printf("Recensioni:\n");
             short recensioni_stampate=0;
             for (short x=0; x<MAX_RECENSIONI; x++){
@@ -90,9 +91,10 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
     FILE *file = fopen(nomeFile, "rb");
     if(file != NULL){
         videogame_t catalogo[MAX_GIOCHI];
-        float medie_recensioni[MAX_GIOCHI];
+        float medie_recensioni[MAX_GIOCHI];// Array per memorizzare le medie
         int num_giochi=0;
-
+        
+        //Calcolo della media delle recensioni
         while(num_giochi<MAX_GIOCHI && fread(&catalogo[num_giochi], sizeof(videogame_t), 1, file)==1){
             medie_recensioni[num_giochi]=StatisticaRecensione(nomeFile, catalogo[num_giochi].nome, catalogo[num_giochi]);
             num_giochi++;
@@ -104,12 +106,15 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
             return;
         }
 
+        //Shell sort (ordine decrescente)
         int intervallo=num_giochi/2;
         while(intervallo>0){
             for(int i=intervallo; i<num_giochi; i++){
+                //Variabili temporanee per salvarsi la posizione corrente
                 videogame_t temp_gioco=catalogo[i];
                 float temp_media=medie_recensioni[i];
                 int j=i;
+                //Spostando un elemento nell'array delle media spostiamo anche l'elemento corrispondente nell'array dei giochi
                 while(j>=intervallo && medie_recensioni[j-intervallo]<temp_media){
                     catalogo[j]=catalogo[j-intervallo];
                     medie_recensioni[j]=medie_recensioni[j-intervallo];
@@ -120,7 +125,7 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
             }
             intervallo/=2;
         }
-
+        //Stampa dell'elenco dei giochi ordinato per media recensioni
         printf("\n---CLASSIFICA GIOCHI PER MEDIA RECENSIONI---\n");
         for(int i=0; i<num_giochi; i++){
             printf("\n-------------------------------------\n");
@@ -150,7 +155,7 @@ void Ordinamento_media_recensioni(char *nomeFile, videogame_t videogioco){
             }
             if(generi_stampati==0) printf("N/D");
             printf("\n");
-
+            // Stampa delle singole recensioni
             printf("Recensioni:\n");
             short recensioni_stampate=0;
             for (short x=0; x<MAX_RECENSIONI; x++){

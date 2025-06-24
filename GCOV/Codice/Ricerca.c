@@ -1,21 +1,8 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include "CatalogoVideogame.h"
-
-// Fase di Ricerca
-/* La ricerca del videogame si divide in due tipi:
- * l'admin potrà ricercare un videogame solo per effettuare 3 operazioni madri:
- * MODIFICA(tra cui aggiunta), CANCELLAZIONE, VISUALIZZARE RECENSIONE
- *
- * L'utente invece può solamente ricercare per visualizzare le informazioni di un gioco
- * e aggiungere una recensione ed acquistare il gioco.
- */
 
 void Ricerca(char *nomeFile, videogame_t videogioco, short check_admin){
     char nome_ricerca[70];

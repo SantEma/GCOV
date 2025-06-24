@@ -1,7 +1,3 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,10 +6,10 @@
 void MenuPrincipale(){
     videogame_t videogioco; // Struttura per il gioco da ricercare
 
-    short sceltaprincipale=0;
-    int check_admin=0;
+    short sceltaprincipale=0; //Scelta dell'utente nel menu principale
+    int check_admin=0; // Booleana presente per poter identificare l'utente per tutte le sue operazioni, di default è falsa in modo da autenticarsi da visitatore
     
-    //Fase di autentificazione
+    //Fase di autentificazione, l'utente viene sempre considerato visitatore fin tanto che non si autentica
     do{
         printf("\nBenvenuti!\nScegliere come ci si vuole autenticare:\n1)Admin\n2)Visitatore\n-1)Uscire\nScelta:");
         scanf("%hd", &sceltaprincipale);
@@ -21,17 +17,17 @@ void MenuPrincipale(){
         
         switch(sceltaprincipale){
             case 1:
-                check_admin=AutenticazioneAdmin();
-                if(check_admin==1){
-                    MenuAdmin(videogioco, "catalogo.dat", 1);
-                }
-                else if(check_admin==0){
-                    MenuVisitatore(videogioco, "catalogo.dat", 0);
+                check_admin=AutenticazioneAdmin(); //Assegnazione del valore di ritorno della variabile autenticazione admin
+                switch(check_admin){
+                    case 0:
+                    MenuVisitatore(videogioco, "catalogo.dat", check_admin);
+                    case 1:
+                    MenuAdmin(videogioco, "catalogo.dat", check_admin);
                 }
                 break;
             case 2:
                 printf("\nBenvenuto visitatore!\n");
-                MenuVisitatore(videogioco, "catalogo.dat", 0);
+                MenuVisitatore(videogioco, "catalogo.dat", check_admin);
                 break;
             case -1:
                 printf("\nUscita dal programma...\n");
@@ -45,7 +41,7 @@ void MenuPrincipale(){
 }
 
 void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
-    short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire
+    short sceltadmin=0; //Variabile per la scelta dell'operazione da eseguire per l'admin
     do{
         printf("\n\n--- MENU AMMINISTRATORE ---\n");
         printf("\nDigitare il corrispettivo numero per eseguire la scelta desiderata\n1) Ricerca prodotto\n2) Ordinamento giochi\n-1) Uscire dal Menu\nScelta:");
@@ -83,7 +79,7 @@ void MenuAdmin(videogame_t videogioco, char *nomeFile, short check_admin){
                 printf("\nUscita dal menu...\n");
                 break;
             default:
-                printf("\nScelta non valida, riprova: ");
+                printf("\nScelta non valida, riprova(1,2,-1): ");
                 sceltadmin=0;
                 break;
         }
@@ -114,7 +110,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
                         
                         switch(scelta_ordinamento){
                             case 1:
-                                Ordinamento_copie_vendute(nomeFile, videogioco);
+                                Ordinamento_copie_vendute(nomeFile, videogioco); 
                                 break;
                             case 2:
                                 Ordinamento_media_recensioni(nomeFile, videogioco);
@@ -142,7 +138,7 @@ void MenuVisitatore(videogame_t videogioco, char* nomeFile, short check_admin){
 
 int AutenticazioneAdmin(){
     char input_password[MAX_CARATTERI_PASSWORD];
-    short scelta_errore=0;
+    short scelta_errore=0; //Variabile per immagazzinare la scelta ove entri in questa funzione
     
     do{
         printf("\nInserire la password di amministratore: ");
@@ -156,7 +152,7 @@ int AutenticazioneAdmin(){
         }
         else{
             printf("\nATTENZIONE!Password errata!\nCosa si vuole fare?\n1)Riprovare l'inserimento\n2)Continuare come visitatore\n3)Uscire dal programma\nScelta: ");
-
+            //L'utente viene sollecitato a riemettere la password se autorizzato (così da non far riavviare il programma nel caso la voglia reimettere), altrimenti diventa un semplice utente
             do{
                 scanf("%hd", &scelta_errore);
                 while (getchar()!='\n');//Svuota il buffer

@@ -1,21 +1,17 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "CatalogoVideogame.h"
 
 void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t videogioco){
-    short recensione_generale=-1;                                      // Variabile per la recensione generale a -1 così da far valere lo 0 nello switch
-    short pessimo=-1, insufficiente=-1, buono=-1, eccellente=-1;       // Contatori per le recensioni a -1 così da far valere lo 0 nello switch
+    short recensione_generale=-1;// Variabile per la recensione generale a -1 così da far valere lo 0 nello switch
+    short pessimo=-1, insufficiente=-1, buono=-1, eccellente=-1;// Contatori per le recensioni a -1 così da far valere lo 0 nello switch
 
     FILE *file=fopen(nomeFile, "rb");
     if (file!=NULL){
         for (short i=0; i<MAX_RECENSIONI; i++){
             if (videogioco.recensione[i].recensione_num!=-1){
-                printf("\nDebbugBIl valore di ora e' %d", i);
+                printf("\nIl valore di ora e' %d", i);
                 if (videogioco.recensione[i].recensione_num==0){
                     printf("\nPessimo");
                     printf("\nRecensioni scritte: %s ", videogioco.recensione[i].recensione_scritta);
@@ -53,6 +49,7 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
             else
                 printf("\nValore indesiderato per la recensione generale");
         }
+        // Stampa della stringa corrispondente alla recensione generale calcolata
         switch (recensione_generale){
         case 0:
             printf("Pessima");
@@ -78,18 +75,19 @@ void Visualizza_Recensione(char *nomeFile, char *nome_ricerca, videogame_t video
 }
 
 float StatisticaRecensione(char *nomeFile, char *nome_ricerca ,videogame_t videogioco){
-    float media=0.0;
+    float media=0.0; // Contatore media
     short count=0; // Contatore per le recensioni valide
 
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
         for(short i=0;i<MAX_RECENSIONI;i++){
+             // Somma tutte le valutazioni numeriche valide se sono diverse da quelle di default nel file.
             if(videogioco.recensione[i].recensione_num!=-1){
                 count++;
                 media+=videogioco.recensione[i].recensione_num;
             }
         }
-        if(count>0) media=media/count; // Calcola la media delle recensioni se maggiori di 0
+        if(count>0) media=media/count; //Calcola la media solo se c'è almeno una recensione, per evitare una divisione per zero.
         fclose(file);
         return media;
     }

@@ -1,7 +1,3 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,7 +5,7 @@
 
 //Funzione per la creazione del catalogo
 void ScriviCatalogo(char *nomeFile){
-    //array dei 20 giochi iniziali - INIZIALIZZAZIONE CORRETTA
+    //Array dei 20 giochi iniziali 
     videogame_t catalogo[GIOCHI_START]={
         {"The Legend of Zelda: Breath of the Wild", "Nintendo", "Nintendo EPD", "Avventura open-world in Hyrule", 2017, {"Avventura", "", "", "", ""}, {{-1,""}}, 0},
         {"The Witcher 3: Wild Hunt", "CD Projekt", "CD Projekt RED", "Caccia mostri in un mondo fantasy", 2015, {"GDR", "", "", "", ""}, {{-1,""}}, 0},
@@ -42,15 +38,13 @@ void ScriviCatalogo(char *nomeFile){
 
     //Verifica se il file esiste già
     FILE* file=fopen(nomeFile, "rb"); //Se il file è apribile in rb allora già esiste, bisogna non entrarci
-    if(file==NULL){
-        //File non esistente, possiamo inserire i giochi
-
+    if(file==NULL){ 
         short flag=1; //Controllare se il file è stato creato correttamente
         file=fopen(nomeFile, "wb");
         if(file!=NULL){
             if(fwrite(catalogo, sizeof(videogame_t), GIOCHI_START,file)!=GIOCHI_START) flag=0; // Controlliamo che scriva tutti gli elementi definiti dal numero della costante
             if(!flag) printf("\nErrore nella scrittura");
-            else printf("\nSCRITTO");
+            else printf("\nDatabase inizializzato!\n");
             fclose(file);
         }
         else printf("\nError\n");

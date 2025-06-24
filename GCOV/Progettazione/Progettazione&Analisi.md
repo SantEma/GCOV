@@ -23,6 +23,8 @@ L'autenticazione viene fatta in una funzione differente che restituisce una flag
 - O per media recensione
 - O per copie vendute
   In tutti i due casi l'ordinamento avviene per ordine decrescente, in modo da risaltare i videogiochi con una media o copie vendute alte
+
+Si ipotizza che per ogni gioco si possa mettere lo stesso titolo, poichè potrebbero esistere diverse versioni come le remastered (come Silent Hill 2 che ha due versioni, una del 2001 e una del 2025)
 ### Specific Function - Admin
 - **Ricerca**: l'admin deve ricercare un videogioco per poter eseguire tre operazioni:
 	- **Modificare prodotto** $\to$ aggiungere o modificare
@@ -42,7 +44,7 @@ Ogni videogioco è caratterizzato da:
 - uno o più generi
 - una o più recensioni (*obbligatoria, che va da 0 a 5*)
 ## Variabili principali utilizzate
-**CatalogoVideogame.h**
+
 * `videogame_t`: È la struttura dati centrale che definisce il modello per ogni videogioco, contenendo tutti i suoi attributi come nome, sviluppatore, anno e copie vendute.
 * `recensione_t`: Struttura annidata dentro `videogame_t`, utilizzata per memorizzare le informazioni di una singola recensione, sia numerica che testuale.
 * `check_admin`: Un flag numerico  che distingue un utente con privilegi di amministratore (`1`) da un visitatore (`0`),determina quali menu e operazioni sono accessibili.
@@ -70,8 +72,10 @@ Una volta fatta l'autenticazione (e in base all'esito di quest'ultima) si viene 
 ## Ricerca
 La ricerca del videogioco da parte dell'admin e dell'utente deve comprende la possibilità di filtrare in sottostringhe e di gestire l'upperCase e il LowerCase.
 **SOTTOSTRINGHE**$\to$ Cerchi fif (su 50 fif diversi che stanno, come fifa fifoloide ecc.. fifoloide 3) e poi l'utente deve inserire il nome completo del gioco che vuole selezionare tra quelli mostrati. 
+La funzione strstr è una funzione standard della libreria C <string.h>, cerca l'occorenza di una sottostringa in una stringa più grande tra quelle selezionate.
 La ricerca per l'admin per modificare/eliminare un videogioco sarà effettuata filtrando per **nome del videogioco** ognuna di queste azioni sarà eseguita in sotto-funzioni, poste in un nuovo file .c dove ci saranno le 3 azioni eseguibili dall'admin nella scelta 1 della ricerca, dopo di che si sceglierà quale campo vuole modificare l'admin nella modifica.
 Per l'eliminazione andiamo ad usare un sistema di scambi: il file catalogo.dat viene riscritto su un file temporaneo temp.dat, quest'ultimo inserisce tutti i giochi fin quando non trova il gioco che si vuole cancellare e lo salta, in modo da non inserire quei byte. Una volta fatto ciò, l'utente in caso positivo viene avvisato del successo dell'operazione (con il file originale rimosso e quello temporaneo rinominato a quello originale), nel caso contrario viene avvisato di non aver trovato quel gioco nel catalogo
+
 ### Aggiunta gioco
 L'admin può anche aggiungere un nuovo gioco nel catalogo, sempre specificato nella ricerca come operazione da poter eseguire. Questa operazione permette all'admin di aggiungere un nuovo videogame nel catalogo ponendolo come ultimo presente nella lista dei videogiochi e così via per ogni nuova aggiunta che sarà inserita, la posizione nel file binario sarà riportata all'inizio in caso si vogliano eseguire altre operazioni che richiedono uno spostamento della posizione.
 ### Recensioni

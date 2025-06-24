@@ -1,7 +1,3 @@
-/**
- * Inserire il doxygen
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,14 +6,14 @@
 void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco){
     FILE *file=fopen(nomeFile, "rb");
     if(file!=NULL){
-        // Ricerca del gioco da visualizzare
+        // Stampa delle informazioni base del videogioco.
         printf("\nNome: %s", videogioco.nome);
         printf("\nEditore: %s", videogioco.editore);
         printf("\nSviluppatore: %s", videogioco.sviluppatore);
         printf("\nDescrizione: %s", videogioco.descrizione_breve_gioco);
         printf("\nAnno di uscita: %d", videogioco.anno_uscita);
         printf("\nGeneri: ");
-        for(short i=0; i<MAX_GENERI && videogioco.genere[i][0]!='\0'; i++){ //videogioco.genere[i][0] != '\0' serve per evitare di leggere generi vuoti fermandosi all'ultimo che non sia ""
+        for(short i=0; i<MAX_GENERI && videogioco.genere[i][0]!='\0'; i++){ //Serve per evitare di leggere generi vuoti,fermandosi all'ultimo che non sia vuoto
             printf("%s ", videogioco.genere[i]);
         }
         Visualizza_Recensione(nomeFile, nome_ricerca, videogioco);
@@ -30,7 +26,7 @@ void VisualizzaVideogioco(char *nomeFile, char* nome_ricerca, videogame_t videog
 
 void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogioco, short pos){
     char scelta_recensionescritt;
-    short recensione_impostata=0; // Flag per verificare se è stata impostata una recensione
+    short recensione_impostata=0; //Flag per verificare se è stata impostata una recensione
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
@@ -44,7 +40,7 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
                     if(videogioco.recensione[i].recensione_num<0 || videogioco.recensione[i].recensione_num>5) printf("\nValutazione non valida, rinserirla, deve essere compresa tra 0 e 5.\n");
                 }while(videogioco.recensione[i].recensione_num<0 || videogioco.recensione[i].recensione_num>5);
 
-                printf("Vuoi inserire una recensione scritta? (s/n): ");
+                printf("Vuoi inserire una recensione scritta? (S/N): ");
                 do{
                     scanf("%c", &scelta_recensionescritt);
                     while (getchar()!='\n'); // Svuota il buffer
@@ -62,9 +58,9 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogio
             }
             recensione_impostata=1;
         }
-        if(recensione_impostata==0) printf("\nNon è possibile aggiungere altre recensioni, il massimo è %d.\n", MAX_RECENSIONI);
+        if(recensione_impostata==0) printf("\nNon è possibile aggiungere altre recensioni, il massimo possibile e' %d.\n", MAX_RECENSIONI);
         
-        // Aggiorna il file con la nuova recensione
+        // Aggiorna il file con i dati del videogioco che ora includono la nuova recensione
         fseek(file, pos * sizeof(videogame_t), SEEK_SET); // Torna alla posizione del gioco
         if(fwrite(&videogioco, sizeof(videogame_t), 1, file)!=1) printf("\nErrore nella scrittura della recensione nel file.\n");            
         else printf("\nRecensione aggiunta con successo!\n");
@@ -80,7 +76,7 @@ void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,sh
 
     FILE *file=fopen(nomeFile, "rb+");
     if(file!=NULL){
-        if(videogioco.copie_vendute<MAX_PRODUCTION){ // Controlla se ci sono copie disponibili
+        if(videogioco.copie_vendute<MAX_PRODUCTION){ // Controlla se ci sono copie disponibili nel "magazzino"
             printf("\nIl gioco %s e' disponibile per l'acquisto. Erogazione in corso.\n", videogioco.nome);
             videogioco.copie_vendute++;
             gioco_acquistato=1;
@@ -98,7 +94,7 @@ void AcquistaGioco(char *nomeFile, char* nome_ricerca, videogame_t videogioco,sh
             else printf("\nIl gioco %s e' stato acquistato con successo!\n", videogioco.nome);
             
             //Richiesta di recensione
-            printf("\nVuoi aggiungere una recensione al gioco appena acquistato? (s/n): ");
+            printf("\nVuoi aggiungere una recensione al gioco appena acquistato? (S/N): ");
             char scelta_recensione;
             scanf(" %c", &scelta_recensione);
             if(scelta_recensione=='s' || scelta_recensione=='S'){
