@@ -92,7 +92,7 @@ void ModificaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco,sh
 }
 
 
-void CancellaGioco(char *nomeFile, char *nome_ricerca,videogame_t videogioco, short pos){
+void CancellaGioco(char *nomeFile, char *nome_ricerca, videogame_t videogioco, short pos){
 
     FILE *file_originale=fopen(nomeFile,"rb");
     FILE *file_temporaneo=fopen("temp.dat","wb"); //Crea un file temporaneo in scrittura binaria.
