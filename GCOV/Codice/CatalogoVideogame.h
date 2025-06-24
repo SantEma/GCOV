@@ -9,9 +9,6 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifndef CATALOGOVIDEOGAME_H
 #define CATALOGOVIDEOGAME_H
 
@@ -21,14 +18,14 @@
  *
  */
 //Costanti utili per il programma
-#define GIOCHI_START 20 //Numero giochi presenti nel file inizialmente
-#define PASSWORD "Admin157" //codice per accedere come admin, altrimenti si è ospiti (di solito non andrebbero mai messe hardcode le password, ma per semplicità lo si implementa in questa maniera)
-#define MAX_CARATTERI_PASSWORD 15 //caratteri massimi per la password dell'admin
-#define MAX_CARATTERI_DESCRIZIONI 200 //caratteri massimi per la recensione e descrizione
-#define MAX_GENERI 5 //Numero massimo di generi inseribili
-#define MAX_RECENSIONI 70 //Numero massimo di recensioni inseribili per ogni gioco, che sia un valore accettabile
-#define MAX_PRODUCTION 100 // Numero massimo di copie distribuite, per evitare valori eccessivi
-#define MAX_GIOCHI 50  // Giochi massimi per il catalogo nell'ordinamento, si presuppone non si vada oltre
+#define GIOCHI_START 20                 /**< @brief Numero giochi presenti nel file inizialmente. */
+#define PASSWORD "Admin157"             /**< @brief Codice per accedere come admin. Nota: per semplicità, non è memorizzata in modo sicuro. */
+#define MAX_CARATTERI_PASSWORD 15       /**< @brief Caratteri massimi per la password dell'admin. */
+#define MAX_CARATTERI_DESCRIZIONI 200   /**< @brief Caratteri massimi per la recensione scritta e la descrizione breve. */
+#define MAX_GENERI 5                    /**< @brief Numero massimo di generi inseribili per un gioco. */
+#define MAX_RECENSIONI 70               /**< @brief Numero massimo di recensioni inseribili per ogni gioco. */
+#define MAX_PRODUCTION 100              /**< @brief Numero massimo di copie distribuite, per evitare valori eccessivi. */
+#define MAX_GIOCHI 50                   /**< @brief Giochi massimi per il catalogo nell'ordinamento, si presuppone non si vada oltre. */
 
 /**
  * @brief Struttura per le recensioni dei videogiochi
@@ -61,6 +58,7 @@ typedef struct {
  *
  * L'impementazione di queste funzioni può essere trovato nel file Menu.c
  */
+
 //Funzione per la gestione del menu
 void MenuPrincipale();
 
@@ -95,6 +93,7 @@ int AutenticazioneAdmin();
  * e nel file CreazioneFile.c per quanto riguarda la scrittura del catalogo iniziale.
  *
  */
+
 //Funzioni per la gestione del catalogo
 /**
  * @brief Scrive il catalogo dei videogiochi.
@@ -111,20 +110,13 @@ void ScriviCatalogo(char *nomeFile);
 void Ricerca(char *nomeFile, videogame_t videogame, short check_admin);
 
 /**
- * @brief Visualizza l'intero catalogo dei videogiochi.
- * @param nomeFile Il nome del file che contiene il catalogo dei videogiochi.
- * @param videogame La struttura che rappresenta un videogioco (usata per iterazione).
- * @return void
- * @details Questa funzione è implementata nel file `Ordinamento.c`.
- */
-
-/**
  * @brief Funzioni per la gestione della modifica, cancellazione, aggiunta e visualizzazione dei videogiochi da parte dell'admin, in base al
  * titolo del gioco inserito nella fase di Ricerca
  *
  * Queste funzioni vengono implementate nel file OperazioniAdmin.c, dove sono presenti le funzioni
  * eseguibili esclusivamente dall'admin per la gestione del catalogo dei videogiochi.
  */
+
 //Funzioni per la gestione dei videogiochi da parte dell'admin
 /**
  * @brief Modifica un gioco.
@@ -161,6 +153,7 @@ void AggiungiGioco(char *nomeFile, videogame_t videogame);
  * eseguibili esclusivamente dall'utente per la gestione del catalogo dei videogiochi
  *
  */
+
 //Funzioni per la gestione dei videogiochi da parte dell'utente
 /**
  * @brief Acquista un gioco.
@@ -200,6 +193,7 @@ void AggiungiRecensione(char *nomeFile, char* nome_ricerca, videogame_t videogam
  * come i due ordinamenti, la visualizzazione di un videogioco, l'acquisto di un videogioco e la gestione delle statistiche
  *
  */
+
 //Funzioni per la gestione dei videogiochi per entrambi i ruoli
 /**
  * @brief Visualizza le recensioni di un gioco.
@@ -244,6 +238,7 @@ void VisualizzaStatistiche(char *nomeFile, char* nome_ricerca, videogame_t video
  * nelle funzioni StatisticaRecensione e StatisticaCopieVendute.
  *
  */
+
 //Funzioni per l'ordinamento
 /**
  * @brief Ordina il catalogo per copie vendute.

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['scrivicatalogo_0',['ScriviCatalogo',['../_catalogo_videogame_8h.html#aba01b7008d8a6ca855999856e07770bc',1,'CreazioneFile.c']]],
-  ['statisticacopievendute_1',['StatisticaCopieVendute',['../_catalogo_videogame_8h.html#ac4377de31a09b1e31a4945e23ba30cf7',1,'OperazioniAU.c']]],
-  ['statisticarecensione_2',['StatisticaRecensione',['../_catalogo_videogame_8h.html#aca602f7d02458c187c68eddd159c43ba',1,'OperazioniAU.c']]]
+  ['recensione_5ft_0',['recensione_t',['../structrecensione__t.html',1,'']]],
+  ['ricerca_1',['Ricerca',['../_catalogo_videogame_8h.html#a07e620421b1dc3bcfb83a11140c0e310',1,'Ricerca.c']]]
 ];
